@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_Result = new System.Windows.Forms.Button();
             this.btn_plus = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.btn_bspace = new System.Windows.Forms.Button();
             this.btn_divide = new System.Windows.Forms.Button();
             this.btn_multiply = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +74,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(214, 351);
             this.splitContainer1.SplitterDistance = 107;
             this.splitContainer1.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(214, 107);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "0";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel1
             // 
@@ -318,17 +329,6 @@
             this.btn_multiply.Text = "×";
             this.btn_multiply.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(214, 107);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "123 455";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,6 +350,7 @@
 
         #endregion
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btn_Result;
         private System.Windows.Forms.Button btn_plus;
@@ -370,7 +371,6 @@
         private System.Windows.Forms.Button btn_bspace;
         private System.Windows.Forms.Button btn_divide;
         private System.Windows.Forms.Button btn_multiply;
-        private System.Windows.Forms.Label label1;
     }
 }
 
