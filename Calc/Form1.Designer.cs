@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_Result = new System.Windows.Forms.Button();
             this.btn_plus = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.btn_bspace = new System.Windows.Forms.Button();
             this.btn_divide = new System.Windows.Forms.Button();
             this.btn_multiply = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +74,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(214, 351);
             this.splitContainer1.SplitterDistance = 107;
             this.splitContainer1.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(214, 107);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "123 455";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel1
             // 
@@ -155,6 +166,7 @@
             this.btn_Negative.TabIndex = 16;
             this.btn_Negative.Text = "±";
             this.btn_Negative.UseVisualStyleBackColor = true;
+            this.btn_Negative.Click += new System.EventHandler(this.btn_Negative_Click);
             // 
             // btn_clear
             // 
@@ -166,6 +178,7 @@
             this.btn_clear.TabIndex = 12;
             this.btn_clear.Text = "C";
             this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // btn_Coma
             // 
@@ -188,6 +201,7 @@
             this.btn_1.TabIndex = 3;
             this.btn_1.Text = "1";
             this.btn_1.UseVisualStyleBackColor = true;
+            this.btn_1.Click += new System.EventHandler(this.btn_1_Click);
             // 
             // btn_Zero
             // 
@@ -199,6 +213,7 @@
             this.btn_Zero.TabIndex = 0;
             this.btn_Zero.Text = "0";
             this.btn_Zero.UseVisualStyleBackColor = true;
+            this.btn_Zero.Click += new System.EventHandler(this.btn_Zero_Click);
             // 
             // btn_2
             // 
@@ -210,6 +225,7 @@
             this.btn_2.TabIndex = 4;
             this.btn_2.Text = "2";
             this.btn_2.UseVisualStyleBackColor = true;
+            this.btn_2.Click += new System.EventHandler(this.btn_2_Click);
             // 
             // btn_7
             // 
@@ -221,6 +237,7 @@
             this.btn_7.TabIndex = 9;
             this.btn_7.Text = "7";
             this.btn_7.UseVisualStyleBackColor = true;
+            this.btn_7.Click += new System.EventHandler(this.btn_7_Click);
             // 
             // btn_3
             // 
@@ -232,6 +249,7 @@
             this.btn_3.TabIndex = 5;
             this.btn_3.Text = "3";
             this.btn_3.UseVisualStyleBackColor = true;
+            this.btn_3.Click += new System.EventHandler(this.btn_3_Click);
             // 
             // btn_8
             // 
@@ -243,6 +261,7 @@
             this.btn_8.TabIndex = 10;
             this.btn_8.Text = "8";
             this.btn_8.UseVisualStyleBackColor = true;
+            this.btn_8.Click += new System.EventHandler(this.btn_8_Click);
             // 
             // btn_6
             // 
@@ -254,6 +273,7 @@
             this.btn_6.TabIndex = 8;
             this.btn_6.Text = "6";
             this.btn_6.UseVisualStyleBackColor = true;
+            this.btn_6.Click += new System.EventHandler(this.btn_6_Click);
             // 
             // btn_4
             // 
@@ -265,6 +285,7 @@
             this.btn_4.TabIndex = 6;
             this.btn_4.Text = "4";
             this.btn_4.UseVisualStyleBackColor = true;
+            this.btn_4.Click += new System.EventHandler(this.btn_4_Click);
             // 
             // btn_9
             // 
@@ -276,6 +297,7 @@
             this.btn_9.TabIndex = 11;
             this.btn_9.Text = "9";
             this.btn_9.UseVisualStyleBackColor = true;
+            this.btn_9.Click += new System.EventHandler(this.btn_9_Click);
             // 
             // btn_5
             // 
@@ -287,6 +309,7 @@
             this.btn_5.TabIndex = 7;
             this.btn_5.Text = "5";
             this.btn_5.UseVisualStyleBackColor = true;
+            this.btn_5.Click += new System.EventHandler(this.btn_5_Click);
             // 
             // btn_bspace
             // 
@@ -297,6 +320,7 @@
             this.btn_bspace.TabIndex = 17;
             this.btn_bspace.Text = "←";
             this.btn_bspace.UseVisualStyleBackColor = true;
+            this.btn_bspace.Click += new System.EventHandler(this.btn_bspace_Click);
             // 
             // btn_divide
             // 
@@ -317,17 +341,6 @@
             this.btn_multiply.TabIndex = 19;
             this.btn_multiply.Text = "×";
             this.btn_multiply.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(214, 107);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "123 455";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Form1
             // 

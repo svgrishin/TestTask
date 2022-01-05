@@ -10,8 +10,9 @@ namespace Calc
     {
         public double[] args = new double[2];
         int index = 0;
-        string arg, disp;
-        public int func;
+        public string arg, disp;
+        public int func=0;
+        public bool minus = false;
         
         public void getArgs()
         {
@@ -20,16 +21,43 @@ namespace Calc
             else index = 0;
         }
 
+        public void resetArgs()
+        {
+            arg = "0";
+            disp = arg;
+            Array.Clear(args, 0, 1);
+            func = 0;
+            index = 0;
+            minus = false;
+        }
+
         public string inputValues(char c)
         {
-            arg += c;
-            disp = arg;
+            if (c == '-') arg = arg.Insert(0, "-");
+            else arg += c;
             
-            for (int i=3; i<=disp.Length;i+=4)
-            {
-                disp.Insert(i, " ");
-            }
+            disp = arg;   
+            
+            return displayOut();
+        }
 
+        public string deleteSymbol()
+        {
+            if (arg.Length > 1+Convert.ToInt16(minus))
+                arg = arg.Substring(0, arg.Length - 1);
+            else arg = "0";
+            
+            disp = arg;
+            return displayOut();
+        }
+
+        private string displayOut()
+        {
+            if (disp.Contains(',') == false)
+                for (int i = 3+Convert.ToInt16(minus); i <= disp.Length; i += 4)
+                {
+                    disp = disp.Insert(disp.Length - i, " ");
+                }
             return disp;
         }
 

@@ -12,16 +12,85 @@ namespace Calc
 {
     public partial class Form1 : Form
     {
+        Calculator calc = new Calculator();
         public Form1()
         {
             InitializeComponent();
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        
+        private void btn_1_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('1');
+        }
+
+        private void btn_2_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('2');
+        }
+
+        private void btn_3_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('3');
+        }
+
+        private void btn_4_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('4');
+        }
+
+        private void btn_5_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('5');
+        }
+
+        private void btn_6_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('6');
+        }
+
+        private void btn_7_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('7');
+        }
+
+        private void btn_8_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('8');
+        }
+
+        private void btn_9_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.inputValues('9');
+        }
+
+        private void btn_Zero_Click(object sender, EventArgs e)
+        {
+            if (calc.disp == "0") label1.Text = calc.inputValues(',');
+            else label1.Text = calc.inputValues('0');
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            calc.resetArgs();
+            label1.Text = calc.disp;
+        }
+
+        private void btn_bspace_Click(object sender, EventArgs e)
+        {
+            label1.Text = calc.deleteSymbol();
+        }
+
+        private void btn_Negative_Click(object sender, EventArgs e)
+        {
+            calc.minus = !calc.minus;
+            
+            label1.Text = calc.inputValues('-');
+        }
     }
 }
