@@ -82,12 +82,18 @@ namespace Calc
 
         public string deleteSymbol()
         {
-            if (arg.Length > 1+Convert.ToInt16(minus))
+            if (arg.Length > 1 + Convert.ToInt16(minus))
+            {
                 arg = arg.Substring(0, arg.Length - 1);
-            else arg = "0";
+                return displayOut(arg);
+            }
+            else
+            {
+                arg = "";
+                disp = "0";
+                return displayOut(disp);
+            }
             
-            disp = arg;
-            return displayOut(arg);
         }
 
         public string displayOut(string s)

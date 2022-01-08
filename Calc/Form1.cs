@@ -83,6 +83,7 @@ namespace Calc
 
         private void btn_bspace_Click(object sender, EventArgs e)
         {
+            
             label1.Text = calc.deleteSymbol();
         }
 
@@ -112,7 +113,6 @@ namespace Calc
             else calc.getArgs(f);
 
             label1.Text = calc.displayOut(calc.disp);
-            calc.calcFunc = f;
         }
 
         private void btn_multiply_Click(object sender, EventArgs e)
