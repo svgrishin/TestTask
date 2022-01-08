@@ -14,6 +14,7 @@ namespace Calc
         public int func=0;
         public bool minus = false;
         public bool[] argsIsPresent = new bool[2]{false,false};
+        public Func<double> calcFunc;
         
         public void getArgs(Func<double> f)
         {
@@ -128,6 +129,11 @@ namespace Calc
                 case 3: args[0] = multiply(); break; 
                 case 4: args[0] = divide(); break; 
             }
+        }
+
+        public void setFunction(Func<double>f)
+        {
+            ;
         }
 
     }

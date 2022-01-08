@@ -156,6 +156,7 @@
             this.btn_minus.TabIndex = 19;
             this.btn_minus.Text = "-";
             this.btn_minus.UseVisualStyleBackColor = true;
+            this.btn_minus.Click += new System.EventHandler(this.btn_minus_Click);
             // 
             // btn_Negative
             // 
@@ -333,6 +334,7 @@
             this.btn_divide.TabIndex = 18;
             this.btn_divide.Text = "÷";
             this.btn_divide.UseVisualStyleBackColor = true;
+            this.btn_divide.Click += new System.EventHandler(this.btn_divide_Click);
             // 
             // btn_multiply
             // 
@@ -343,6 +345,7 @@
             this.btn_multiply.TabIndex = 19;
             this.btn_multiply.Text = "×";
             this.btn_multiply.UseVisualStyleBackColor = true;
+            this.btn_multiply.Click += new System.EventHandler(this.btn_multiply_Click);
             // 
             // Form1
             // 

@@ -99,9 +99,35 @@ namespace Calc
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            
-            calc.getArgs(calc.summ);
+            funcClick(calc.summ);
+        }
+
+        private void funcClick(Func<double> f)
+        {
+            if (calc.calcFunc != f)
+            {
+                calc.getArgs(calc.calcFunc);
+                calc.calcFunc = f;
+            }
+            else calc.getArgs(f);
+
             label1.Text = calc.displayOut(calc.disp);
+            calc.calcFunc = f;
+        }
+
+        private void btn_multiply_Click(object sender, EventArgs e)
+        {
+            funcClick(calc.multiply);
+        }
+
+        private void btn_divide_Click(object sender, EventArgs e)
+        {
+            funcClick(calc.divide);
+        }
+
+        private void btn_minus_Click(object sender, EventArgs e)
+        {
+            funcClick(calc.differens);
         }
     }
 }
