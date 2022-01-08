@@ -83,7 +83,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(214, 107);
             this.label1.TabIndex = 0;
-            this.label1.Text = "123 455";
+            this.label1.Text = "0";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel1
@@ -145,6 +145,7 @@
             this.btn_plus.TabIndex = 20;
             this.btn_plus.Text = "+";
             this.btn_plus.UseVisualStyleBackColor = true;
+            this.btn_plus.Click += new System.EventHandler(this.btn_plus_Click);
             // 
             // btn_minus
             // 
@@ -190,6 +191,7 @@
             this.btn_Coma.TabIndex = 1;
             this.btn_Coma.Text = ",";
             this.btn_Coma.UseVisualStyleBackColor = true;
+            this.btn_Coma.Click += new System.EventHandler(this.btn_Coma_Click);
             // 
             // btn_1
             // 

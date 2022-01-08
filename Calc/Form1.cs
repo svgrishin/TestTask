@@ -71,14 +71,14 @@ namespace Calc
 
         private void btn_Zero_Click(object sender, EventArgs e)
         {
-            if (calc.disp == "0") label1.Text = calc.inputValues(',');
+            if (calc.arg == "") label1.Text = calc.inputValues("0,");
             else label1.Text = calc.inputValues('0');
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
             calc.resetArgs();
-            label1.Text = calc.disp;
+            label1.Text = "0";
         }
 
         private void btn_bspace_Click(object sender, EventArgs e)
@@ -89,8 +89,19 @@ namespace Calc
         private void btn_Negative_Click(object sender, EventArgs e)
         {
             calc.minus = !calc.minus;
+            label1.Text = calc.inputValues("-");
+        }
+
+        private void btn_Coma_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_plus_Click(object sender, EventArgs e)
+        {
             
-            label1.Text = calc.inputValues('-');
+            calc.getArgs(calc.summ);
+            label1.Text = calc.displayOut(calc.disp);
         }
     }
 }

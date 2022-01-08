@@ -9,25 +9,39 @@ namespace Calc
     public class Calculator
     {
         public double[] args = new double[2];
-        int index = 0;
-        public string arg, disp;
+        bool index = false;
+        public string arg = "", disp="0";
         public int func=0;
         public bool minus = false;
+        public bool[] argsIsPresent = new bool[2]{false,false};
         
-        public void getArgs()
+        public void getArgs(Func<double> f)
         {
-            args[index] = Convert.ToDouble(arg);
-            if (index == 0) index = 1;
-            else index = 0;
+            try
+            { 
+                args[Convert.ToInt16(index)] = Convert.ToDouble(arg);
+                index = !index;
+                //arg = "";
+                if (index == false)
+                {
+                    args[0] = f();
+                    arg=Convert.ToString(args[0]);
+                    index =! index;
+                    disp = arg;
+                }
+                disp = arg;
+                arg = "";
+            }
+            catch { resetArgs(); };
         }
 
         public void resetArgs()
         {
-            arg = "0";
-            disp = arg;
+            arg = "";
+            disp = "0";
             Array.Clear(args, 0, 1);
             func = 0;
-            index = 0;
+            index = false;
             minus = false;
         }
 
@@ -36,9 +50,33 @@ namespace Calc
             if (c == '-') arg = arg.Insert(0, "-");
             else arg += c;
             
-            disp = arg;   
-            
-            return displayOut();
+            return displayOut(arg);
+        }
+
+        public string inputValues(string c)
+        {
+            switch (c)
+            {
+                case "-":
+                    {
+                        if (arg != "" & arg != "0")
+                        {
+                            switch (minus)
+                            {
+                                case true: arg = arg.Insert(0, c); break;
+                                case false: arg = arg.TrimStart('-'); break;
+                            }
+                            disp = arg;
+                            return displayOut(arg);
+                        }
+                    };break;
+                case "0,":
+                    {
+                        arg = arg + c;
+                        disp = arg;
+                    };break;
+            }
+            return disp;
         }
 
         public string deleteSymbol()
@@ -48,17 +86,17 @@ namespace Calc
             else arg = "0";
             
             disp = arg;
-            return displayOut();
+            return displayOut(arg);
         }
 
-        private string displayOut()
+        public string displayOut(string s)
         {
-            if (disp.Contains(',') == false)
-                for (int i = 3+Convert.ToInt16(minus); i <= disp.Length; i += 4)
+            if (arg.Contains(',') == false)
+                for (int i = 3; i <= arg.Length-Convert.ToInt16(minus)-1; i += 3)
                 {
-                    disp = disp.Insert(disp.Length - i, " ");
+                    s = s.Insert(arg.Length - i, " ");
                 }
-            return disp;
+            return s;
         }
 
         public double summ()
