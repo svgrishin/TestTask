@@ -135,6 +135,7 @@
             this.btn_Result.TabIndex = 21;
             this.btn_Result.Text = "=";
             this.btn_Result.UseVisualStyleBackColor = true;
+            this.btn_Result.Click += new System.EventHandler(this.btn_Result_Click);
             // 
             // btn_plus
             // 

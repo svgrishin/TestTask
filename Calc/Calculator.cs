@@ -9,31 +9,26 @@ namespace Calc
     public class Calculator
     {
         public double[] args = new double[2];
-        bool index = false;
+        public bool index = true;
         public string arg = "", disp="0";
-        public int func=0;
         public bool minus = false;
-        public bool[] argsIsPresent = new bool[2]{false,false};
         public Func<double> calcFunc;
-        
+
+        public delegate void useGetResult();
+        public delegate void useGetArgs(Func<double> func);
+
         public void getArgs(Func<double> f)
         {
-            try
-            { 
-                args[Convert.ToInt16(index)] = Convert.ToDouble(arg);
-                index = !index;
-                //arg = "";
-                if (index == false)
-                {
-                    args[0] = f();
-                    arg=Convert.ToString(args[0]);
-                    index =! index;
-                    disp = arg;
-                }
-                disp = arg;
-                arg = "";
+            index = !index;
+            
+            tryToGetArg(getArgs,f);
+
+            if (index == true)
+            {
+                getResult(f);
             }
-            catch { resetArgs(); };
+            arg = "";
+            disp = Convert.ToString(args[0]);
         }
 
         public void resetArgs()
@@ -41,8 +36,8 @@ namespace Calc
             arg = "";
             disp = "0";
             Array.Clear(args, 0, 1);
-            func = 0;
-            index = false;
+            calcFunc = null;
+            index = true;
             minus = false;
         }
 
@@ -93,7 +88,6 @@ namespace Calc
                 disp = "0";
                 return displayOut(disp);
             }
-            
         }
 
         public string displayOut(string s)
@@ -126,21 +120,64 @@ namespace Calc
             return args[0] - args[1];
         }
 
-        public void getResult()
+        public void getResult(Func<double> f)
         {
-            switch (func)
+            args[0] = f();
+            index = false;
+        }
+
+        public void resultBtn()
+        {
+            index = !index;
+
+            tryToGetArg(resultBtn);
+
+            getResult(calcFunc);
+            disp = Convert.ToString(args[0]);
+            index = true;
+            arg = disp;
+        }
+
+        public void tryToGetArg(useGetResult f)
+        {
+            try
             {
-                case 1: args[0] = summ();break;
-                case 2: args[0] = differens();break;
-                case 3: args[0] = multiply(); break; 
-                case 4: args[0] = divide(); break; 
+                args[Convert.ToByte(index)] = Convert.ToDouble(arg);
+            }
+            catch
+            {
+                arg = "0";
+                index = !index;
+                f();
             }
         }
 
-        public void setFunction(Func<double>f)
+        public void tryToGetArg(useGetArgs func, Func<double> f)
         {
-            ;
+            try
+            {
+                args[Convert.ToByte(index)] = Convert.ToDouble(arg);
+            }
+            catch
+            {
+                arg = "0";
+                index = !index;
+                func(f);
+            }
         }
 
+        public void catchFunc(useGetResult f)
+        {
+            arg = "0";
+            index = !index;
+            f();
+        }
+
+        public void catchFunc(useGetArgs func, Func<double> f)
+        {
+            arg = "0";
+            index = !index;
+            func(f);
+        }
     }
 }

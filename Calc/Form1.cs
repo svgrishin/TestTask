@@ -107,7 +107,10 @@ namespace Calc
         {
             if (calc.calcFunc != f)
             {
+                //if (calc.index == false) calc.index = true;
+                //calc.index = true;
                 calc.getArgs(calc.calcFunc);
+                
                 calc.calcFunc = f;
             }
             else calc.getArgs(f);
@@ -128,6 +131,12 @@ namespace Calc
         private void btn_minus_Click(object sender, EventArgs e)
         {
             funcClick(calc.differens);
+        }
+
+        private void btn_Result_Click(object sender, EventArgs e)
+        {
+            calc.resultBtn();
+            label1.Text = calc.displayOut(calc.disp);
         }
     }
 }
