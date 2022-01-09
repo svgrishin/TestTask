@@ -146,9 +146,7 @@ namespace Calc
             }
             catch
             {
-                arg = "0";
-                index = !index;
-                f();
+                catchFunc(f);
             }
         }
 
@@ -160,24 +158,26 @@ namespace Calc
             }
             catch
             {
-                arg = "0";
-                index = !index;
-                func(f);
+                catchFunc(func, f);
             }
         }
 
         public void catchFunc(useGetResult f)
         {
-            arg = "0";
-            index = !index;
+            catchSwitch();
             f();
         }
 
         public void catchFunc(useGetArgs func, Func<double> f)
         {
+            catchSwitch();
+            func(f);
+        }
+
+        public void catchSwitch()
+        {
             arg = "0";
             index = !index;
-            func(f);
         }
     }
 }
