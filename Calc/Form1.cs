@@ -136,5 +136,10 @@ namespace Calc
             calc.resultBtn();
             label1.Text = calc.displayOut(calc.disp);
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

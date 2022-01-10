@@ -122,6 +122,16 @@ namespace Calc
             return args[0] - args[1];
         }
 
+        public double powerOf()
+        {
+            return Math.Pow(args[0],2);
+        }
+
+        public double sqrtOf()
+        {
+            return Math.Sqrt(args[0]);
+        }
+
         public void getResult(Func<double> f)
         {
             args[0] = f();
