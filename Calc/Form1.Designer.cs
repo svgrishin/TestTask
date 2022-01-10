@@ -373,6 +373,7 @@
             this.btn_SQRT.TabIndex = 23;
             this.btn_SQRT.Text = "√";
             this.btn_SQRT.UseVisualStyleBackColor = true;
+            this.btn_SQRT.Click += new System.EventHandler(this.btn_SQRT_Click);
             // 
             // Form1
             // 

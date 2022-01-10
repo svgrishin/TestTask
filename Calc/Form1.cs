@@ -141,5 +141,13 @@ namespace Calc
         {
 
         }
+
+        private void btn_SQRT_Click(object sender, EventArgs e)
+        {
+            funcClick(calc.powerOf);
+            
+            //calc.resultBtn();
+            //calc.resultBtn();
+        }
     }
 }
