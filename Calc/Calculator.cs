@@ -17,13 +17,13 @@ namespace Calc
         public Func<double> calcFunc;
 
         //public delegate void useGetResult();
-        public delegate void useGetArgs(Func<double> func);
+        //public delegate void useGetArgs(Func<double> func);
 
         public void getArgs(Func<double> f)
         {
             index = !index;
             
-            tryToGetArg(getArgs,f);
+            tryToGetArg();
 
             if (index == true)
             {
@@ -148,27 +148,7 @@ namespace Calc
             }
             catch
             {
-                
-                //catchFunc(f);
             }
-        }
-
-        public void tryToGetArg(useGetArgs func, Func<double> f)
-        {
-            try
-            {
-                args[Convert.ToByte(index)] = Convert.ToDouble(arg);
-            }
-            catch
-            {
-                //catchFunc(func, f);
-            }
-        }
-
-        public void catchFunc(useGetArgs func, Func<double> f)
-        {
-            catchSwitch();
-            func(f);
         }
 
         public void catchSwitch()
