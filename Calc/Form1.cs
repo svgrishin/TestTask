@@ -107,8 +107,6 @@ namespace Calc
         {
             if (calc.calcFunc != f)
             {
-                //if (calc.index == false) calc.index = true;
-                //calc.index = true;
                 calc.getArgs(calc.calcFunc);
                 
                 calc.calcFunc = f;

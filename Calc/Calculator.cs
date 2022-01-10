@@ -9,12 +9,14 @@ namespace Calc
     public class Calculator
     {
         public double[] args = new double[2];
+        public bool isResultPresent = false;
+
         public bool index = true;
         public string arg = "", disp="0";
         public bool minus = false;
         public Func<double> calcFunc;
 
-        public delegate void useGetResult();
+        //public delegate void useGetResult();
         public delegate void useGetArgs(Func<double> func);
 
         public void getArgs(Func<double> f)
@@ -92,10 +94,10 @@ namespace Calc
 
         public string displayOut(string s)
         {
-            if (arg.Contains(',') == false)
-                for (int i = 3; i <= arg.Length-Convert.ToInt16(minus)-1; i += 3)
+            if (s.Contains(',') == false)
+                for (int i = 3; i <= s.Length-Convert.ToInt16(minus)-1; i += 4)
                 {
-                    s = s.Insert(arg.Length - i, " ");
+                    s = s.Insert(s.Length-i, " ");
                 }
             return s;
         }
@@ -130,15 +132,15 @@ namespace Calc
         {
             index = !index;
 
-            tryToGetArg(resultBtn);
+            tryToGetArg();
 
             getResult(calcFunc);
             disp = Convert.ToString(args[0]);
             index = true;
-            arg = disp;
+            arg = "";
         }
 
-        public void tryToGetArg(useGetResult f)
+        public void tryToGetArg()
         {
             try
             {
@@ -146,7 +148,8 @@ namespace Calc
             }
             catch
             {
-                catchFunc(f);
+                
+                //catchFunc(f);
             }
         }
 
@@ -158,14 +161,8 @@ namespace Calc
             }
             catch
             {
-                catchFunc(func, f);
+                //catchFunc(func, f);
             }
-        }
-
-        public void catchFunc(useGetResult f)
-        {
-            catchSwitch();
-            f();
         }
 
         public void catchFunc(useGetArgs func, Func<double> f)
@@ -176,7 +173,7 @@ namespace Calc
 
         public void catchSwitch()
         {
-            arg = "0";
+            arg = "";
             index = !index;
         }
     }
