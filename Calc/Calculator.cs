@@ -146,15 +146,7 @@ namespace Calc
             {
                 args[Convert.ToByte(index)] = Convert.ToDouble(arg);
             }
-            catch
-            {
-            }
-        }
-
-        public void catchSwitch()
-        {
-            arg = "";
-            index = !index;
+            catch {}
         }
     }
 }
