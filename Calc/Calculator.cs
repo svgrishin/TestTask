@@ -16,6 +16,8 @@ namespace Calc
         public bool minus = false;
         public Func<double> calcFunc;
 
+        public string mr;
+
         //public delegate void useGetResult();
         //public delegate void useGetArgs(Func<double> func);
 
@@ -71,6 +73,11 @@ namespace Calc
                 case "0,":
                     {
                         arg = arg + c;
+                        disp = arg;
+                    };break;
+                default:
+                    {
+                        arg = mr;
                         disp = arg;
                     };break;
             }
@@ -157,6 +164,13 @@ namespace Calc
                 args[Convert.ToByte(index)] = Convert.ToDouble(arg);
             }
             catch {}
+        }
+
+        public void extraFunc(Func<double> f)
+        {
+            args[1] = 2;
+            calcFunc = f;
+            resultBtn();
         }
     }
 }

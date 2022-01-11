@@ -137,25 +137,27 @@ namespace Calc
             label1.Text = calc.displayOut(calc.disp);
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btn_SQRT_Click(object sender, EventArgs e)
         {
-            calc.args[1] = 2;
-            calc.calcFunc = calc.sqrtOf;
-            calc.resultBtn();
+            calc.extraFunc(calc.sqrtOf);
             label1.Text = calc.displayOut(calc.disp);
         }
 
         private void btn_SQR_Click(object sender, EventArgs e)
         {
-            calc.args[1] = 2;
-            calc.calcFunc = calc.powerOf;
-            calc.resultBtn();
+            calc.extraFunc(calc.powerOf);
             label1.Text = calc.displayOut(calc.disp);
+        }
+
+        private void btn_MR_Click(object sender, EventArgs e)
+        {
+            label1.Text=calc.inputValues(Convert.ToString(btn_MR));
+        }
+
+        private void btn_MPlus_Click(object sender, EventArgs e)
+        {
+            calc.mr = calc.arg;
+            label1.Text = calc.inputValues(Convert.ToString(btn_MR));
         }
     }
 }
