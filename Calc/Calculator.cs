@@ -124,7 +124,7 @@ namespace Calc
 
         public double powerOf()
         {
-            return Math.Pow(args[0],2);
+            return Math.Pow(args[0],args[1]);
         }
 
         public double sqrtOf()

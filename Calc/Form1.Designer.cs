@@ -363,6 +363,7 @@
             this.btn_SQR.TabIndex = 22;
             this.btn_SQR.Text = "x^2";
             this.btn_SQR.UseVisualStyleBackColor = true;
+            this.btn_SQR.Click += new System.EventHandler(this.btn_SQR_Click);
             // 
             // btn_SQRT
             // 

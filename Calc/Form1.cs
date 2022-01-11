@@ -144,10 +144,19 @@ namespace Calc
 
         private void btn_SQRT_Click(object sender, EventArgs e)
         {
-            funcClick(calc.powerOf);
-            
-            //calc.resultBtn();
-            //calc.resultBtn();
+            calc.args[1] = 2;
+            calc.calcFunc = calc.sqrtOf;
+            calc.resultBtn();
+            label1.Text = calc.displayOut(calc.disp);
+        }
+
+        private void btn_SQR_Click(object sender, EventArgs e)
+        {
+            calc.args[1] = 2;
+            calc.calcFunc = calc.powerOf;
+            calc.resultBtn();
+            label1.Text = calc.displayOut(calc.disp);
         }
     }
 }
+
