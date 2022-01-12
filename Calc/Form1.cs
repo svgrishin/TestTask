@@ -145,9 +145,10 @@ namespace Calc
 
         private void btn_SQR_Click(object sender, EventArgs e)
         {
-            calc.extraFunc(calc.powerOf);
+            calc.extraFunc(calc.sqrOf);
             label1.Text = calc.displayOut(calc.disp);
         }
+
 
         private void btn_MR_Click(object sender, EventArgs e)
         {

@@ -75,11 +75,6 @@ namespace Calc
                         arg = arg + c;
                         disp = arg;
                     };break;
-                default:
-                    {
-                        arg = mr;
-                        disp = arg;
-                    };break;
             }
             return disp;
         }
@@ -129,7 +124,7 @@ namespace Calc
             return args[0] - args[1];
         }
 
-        public double powerOf()
+        public double sqrOf()
         {
             return Math.Pow(args[0],args[1]);
         }
@@ -143,6 +138,11 @@ namespace Calc
         {
             args[0] = f();
             index = false;
+        }
+
+        public void extraFunc(Func<double>f)
+        {
+            getResult(f);
         }
 
         public void resultBtn()
@@ -165,12 +165,7 @@ namespace Calc
             }
             catch {}
         }
-
-        public void extraFunc(Func<double> f)
-        {
-            args[1] = 2;
-            calcFunc = f;
-            resultBtn();
-        }
     }
+
+
 }
