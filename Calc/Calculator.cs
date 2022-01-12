@@ -126,7 +126,7 @@ namespace Calc
 
         public double sqrOf()
         {
-            return Math.Pow(args[0],args[1]);
+            return Math.Pow(args[0],2);
         }
 
         public double sqrtOf()
@@ -142,7 +142,13 @@ namespace Calc
 
         public void extraFunc(Func<double>f)
         {
+            index = !index;
+            tryToGetArg();
             getResult(f);
+
+            disp = Convert.ToString(args[0]);
+            arg = "";
+            index = !index;
         }
 
         public void resultBtn()
