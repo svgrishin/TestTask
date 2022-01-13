@@ -202,10 +202,10 @@ namespace Calc
             catch
             {
                 index = !index;
-                //args[1] = args[0];
+               
             }
             index = !index;
-            arg = "";
+            //arg = "";
         }
 
         public void tryToGetArg(double s)
