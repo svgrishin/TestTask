@@ -11,7 +11,8 @@ namespace Calc
         public double[] args = new double[2];
         public bool isResultPresent = false;
 
-        public bool index = true;
+        //public bool index = true; вернуть, если всё будет плохо
+        public bool index = false;
         public string arg = "", disp="0";
         public bool minus = false;
         public Func<double> calcFunc;
@@ -34,6 +35,21 @@ namespace Calc
             arg = "";
             disp = Convert.ToString(args[0]);
         }
+
+        public void getArgsTest()
+        {
+            index = !index;
+
+            tryToGetArg(arg);
+
+            if (index == true)
+            {
+                getResult(calcFunc);
+            }
+            arg = "";
+            disp = Convert.ToString(args[0]);
+        }
+
 
         public void resetArgs()
         {
@@ -137,8 +153,9 @@ namespace Calc
         public void getResult(Func<double> f)
         {
             args[0] = f();
-            //index = false;
-            index = !index;
+            disp = displayOut(Convert.ToString(args[0]));
+            
+            //index = !index; вернуть, если всё плохо
         }
 
         public void extraFunc(Func<double>f)
@@ -161,7 +178,7 @@ namespace Calc
             getResult(calcFunc);
             disp = Convert.ToString(args[0]);
             index = true;
-            //arg = "";
+            //index = !index;
         }
 
         public void tryToGetArg(string s)
@@ -174,6 +191,21 @@ namespace Calc
             {
                 args[1] = args[0];
             }
+        }
+
+        public void tryToGetArgTest(string s)
+        {
+            try
+            {
+                args[Convert.ToByte(index)] = Convert.ToDouble(s);
+            }
+            catch
+            {
+                index = !index;
+                //args[1] = args[0];
+            }
+            index = !index;
+            arg = "";
         }
 
         public void tryToGetArg(double s)

@@ -105,13 +105,29 @@ namespace Calc
 
         private void funcClick(Func<double> f)
         {
-            if (calc.calcFunc != f)
+            //if (calc.calcFunc != f)
+            //{
+            //    //if (calc.calcFunc != null) calc.index = !calc.index;
+            //    calc.getArgs(calc.calcFunc);
+            //    //calc.calcFunc = f;
+            //}
+
+            //else calc.getArgs(calc.calcFunc);
+            //calc.calcFunc = f;
+            //label1.Text = calc.displayOut(calc.disp);
+
+
+            calc.tryToGetArgTest(calc.arg);
+            switch (calc.index)
             {
-                if (calc.calcFunc != null) calc.index = !calc.index;
-                calc.calcFunc = f;
+                case true:calc.calcFunc = f; break;
+                case false:
+                {
+                    calc.getResult(calc.calcFunc);
+                    label1.Text = calc.displayOut(calc.disp);
+                    calc.calcFunc = f;
+                }break;
             }
-            calc.getArgs(f);
-            label1.Text = calc.displayOut(calc.disp);
         }
 
         private void btn_multiply_Click(object sender, EventArgs e)
