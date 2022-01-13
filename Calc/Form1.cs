@@ -107,12 +107,10 @@ namespace Calc
         {
             if (calc.calcFunc != f)
             {
-                calc.getArgs(calc.calcFunc);
-                
+                if (calc.calcFunc != null) calc.index = !calc.index;
                 calc.calcFunc = f;
             }
-            else calc.getArgs(f);
-
+            calc.getArgs(f);
             label1.Text = calc.displayOut(calc.disp);
         }
 

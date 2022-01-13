@@ -25,7 +25,7 @@ namespace Calc
         {
             index = !index;
             
-            tryToGetArg();
+            tryToGetArg(arg);
 
             if (index == true)
             {
@@ -137,13 +137,14 @@ namespace Calc
         public void getResult(Func<double> f)
         {
             args[0] = f();
-            index = false;
+            //index = false;
+            index = !index;
         }
 
         public void extraFunc(Func<double>f)
         {
             index = !index;
-            tryToGetArg();
+            tryToGetArg(arg);
             getResult(f);
 
             disp = Convert.ToString(args[0]);
@@ -155,21 +156,36 @@ namespace Calc
         {
             index = !index;
 
-            tryToGetArg();
+            if (index == true) tryToGetArg(arg);
 
             getResult(calcFunc);
             disp = Convert.ToString(args[0]);
             index = true;
-            arg = "";
+            //arg = "";
         }
 
-        public void tryToGetArg()
+        public void tryToGetArg(string s)
         {
             try
             {
-                args[Convert.ToByte(index)] = Convert.ToDouble(arg);
+                args[Convert.ToByte(index)] = Convert.ToDouble(s);
             }
-            catch {}
+            catch
+            {
+                args[1] = args[0];
+            }
+        }
+
+        public void tryToGetArg(double s)
+        {
+            try
+            {
+                args[Convert.ToByte(index)] = s;
+            }
+            catch
+            {
+                //args[Convert.ToByte(index)] = args[Convert.ToByte(!index)];
+            }
         }
     }
 
