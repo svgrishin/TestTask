@@ -95,7 +95,11 @@ namespace Calc
 
         private void btn_Coma_Click(object sender, EventArgs e)
         {
-
+            if (calc.arg.Contains(',') == false)
+            {
+                if (calc.arg == "") label1.Text = calc.inputValues("0,");
+                else label1.Text = calc.inputValues(',');
+            }
         }
 
         private void btn_plus_Click(object sender, EventArgs e)
