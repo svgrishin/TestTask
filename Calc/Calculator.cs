@@ -148,27 +148,6 @@ namespace Calc
             index = !index;
         }
 
-        public void resultBtn()
-        {
-            //index = !index;
-
-            //if (index == true) tryToGetArg(arg);
-
-            //getResult(calcFunc);
-            //disp = Convert.ToString(args[0]);
-            //index = true;
-
-            //
-            //index = !index;
-
-            if (index == true) tryToGetArg(arg);
-
-            getResult(calcFunc);
-
-
-            index = false;
-        }
-
         public void tryToGetArg(string s)
         {
             try

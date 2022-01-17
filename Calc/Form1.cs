@@ -139,7 +139,7 @@ namespace Calc
 
         private void btn_Result_Click(object sender, EventArgs e)
         {
-            calc.resultBtn();
+            funcClick(calc.calcFunc);
             label1.Text = calc.displayOut(calc.disp);
         }
 
