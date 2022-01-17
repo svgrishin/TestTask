@@ -18,6 +18,8 @@ namespace Calc
 
         public double mr;
 
+        public object calcBtn;
+
         public void getArgs(Func<double> f)
         {
             index = !index;
@@ -38,12 +40,14 @@ namespace Calc
             disp = "0";
             Array.Clear(args, 0, 1);
             calcFunc = null;
-            index = true;
+            index = false;
             minus = false;
+            isResultPresent = false;
         }
 
         public string inputValues(char c)
         {
+            if (isResultPresent == true) resetArgs();
             if (c == '-') arg = arg.Insert(0, "-");
             else arg += c;
             
@@ -134,6 +138,7 @@ namespace Calc
         public void getResult(Func<double> f)
         {
             args[0] = f();
+            isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
         }
 

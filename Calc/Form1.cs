@@ -100,23 +100,30 @@ namespace Calc
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            funcClick(calc.summ);
+            funcClick(calc.summ, sender);
         }
 
-        private void funcClick(Func<double> f)
-        {            
-            if (f != calc.calcFunc && calc.calcFunc!=null) calc.index = true;
+        private void funcClick(Func<double> f, object sender)
+        {   
+            if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
+            
             calc.tryToGetArg(calc.arg);
 
             switch (calc.index)
             {
-                case true:calc.calcFunc = f; break;
+                case true:
+                    {
+                        calc.calcFunc = f;
+                        calc.isResultPresent = false;
+                    }
+                    break;
                 case false:
                 {
                     calc.getResult(calc.calcFunc);
                     label1.Text = calc.displayOut(calc.disp);
                     calc.calcFunc = f;
+                    
                 }break;
             }
             calc.arg = "";
@@ -124,23 +131,33 @@ namespace Calc
 
         private void btn_multiply_Click(object sender, EventArgs e)
         {
-            funcClick(calc.multiply);
+            funcClick(calc.multiply, sender);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
-            funcClick(calc.divide);
+            funcClick(calc.divide, sender);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            funcClick(calc.differens);
+            funcClick(calc.differens, sender);
         }
 
         private void btn_Result_Click(object sender, EventArgs e)
         {
-            funcClick(calc.calcFunc);
+            funcClick(calc.calcFunc, sender);
             label1.Text = calc.displayOut(calc.disp);
+            calc.index = false;
+            
+
+            ////calc.tryToGetArg(calc.arg);
+            ////calc.getResult(calc.calcFunc);
+            ////calc.arg = "";
+
+
+            label1.Text = calc.displayOut(calc.disp);
+            this.Text = sender.GetHashCode().ToString();
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
