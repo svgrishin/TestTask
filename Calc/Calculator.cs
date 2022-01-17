@@ -189,36 +189,21 @@ namespace Calc
             }
             catch
             {
-                args[1] = args[0];
-            }
-        }
-
-        public void tryToGetArgTest(string s)
-        {
-            try
-            {
-                args[Convert.ToByte(index)] = Convert.ToDouble(s);
-            }
-            catch
-            {
                 index = !index;
-               
             }
             index = !index;
-            //arg = "";
         }
 
-        public void tryToGetArg(double s)
-        {
-            try
-            {
-                args[Convert.ToByte(index)] = s;
-            }
-            catch
-            {
-                //args[Convert.ToByte(index)] = args[Convert.ToByte(!index)];
-            }
-        }
+        //public void tryToGetArg(double s)
+        //{
+        //    try
+        //    {
+        //        args[Convert.ToByte(index)] = s;
+        //    }
+        //    catch
+        //    {
+        //    }
+        //}
     }
 
 

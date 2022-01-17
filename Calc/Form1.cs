@@ -104,30 +104,16 @@ namespace Calc
         }
 
         private void funcClick(Func<double> f)
-        {
-            //if (calc.calcFunc != f)
-            //{
-            //    //if (calc.calcFunc != null) calc.index = !calc.index;
-            //    calc.getArgs(calc.calcFunc);
-            //    //calc.calcFunc = f;
-            //}
-
-            //else calc.getArgs(calc.calcFunc);
-            //calc.calcFunc = f;
-            //label1.Text = calc.displayOut(calc.disp);
-            
+        {            
             if (f != calc.calcFunc && calc.calcFunc!=null) calc.index = true;
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
-            calc.tryToGetArgTest(calc.arg);
-
-            //if (calc.calcFunc == f && calc.arg != "") calc.index = false;
+            calc.tryToGetArg(calc.arg);
 
             switch (calc.index)
             {
                 case true:calc.calcFunc = f; break;
                 case false:
                 {
-                    //if (calc.calcFunc == f && calc.arg != "") calc.index = true;
                     calc.getResult(calc.calcFunc);
                     label1.Text = calc.displayOut(calc.disp);
                     calc.calcFunc = f;
