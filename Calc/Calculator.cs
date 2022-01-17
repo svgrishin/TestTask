@@ -165,6 +165,11 @@ namespace Calc
             }
             index = !index;
         }
+
+        public void resPresCheck()
+        {
+            if (isResultPresent == true) resetArgs();
+        }
     }
 
 

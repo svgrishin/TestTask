@@ -111,20 +111,29 @@ namespace Calc
         {   
             if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
-            
+
             calc.tryToGetArg(calc.arg);
+
+            //calc.index = !calc.isResultPresent;
 
             switch (calc.index)
             {
                 case true:
                     {
                         calc.calcFunc = f;
-                        calc.isResultPresent = false;
+                        //calc.isResultPresent = false;
                     }
                     break;
                 case false:
                 {
-                    calc.getResult(calc.calcFunc);
+                        try
+                        {
+                            calc.getResult(calc.calcFunc);
+                        }
+                        catch
+                        {
+                            calc.getResult(f);
+                        }
                     label1.Text = calc.displayOut(calc.disp);
                     calc.calcFunc = f;
                     
@@ -153,15 +162,10 @@ namespace Calc
             funcClick(calc.calcFunc, sender);
             label1.Text = calc.displayOut(calc.disp);
             calc.index = false;
-            
 
-            ////calc.tryToGetArg(calc.arg);
-            ////calc.getResult(calc.calcFunc);
-            ////calc.arg = "";
-
+            calc.isResultPresent = true;
 
             label1.Text = calc.displayOut(calc.disp);
-            this.Text = sender.GetHashCode().ToString();
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
@@ -179,9 +183,10 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
+            calc.resPresCheck();
             calc.arg = Convert.ToString(calc.mr);
-            calc.tryToGetArg(calc.arg);
-            label1.Text = calc.displayOut(calc.disp);
+            //calc.tryToGetArg(calc.arg);
+            label1.Text = calc.displayOut(calc.arg);
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
