@@ -32,21 +32,6 @@ namespace Calc
             disp = Convert.ToString(args[0]);
         }
 
-        public void getArgsTest()
-        {
-            index = !index;
-
-            tryToGetArg(arg);
-
-            if (index == true)
-            {
-                getResult(calcFunc);
-            }
-            arg = "";
-            disp = Convert.ToString(args[0]);
-        }
-
-
         public void resetArgs()
         {
             arg = "";
@@ -150,8 +135,6 @@ namespace Calc
         {
             args[0] = f();
             disp = displayOut(Convert.ToString(args[0]));
-            
-            //index = !index; вернуть, если всё плохо
         }
 
         public void extraFunc(Func<double>f)
@@ -167,14 +150,23 @@ namespace Calc
 
         public void resultBtn()
         {
-            index = !index;
+            //index = !index;
+
+            //if (index == true) tryToGetArg(arg);
+
+            //getResult(calcFunc);
+            //disp = Convert.ToString(args[0]);
+            //index = true;
+
+            //
+            //index = !index;
 
             if (index == true) tryToGetArg(arg);
 
             getResult(calcFunc);
-            disp = Convert.ToString(args[0]);
-            index = true;
-            //index = !index;
+
+
+            index = false;
         }
 
         public void tryToGetArg(string s)
