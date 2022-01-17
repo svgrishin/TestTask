@@ -11,16 +11,12 @@ namespace Calc
         public double[] args = new double[2];
         public bool isResultPresent = false;
 
-        //public bool index = true; вернуть, если всё будет плохо
         public bool index = false;
         public string arg = "", disp="0";
         public bool minus = false;
         public Func<double> calcFunc;
 
         public string mr;
-
-        //public delegate void useGetResult();
-        //public delegate void useGetArgs(Func<double> func);
 
         public void getArgs(Func<double> f)
         {
@@ -193,17 +189,6 @@ namespace Calc
             }
             index = !index;
         }
-
-        //public void tryToGetArg(double s)
-        //{
-        //    try
-        //    {
-        //        args[Convert.ToByte(index)] = s;
-        //    }
-        //    catch
-        //    {
-        //    }
-        //}
     }
 
 
