@@ -31,6 +31,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_MPlus = new System.Windows.Forms.Button();
             this.btn_MR = new System.Windows.Forms.Button();
             this.btn_Result = new System.Windows.Forms.Button();
             this.btn_plus = new System.Windows.Forms.Button();
@@ -53,7 +54,7 @@
             this.btn_SQR = new System.Windows.Forms.Button();
             this.btn_SQRT = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
-            this.btn_MPlus = new System.Windows.Forms.Button();
+            this.btn_MMinus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -121,6 +122,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btn_SQR, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.btn_SQRT, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.btn_clear, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_MMinus, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -134,6 +136,17 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(353, 312);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btn_MPlus
+            // 
+            this.btn_MPlus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MPlus.Location = new System.Drawing.Point(3, 3);
+            this.btn_MPlus.Name = "btn_MPlus";
+            this.btn_MPlus.Size = new System.Drawing.Size(82, 45);
+            this.btn_MPlus.TabIndex = 1;
+            this.btn_MPlus.Text = "M+";
+            this.btn_MPlus.UseVisualStyleBackColor = true;
+            this.btn_MPlus.Click += new System.EventHandler(this.btn_MPlus_Click);
             // 
             // btn_MR
             // 
@@ -390,16 +403,15 @@
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
-            // btn_MPlus
+            // btn_MMinus
             // 
-            this.btn_MPlus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_MPlus.Location = new System.Drawing.Point(3, 3);
-            this.btn_MPlus.Name = "btn_MPlus";
-            this.btn_MPlus.Size = new System.Drawing.Size(82, 45);
-            this.btn_MPlus.TabIndex = 1;
-            this.btn_MPlus.Text = "M+";
-            this.btn_MPlus.UseVisualStyleBackColor = true;
-            this.btn_MPlus.Click += new System.EventHandler(this.btn_MPlus_Click);
+            this.btn_MMinus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MMinus.Location = new System.Drawing.Point(3, 54);
+            this.btn_MMinus.Name = "btn_MMinus";
+            this.btn_MMinus.Size = new System.Drawing.Size(82, 45);
+            this.btn_MMinus.TabIndex = 24;
+            this.btn_MMinus.Text = "M-";
+            this.btn_MMinus.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -447,6 +459,7 @@
         private System.Windows.Forms.Button btn_SQRT;
         private System.Windows.Forms.Button btn_MR;
         private System.Windows.Forms.Button btn_MPlus;
+        private System.Windows.Forms.Button btn_MMinus;
     }
 }
 

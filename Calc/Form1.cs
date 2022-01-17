@@ -158,14 +158,19 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
-            calc.tryToGetArg(calc.mr);
-            label1.Text = calc.inputValues(Convert.ToString(btn_MR));
+            calc.arg = Convert.ToString(calc.mr);
+            calc.tryToGetArg(calc.arg);
+            label1.Text = calc.displayOut(calc.disp);
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
-            if (calc.arg=="") { calc.mr = Convert.ToString(calc.args[0]); }
-            else calc.mr = calc.arg;
+            if (calc.arg=="") { calc.mr += calc.args[0]; }
+            else calc.mr += Convert.ToDouble(calc.arg);
+            calc.arg = "";
+            calc.index = true;
+
+            this.Text = Convert.ToString(calc.mr);
         }
     }
 }

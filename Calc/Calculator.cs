@@ -16,7 +16,7 @@ namespace Calc
         public bool minus = false;
         public Func<double> calcFunc;
 
-        public string mr;
+        public double mr;
 
         public void getArgs(Func<double> f)
         {
