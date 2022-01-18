@@ -78,6 +78,8 @@ namespace Calc
         private void btn_clear_Click(object sender, EventArgs e)
         {
             calc.resetArgs();
+            Array.Clear(calc.args, 0, 1);
+            calc.calcFunc = null;
             label1.Text = "0";
         }
 
@@ -121,6 +123,7 @@ namespace Calc
                 case true:
                     {
                         calc.calcFunc = f;
+                        //if (f != null) calc.calcFunc = f;
                         //calc.isResultPresent = false;
                     }
                     break;
@@ -136,6 +139,7 @@ namespace Calc
                         }
                     label1.Text = calc.displayOut(calc.disp);
                     calc.calcFunc = f;
+                    //if (f != null) calc.calcFunc = f;
                     
                 }break;
             }
@@ -186,6 +190,8 @@ namespace Calc
             calc.resPresCheck();
             calc.arg = Convert.ToString(calc.mr);
             //calc.tryToGetArg(calc.arg);
+            if (calc.isResultPresent == false) calc.calcFunc = null;
+
             label1.Text = calc.displayOut(calc.arg);
         }
 
