@@ -164,6 +164,11 @@ namespace Calc
             catch
             {
                 index = !index;
+                if (isResultPresent == false)
+                {
+                    args[1] = args[0];
+                    index = !index;
+                }
             }
             index = !index;
         }
