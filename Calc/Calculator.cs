@@ -39,7 +39,7 @@ namespace Calc
             arg = "";
             disp = "0";
             //Array.Clear(args, 0, 1);
-            //calcFunc = null;
+            calcFunc = null;
             index = false;
             minus = false;
             isResultPresent = false;

@@ -113,7 +113,7 @@ namespace Calc
         {   
             if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
-
+            if (calc.isResultPresent == true) calc.index = false;
             calc.tryToGetArg(calc.arg);
 
             //calc.index = !calc.isResultPresent;
