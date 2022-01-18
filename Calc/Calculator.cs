@@ -12,10 +12,9 @@ namespace Calc
         public bool isResultPresent = false;
 
         public bool index = false;
-        public string arg = "", disp="0";
+        public string arg = "", disp = "0";
         public bool minus = false;
         public Func<double> calcFunc;
-        public Func<double> resultFunc;
 
         public double mr;
 
@@ -24,7 +23,7 @@ namespace Calc
         public void getArgs(Func<double> f)
         {
             index = !index;
-            
+
             tryToGetArg(arg);
 
             if (index == true)
@@ -40,7 +39,7 @@ namespace Calc
             arg = "";
             disp = "0";
             //Array.Clear(args, 0, 1);
-            calcFunc = null;
+            //calcFunc = null;
             index = false;
             minus = false;
             isResultPresent = false;
@@ -48,11 +47,10 @@ namespace Calc
 
         public string inputValues(char c)
         {
-            if (isResultPresent == true) resetArgs(); 
-            //resetArgs();
+            if (isResultPresent == true) resetArgs();
             if (c == '-') arg = arg.Insert(0, "-");
             else arg += c;
-            
+
             return displayOut(arg);
         }
 
@@ -72,12 +70,12 @@ namespace Calc
                             disp = arg;
                             return displayOut(arg);
                         }
-                    };break;
+                    }; break;
                 case "0,":
                     {
                         arg = arg + c;
                         disp = arg;
-                    };break;
+                    }; break;
             }
             return disp;
         }
@@ -100,9 +98,9 @@ namespace Calc
         public string displayOut(string s)
         {
             if (s.Contains(',') == false)
-                for (int i = 3; i <= s.Length-Convert.ToInt16(minus)-1; i += 4)
+                for (int i = 3; i <= s.Length - Convert.ToInt16(minus) - 1; i += 4)
                 {
-                    s = s.Insert(s.Length-i, " ");
+                    s = s.Insert(s.Length - i, " ");
                 }
             return s;
         }
@@ -129,7 +127,7 @@ namespace Calc
 
         public double sqrOf()
         {
-            return Math.Pow(args[0],2);
+            return Math.Pow(args[0], 2);
         }
 
         public double sqrtOf()
@@ -144,7 +142,7 @@ namespace Calc
             disp = displayOut(Convert.ToString(args[0]));
         }
 
-        public void extraFunc(Func<double>f)
+        public void extraFunc(Func<double> f)
         {
             index = !index;
             tryToGetArg(arg);

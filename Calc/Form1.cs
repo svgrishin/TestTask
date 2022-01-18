@@ -85,7 +85,7 @@ namespace Calc
 
         private void btn_bspace_Click(object sender, EventArgs e)
         {
-            
+
             label1.Text = calc.deleteSymbol();
         }
 
@@ -110,48 +110,39 @@ namespace Calc
         }
 
         private void funcClick(Func<double> f, object sender)
-        {   
+        {
             if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
-            if (calc.isResultPresent == true) calc.index = false;
+
             calc.tryToGetArg(calc.arg);
+
+            //calc.index = !calc.isResultPresent;
 
             switch (calc.index)
             {
                 case true:
                     {
                         calc.calcFunc = f;
-                        calc.resultFunc = f;
+                        //if (f != null) calc.calcFunc = f;
+                        //calc.isResultPresent = false;
                     }
                     break;
                 case false:
-                {
+                    {
                         try
                         {
                             calc.getResult(calc.calcFunc);
                         }
                         catch
                         {
-                            try
-                            {
-                                if (f == calc.resultFunc)
-                                    calc.getResult(f);
-                                else
-                                {
-                                    calc.calcFunc = f;
-                                    calc.isResultPresent = false;
-                                }
-                            }
-                            catch
-                            {
-
-                            }
+                            calc.getResult(f);
                         }
-                    label1.Text = calc.displayOut(calc.disp);
-                    calc.calcFunc = f;
-                    calc.resultFunc = f;
-                    
-                }break;
+                        label1.Text = calc.displayOut(calc.disp);
+                        calc.calcFunc = f;
+                        //if (f != null) calc.calcFunc = f;
+
+                    }
+                    break;
             }
             calc.arg = "";
         }
@@ -173,14 +164,11 @@ namespace Calc
 
         private void btn_Result_Click(object sender, EventArgs e)
         {
-            funcClick(calc.resultFunc, sender);
+            funcClick(calc.calcFunc, sender);
             label1.Text = calc.displayOut(calc.disp);
             calc.index = false;
 
             calc.isResultPresent = true;
-
-
-            calc.calcFunc = null;
 
             label1.Text = calc.displayOut(calc.disp);
         }
@@ -188,7 +176,7 @@ namespace Calc
         private void btn_SQRT_Click(object sender, EventArgs e)
         {
             calc.extraFunc(calc.sqrtOf);
-            label1.Text = calc.displayOut(calc.disp);
+            label1.Text = calc.displayOut(calc.disp); 
         }
 
         private void btn_SQR_Click(object sender, EventArgs e)
@@ -202,6 +190,7 @@ namespace Calc
         {
             calc.resPresCheck();
             calc.arg = Convert.ToString(calc.mr);
+            //calc.tryToGetArg(calc.arg);
             if (calc.isResultPresent == false) calc.calcFunc = null;
 
             label1.Text = calc.displayOut(calc.arg);
@@ -209,7 +198,7 @@ namespace Calc
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
-            if (calc.arg=="") { calc.mr += calc.args[0]; }
+            if (calc.arg == "") { calc.mr += calc.args[0]; }
             else calc.mr += Convert.ToDouble(calc.arg);
             calc.arg = "";
             calc.index = true;
