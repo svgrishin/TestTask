@@ -116,15 +116,12 @@ namespace Calc
             if (calc.isResultPresent == true) calc.index = false;
             calc.tryToGetArg(calc.arg);
 
-            //calc.index = !calc.isResultPresent;
-
             switch (calc.index)
             {
                 case true:
                     {
                         calc.calcFunc = f;
-                        //if (f != null) calc.calcFunc = f;
-                        //calc.isResultPresent = false;
+                        calc.resultFunc = f;
                     }
                     break;
                 case false:
@@ -135,11 +132,24 @@ namespace Calc
                         }
                         catch
                         {
-                            calc.getResult(f);
+                            try
+                            {
+                                if (f == calc.resultFunc)
+                                    calc.getResult(f);
+                                else
+                                {
+                                    calc.calcFunc = f;
+                                    calc.isResultPresent = false;
+                                }
+                            }
+                            catch
+                            {
+
+                            }
                         }
                     label1.Text = calc.displayOut(calc.disp);
                     calc.calcFunc = f;
-                    //if (f != null) calc.calcFunc = f;
+                    calc.resultFunc = f;
                     
                 }break;
             }
@@ -163,11 +173,14 @@ namespace Calc
 
         private void btn_Result_Click(object sender, EventArgs e)
         {
-            funcClick(calc.calcFunc, sender);
+            funcClick(calc.resultFunc, sender);
             label1.Text = calc.displayOut(calc.disp);
             calc.index = false;
 
             calc.isResultPresent = true;
+
+
+            calc.calcFunc = null;
 
             label1.Text = calc.displayOut(calc.disp);
         }
@@ -189,7 +202,6 @@ namespace Calc
         {
             calc.resPresCheck();
             calc.arg = Convert.ToString(calc.mr);
-            //calc.tryToGetArg(calc.arg);
             if (calc.isResultPresent == false) calc.calcFunc = null;
 
             label1.Text = calc.displayOut(calc.arg);

@@ -15,6 +15,7 @@ namespace Calc
         public string arg = "", disp="0";
         public bool minus = false;
         public Func<double> calcFunc;
+        public Func<double> resultFunc;
 
         public double mr;
 
@@ -47,7 +48,8 @@ namespace Calc
 
         public string inputValues(char c)
         {
-            if (isResultPresent == true) resetArgs();
+            if (isResultPresent == true) resetArgs(); 
+            //resetArgs();
             if (c == '-') arg = arg.Insert(0, "-");
             else arg += c;
             
