@@ -145,6 +145,8 @@ namespace Calc
                     break;
             }
             calc.arg = "";
+
+            calc.btnType = true;
         }
 
         private void btn_multiply_Click(object sender, EventArgs e)
@@ -169,6 +171,8 @@ namespace Calc
             calc.index = false;
 
             calc.isResultPresent = true;
+
+            calc.isResultBtn = true;
 
             label1.Text = calc.displayOut(calc.disp);
         }
@@ -205,6 +209,9 @@ namespace Calc
 
             this.Text = Convert.ToString(calc.mr);
         }
+
+
+        
     }
 }
 

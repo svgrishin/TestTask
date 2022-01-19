@@ -20,6 +20,9 @@ namespace Calc
 
         public object calcBtn;
 
+        public bool isResultBtn = false;
+        public bool btnType;
+
         public void getArgs(Func<double> f)
         {
             index = !index;
@@ -50,6 +53,8 @@ namespace Calc
             if (isResultPresent == true) resetArgs();
             if (c == '-') arg = arg.Insert(0, "-");
             else arg += c;
+
+            btnType = false;
 
             return displayOut(arg);
         }
@@ -169,6 +174,28 @@ namespace Calc
         public void resPresCheck()
         {
             if (isResultPresent == true) resetArgs();
+        }
+
+        public void resultBtnCheck(Func<double> f)
+        {
+            if (isResultBtn==true)
+            {
+                switch(btnType)
+                {
+                    case false:
+                        {
+                            calcFunc = f;
+                            index = true;
+                            break;
+                        }
+                    case true:
+                        {
+                            calcFunc = null;
+                            index = false;
+                            break;
+                        }
+                }
+            }
         }
     }
 
