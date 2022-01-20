@@ -18,7 +18,6 @@ namespace Calc
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -85,7 +84,6 @@ namespace Calc
 
         private void btn_bspace_Click(object sender, EventArgs e)
         {
-
             label1.Text = calc.deleteSymbol();
         }
 
@@ -106,14 +104,11 @@ namespace Calc
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            
             funcClick(calc.summ, sender);
         }
 
         private void funcClick(Func<double> f, object sender)
         {
-            
-            
             if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
 
@@ -189,7 +184,6 @@ namespace Calc
             label1.Text = calc.displayOut(calc.disp);
         }
 
-
         private void btn_MR_Click(object sender, EventArgs e)
         {
             calc.resPresCheck();
@@ -207,10 +201,7 @@ namespace Calc
             calc.index = true;
 
             this.Text = Convert.ToString(calc.mr);
-        }
-
-
-        
+        } 
     }
 }
 
