@@ -102,10 +102,15 @@ namespace Calc
 
         public string displayOut(string s)
         {
+            //int d = s.Length;
             if (s.Contains(',') == false)
-                for (int i = 3; i <= s.Length - Convert.ToInt16(minus) - 1; i += 4)
+                //for (int i = 3; i <= str.Length - Convert.ToInt16(minus) - 1; i += 4)
+                //{
+                //    s = s.Insert(str.Length - i, " ");
+                //}
+            for (int i = 4; i <= s.Length - Convert.ToInt16(minus); i += 4)
                 {
-                    s = s.Insert(s.Length - i, " ");
+                    s = s.Insert(s.Length - i+1, " ");
                 }
             return s;
         }
