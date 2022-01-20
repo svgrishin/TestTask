@@ -162,14 +162,11 @@ namespace Calc
         {
             calc.isResultBtn = false;
             funcClick(calc.calcFunc, sender);
-            //label1.Text = calc.displayOut(calc.disp);
             calc.index = false;
 
             calc.isResultPresent = true;
 
             calc.isResultBtn = true;
-
-            //label1.Text = calc.displayOut(calc.disp);
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
