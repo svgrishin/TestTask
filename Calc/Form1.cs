@@ -109,7 +109,15 @@ namespace Calc
 
         private void funcClick(Func<double> f, object sender)
         {
-            if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
+            if (f != calc.calcFunc)
+            {
+                calc.args[1] = calc.args[0];
+                if (calc.calcFunc != null) calc.index = true;
+            }
+            
+            //вернуть, если будут косяки
+            //if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
+
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
 
             calc.resultBtnCheck(f);
@@ -161,12 +169,20 @@ namespace Calc
         private void btn_Result_Click(object sender, EventArgs e)
         {
             calc.isResultBtn = false;
-            funcClick(calc.calcFunc, sender);
+
+            if (calc.btnType == true && calc.isResultPresent!= true)
+            {
+                calc.args[1] = calc.args[0];                
+                calc.getResult(calc.calcFunc);
+                label1.Text = calc.disp;
+            }
+            else
+            {
+                funcClick(calc.calcFunc, sender);
+                calc.isResultBtn = true;
+            }
             calc.index = false;
-
             calc.isResultPresent = true;
-
-            calc.isResultBtn = true;
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
