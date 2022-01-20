@@ -41,8 +41,6 @@ namespace Calc
         {
             arg = "";
             disp = "0";
-            //Array.Clear(args, 0, 1);
-            //calcFunc = null;
             index = false;
             minus = false;
             isResultPresent = false;
@@ -50,6 +48,8 @@ namespace Calc
 
         public string inputValues(char c)
         {
+            resultBtnCheck();
+
             if (isResultPresent == true) resetArgs();
             if (c == '-') arg = arg.Insert(0, "-");
             else arg += c;
@@ -184,7 +184,30 @@ namespace Calc
                 {
                     case false:
                         {
-                            calcFunc = f;
+                            calcFunc = null;
+                            index = false;
+                            break;
+                        }
+                    case true:
+                        {
+                            calcFunc = null;
+                            index = false;
+                            arg = Convert.ToString(args[0]);
+                            break;
+                        }
+                }
+                isResultBtn = false;
+            }
+        }
+
+        public void resultBtnCheck()
+        {
+            if (isResultBtn == true)
+            {
+                switch (btnType)
+                {
+                    case false:
+                        {
                             index = true;
                             break;
                         }
@@ -195,6 +218,7 @@ namespace Calc
                             break;
                         }
                 }
+                isResultBtn = false;
             }
         }
     }

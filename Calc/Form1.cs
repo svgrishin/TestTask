@@ -106,25 +106,26 @@ namespace Calc
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
+            
             funcClick(calc.summ, sender);
         }
 
         private void funcClick(Func<double> f, object sender)
         {
+            
+            
             if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
 
+            calc.resultBtnCheck(f);
+            
             calc.tryToGetArg(calc.arg);
-
-            //calc.index = !calc.isResultPresent;
 
             switch (calc.index)
             {
                 case true:
                     {
                         calc.calcFunc = f;
-                        //if (f != null) calc.calcFunc = f;
-                        //calc.isResultPresent = false;
                     }
                     break;
                 case false:
@@ -139,8 +140,6 @@ namespace Calc
                         }
                         label1.Text = calc.displayOut(calc.disp);
                         calc.calcFunc = f;
-                        //if (f != null) calc.calcFunc = f;
-
                     }
                     break;
             }
@@ -166,6 +165,7 @@ namespace Calc
 
         private void btn_Result_Click(object sender, EventArgs e)
         {
+            calc.isResultBtn = false;
             funcClick(calc.calcFunc, sender);
             label1.Text = calc.displayOut(calc.disp);
             calc.index = false;
@@ -194,7 +194,6 @@ namespace Calc
         {
             calc.resPresCheck();
             calc.arg = Convert.ToString(calc.mr);
-            //calc.tryToGetArg(calc.arg);
             if (calc.isResultPresent == false) calc.calcFunc = null;
 
             label1.Text = calc.displayOut(calc.arg);
