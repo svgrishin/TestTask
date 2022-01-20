@@ -149,7 +149,6 @@ namespace Calc
 
         public void extraFunc(Func<double> f)
         {
-            index = !index;
             tryToGetArg(arg);
             getResult(f);
 
