@@ -19,7 +19,7 @@ namespace Calc
         public double mr;
 
         public bool isResultBtn = false;
-        public bool btnType;
+        public bool btnType=false;
 
         public void getArgs(Func<double> f)
         {
@@ -43,7 +43,7 @@ namespace Calc
             minus = false;
             isResultPresent = false;
             isResultBtn = false;
-            btnType = new bool();
+            btnType = false;
             //mr = new double();
         }
 
@@ -51,7 +51,12 @@ namespace Calc
         {
             resultBtnCheck();
 
+            
+
             if (isResultPresent == true) resetArgs();
+
+            if (btnType == true) arg = "";
+
             if (c == '-') arg = arg.Insert(0, "-");
             else arg += c;
 

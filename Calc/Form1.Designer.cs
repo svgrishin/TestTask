@@ -425,6 +425,7 @@
             this.btn_MMinus.TabIndex = 24;
             this.btn_MMinus.Text = "M-";
             this.btn_MMinus.UseVisualStyleBackColor = true;
+            this.btn_MMinus.Click += new System.EventHandler(this.btn_MMinus_Click);
             // 
             // btn_MC
             // 
@@ -435,6 +436,7 @@
             this.btn_MC.TabIndex = 25;
             this.btn_MC.Text = "MC";
             this.btn_MC.UseVisualStyleBackColor = true;
+            this.btn_MC.Click += new System.EventHandler(this.btn_MC_Click);
             // 
             // splitContainer2
             // 
