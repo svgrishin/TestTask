@@ -18,8 +18,6 @@ namespace Calc
 
         public double mr;
 
-        public object calcBtn;
-
         public bool isResultBtn = false;
         public bool btnType;
 
@@ -44,6 +42,9 @@ namespace Calc
             index = false;
             minus = false;
             isResultPresent = false;
+            isResultBtn = false;
+            btnType = new bool();
+            //mr = new double();
         }
 
         public string inputValues(char c)

@@ -214,7 +214,12 @@ namespace Calc
             calc.index = true;
 
             this.Text = Convert.ToString(calc.mr);
-        } 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
