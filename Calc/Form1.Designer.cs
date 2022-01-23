@@ -28,11 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_MPlus = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_MList = new System.Windows.Forms.Button();
+            this.btn_MS = new System.Windows.Forms.Button();
+            this.btn_MC = new System.Windows.Forms.Button();
             this.btn_MR = new System.Windows.Forms.Button();
+            this.btn_MPlus = new System.Windows.Forms.Button();
+            this.btn_MMinus = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_Percent = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btn_Result = new System.Windows.Forms.Button();
             this.btn_plus = new System.Windows.Forms.Button();
             this.btn_minus = new System.Windows.Forms.Button();
@@ -54,56 +61,115 @@
             this.btn_SQR = new System.Windows.Forms.Button();
             this.btn_SQRT = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
-            this.btn_MMinus = new System.Windows.Forms.Button();
-            this.btn_MC = new System.Windows.Forms.Button();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_MS = new System.Windows.Forms.Button();
-            this.btn_MList = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btn_Percent = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.listBox_MR = new System.Windows.Forms.ListBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(338, 502);
-            this.splitContainer1.SplitterDistance = 152;
-            this.splitContainer1.TabIndex = 12;
             // 
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(338, 152);
+            this.label1.Size = new System.Drawing.Size(357, 109);
             this.label1.TabIndex = 0;
             this.label1.Text = "0";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 6;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.Controls.Add(this.btn_MList, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_MS, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_MC, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_MR, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_MPlus, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btn_MMinus, 3, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 112);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(357, 42);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // btn_MList
+            // 
+            this.btn_MList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MList.Location = new System.Drawing.Point(298, 3);
+            this.btn_MList.Name = "btn_MList";
+            this.btn_MList.Size = new System.Drawing.Size(56, 36);
+            this.btn_MList.TabIndex = 28;
+            this.btn_MList.Text = "M";
+            this.btn_MList.UseVisualStyleBackColor = true;
+            this.btn_MList.Click += new System.EventHandler(this.btn_MList_Click);
+            // 
+            // btn_MS
+            // 
+            this.btn_MS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MS.Location = new System.Drawing.Point(239, 3);
+            this.btn_MS.Name = "btn_MS";
+            this.btn_MS.Size = new System.Drawing.Size(53, 36);
+            this.btn_MS.TabIndex = 27;
+            this.btn_MS.Text = "MS";
+            this.btn_MS.UseVisualStyleBackColor = true;
+            this.btn_MS.Click += new System.EventHandler(this.btn_MS_Click);
+            // 
+            // btn_MC
+            // 
+            this.btn_MC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MC.Location = new System.Drawing.Point(3, 3);
+            this.btn_MC.Name = "btn_MC";
+            this.btn_MC.Size = new System.Drawing.Size(53, 36);
+            this.btn_MC.TabIndex = 25;
+            this.btn_MC.Text = "MC";
+            this.btn_MC.UseVisualStyleBackColor = true;
+            this.btn_MC.Click += new System.EventHandler(this.btn_MC_Click);
+            // 
+            // btn_MR
+            // 
+            this.btn_MR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MR.Location = new System.Drawing.Point(62, 3);
+            this.btn_MR.Name = "btn_MR";
+            this.btn_MR.Size = new System.Drawing.Size(53, 36);
+            this.btn_MR.TabIndex = 1;
+            this.btn_MR.Text = "MR";
+            this.btn_MR.UseVisualStyleBackColor = true;
+            this.btn_MR.Click += new System.EventHandler(this.btn_MR_Click);
+            // 
+            // btn_MPlus
+            // 
+            this.btn_MPlus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MPlus.Location = new System.Drawing.Point(121, 3);
+            this.btn_MPlus.Name = "btn_MPlus";
+            this.btn_MPlus.Size = new System.Drawing.Size(53, 36);
+            this.btn_MPlus.TabIndex = 1;
+            this.btn_MPlus.Text = "M+";
+            this.btn_MPlus.UseVisualStyleBackColor = true;
+            this.btn_MPlus.Click += new System.EventHandler(this.btn_MPlus_Click);
+            // 
+            // btn_MMinus
+            // 
+            this.btn_MMinus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MMinus.Location = new System.Drawing.Point(180, 3);
+            this.btn_MMinus.Name = "btn_MMinus";
+            this.btn_MMinus.Size = new System.Drawing.Size(53, 36);
+            this.btn_MMinus.TabIndex = 24;
+            this.btn_MMinus.Text = "M-";
+            this.btn_MMinus.UseVisualStyleBackColor = true;
+            this.btn_MMinus.Click += new System.EventHandler(this.btn_MMinus_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -147,37 +213,45 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.36782F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.36782F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.36782F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(338, 315);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(357, 339);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // btn_MPlus
+            // btn_Percent
             // 
-            this.btn_MPlus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_MPlus.Location = new System.Drawing.Point(115, 3);
-            this.btn_MPlus.Name = "btn_MPlus";
-            this.btn_MPlus.Size = new System.Drawing.Size(50, 21);
-            this.btn_MPlus.TabIndex = 1;
-            this.btn_MPlus.Text = "M+";
-            this.btn_MPlus.UseVisualStyleBackColor = true;
-            this.btn_MPlus.Click += new System.EventHandler(this.btn_MPlus_Click);
+            this.btn_Percent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Percent.Location = new System.Drawing.Point(3, 3);
+            this.btn_Percent.Name = "btn_Percent";
+            this.btn_Percent.Size = new System.Drawing.Size(83, 50);
+            this.btn_Percent.TabIndex = 1;
+            this.btn_Percent.Text = "%";
+            this.btn_Percent.UseVisualStyleBackColor = true;
             // 
-            // btn_MR
+            // button2
             // 
-            this.btn_MR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_MR.Location = new System.Drawing.Point(59, 3);
-            this.btn_MR.Name = "btn_MR";
-            this.btn_MR.Size = new System.Drawing.Size(50, 21);
-            this.btn_MR.TabIndex = 1;
-            this.btn_MR.Text = "MR";
-            this.btn_MR.UseVisualStyleBackColor = true;
-            this.btn_MR.Click += new System.EventHandler(this.btn_MR_Click);
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Location = new System.Drawing.Point(92, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(83, 50);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "СЕ";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Location = new System.Drawing.Point(3, 59);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(83, 50);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "1/x";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // btn_Result
             // 
             this.btn_Result.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Result.Location = new System.Drawing.Point(255, 263);
+            this.btn_Result.Location = new System.Drawing.Point(270, 283);
             this.btn_Result.Name = "btn_Result";
-            this.btn_Result.Size = new System.Drawing.Size(80, 49);
+            this.btn_Result.Size = new System.Drawing.Size(84, 53);
             this.btn_Result.TabIndex = 21;
             this.btn_Result.Text = "=";
             this.btn_Result.UseVisualStyleBackColor = true;
@@ -186,9 +260,9 @@
             // btn_plus
             // 
             this.btn_plus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_plus.Location = new System.Drawing.Point(255, 211);
+            this.btn_plus.Location = new System.Drawing.Point(270, 227);
             this.btn_plus.Name = "btn_plus";
-            this.btn_plus.Size = new System.Drawing.Size(80, 46);
+            this.btn_plus.Size = new System.Drawing.Size(84, 50);
             this.btn_plus.TabIndex = 20;
             this.btn_plus.Text = "+";
             this.btn_plus.UseVisualStyleBackColor = true;
@@ -197,9 +271,9 @@
             // btn_minus
             // 
             this.btn_minus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_minus.Location = new System.Drawing.Point(255, 159);
+            this.btn_minus.Location = new System.Drawing.Point(270, 171);
             this.btn_minus.Name = "btn_minus";
-            this.btn_minus.Size = new System.Drawing.Size(80, 46);
+            this.btn_minus.Size = new System.Drawing.Size(84, 50);
             this.btn_minus.TabIndex = 19;
             this.btn_minus.Text = "-";
             this.btn_minus.UseVisualStyleBackColor = true;
@@ -209,9 +283,9 @@
             // 
             this.btn_Negative.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_Negative.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Negative.Location = new System.Drawing.Point(87, 263);
+            this.btn_Negative.Location = new System.Drawing.Point(92, 283);
             this.btn_Negative.Name = "btn_Negative";
-            this.btn_Negative.Size = new System.Drawing.Size(78, 49);
+            this.btn_Negative.Size = new System.Drawing.Size(83, 53);
             this.btn_Negative.TabIndex = 16;
             this.btn_Negative.Text = "±";
             this.btn_Negative.UseVisualStyleBackColor = true;
@@ -221,9 +295,9 @@
             // 
             this.btn_Coma.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_Coma.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Coma.Location = new System.Drawing.Point(171, 263);
+            this.btn_Coma.Location = new System.Drawing.Point(181, 283);
             this.btn_Coma.Name = "btn_Coma";
-            this.btn_Coma.Size = new System.Drawing.Size(78, 49);
+            this.btn_Coma.Size = new System.Drawing.Size(83, 53);
             this.btn_Coma.TabIndex = 1;
             this.btn_Coma.Text = ",";
             this.btn_Coma.UseVisualStyleBackColor = true;
@@ -233,9 +307,9 @@
             // 
             this.btn_1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_1.Location = new System.Drawing.Point(3, 211);
+            this.btn_1.Location = new System.Drawing.Point(3, 227);
             this.btn_1.Name = "btn_1";
-            this.btn_1.Size = new System.Drawing.Size(78, 46);
+            this.btn_1.Size = new System.Drawing.Size(83, 50);
             this.btn_1.TabIndex = 3;
             this.btn_1.Text = "1";
             this.btn_1.UseVisualStyleBackColor = true;
@@ -245,9 +319,9 @@
             // 
             this.btn_Zero.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_Zero.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Zero.Location = new System.Drawing.Point(3, 263);
+            this.btn_Zero.Location = new System.Drawing.Point(3, 283);
             this.btn_Zero.Name = "btn_Zero";
-            this.btn_Zero.Size = new System.Drawing.Size(78, 49);
+            this.btn_Zero.Size = new System.Drawing.Size(83, 53);
             this.btn_Zero.TabIndex = 0;
             this.btn_Zero.Text = "0";
             this.btn_Zero.UseVisualStyleBackColor = true;
@@ -257,9 +331,9 @@
             // 
             this.btn_2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_2.Location = new System.Drawing.Point(87, 211);
+            this.btn_2.Location = new System.Drawing.Point(92, 227);
             this.btn_2.Name = "btn_2";
-            this.btn_2.Size = new System.Drawing.Size(78, 46);
+            this.btn_2.Size = new System.Drawing.Size(83, 50);
             this.btn_2.TabIndex = 4;
             this.btn_2.Text = "2";
             this.btn_2.UseVisualStyleBackColor = true;
@@ -269,9 +343,9 @@
             // 
             this.btn_7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_7.Location = new System.Drawing.Point(3, 107);
+            this.btn_7.Location = new System.Drawing.Point(3, 115);
             this.btn_7.Name = "btn_7";
-            this.btn_7.Size = new System.Drawing.Size(78, 46);
+            this.btn_7.Size = new System.Drawing.Size(83, 50);
             this.btn_7.TabIndex = 9;
             this.btn_7.Text = "7";
             this.btn_7.UseVisualStyleBackColor = true;
@@ -281,9 +355,9 @@
             // 
             this.btn_3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_3.Location = new System.Drawing.Point(171, 211);
+            this.btn_3.Location = new System.Drawing.Point(181, 227);
             this.btn_3.Name = "btn_3";
-            this.btn_3.Size = new System.Drawing.Size(78, 46);
+            this.btn_3.Size = new System.Drawing.Size(83, 50);
             this.btn_3.TabIndex = 5;
             this.btn_3.Text = "3";
             this.btn_3.UseVisualStyleBackColor = true;
@@ -293,9 +367,9 @@
             // 
             this.btn_8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_8.Location = new System.Drawing.Point(87, 107);
+            this.btn_8.Location = new System.Drawing.Point(92, 115);
             this.btn_8.Name = "btn_8";
-            this.btn_8.Size = new System.Drawing.Size(78, 46);
+            this.btn_8.Size = new System.Drawing.Size(83, 50);
             this.btn_8.TabIndex = 10;
             this.btn_8.Text = "8";
             this.btn_8.UseVisualStyleBackColor = true;
@@ -305,9 +379,9 @@
             // 
             this.btn_6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_6.Location = new System.Drawing.Point(171, 159);
+            this.btn_6.Location = new System.Drawing.Point(181, 171);
             this.btn_6.Name = "btn_6";
-            this.btn_6.Size = new System.Drawing.Size(78, 46);
+            this.btn_6.Size = new System.Drawing.Size(83, 50);
             this.btn_6.TabIndex = 8;
             this.btn_6.Text = "6";
             this.btn_6.UseVisualStyleBackColor = true;
@@ -317,9 +391,9 @@
             // 
             this.btn_4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_4.Location = new System.Drawing.Point(3, 159);
+            this.btn_4.Location = new System.Drawing.Point(3, 171);
             this.btn_4.Name = "btn_4";
-            this.btn_4.Size = new System.Drawing.Size(78, 46);
+            this.btn_4.Size = new System.Drawing.Size(83, 50);
             this.btn_4.TabIndex = 6;
             this.btn_4.Text = "4";
             this.btn_4.UseVisualStyleBackColor = true;
@@ -329,9 +403,9 @@
             // 
             this.btn_9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_9.Location = new System.Drawing.Point(171, 107);
+            this.btn_9.Location = new System.Drawing.Point(181, 115);
             this.btn_9.Name = "btn_9";
-            this.btn_9.Size = new System.Drawing.Size(78, 46);
+            this.btn_9.Size = new System.Drawing.Size(83, 50);
             this.btn_9.TabIndex = 11;
             this.btn_9.Text = "9";
             this.btn_9.UseVisualStyleBackColor = true;
@@ -341,9 +415,9 @@
             // 
             this.btn_5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_5.Location = new System.Drawing.Point(87, 159);
+            this.btn_5.Location = new System.Drawing.Point(92, 171);
             this.btn_5.Name = "btn_5";
-            this.btn_5.Size = new System.Drawing.Size(78, 46);
+            this.btn_5.Size = new System.Drawing.Size(83, 50);
             this.btn_5.TabIndex = 7;
             this.btn_5.Text = "5";
             this.btn_5.UseVisualStyleBackColor = true;
@@ -352,9 +426,9 @@
             // btn_divide
             // 
             this.btn_divide.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_divide.Location = new System.Drawing.Point(255, 55);
+            this.btn_divide.Location = new System.Drawing.Point(270, 59);
             this.btn_divide.Name = "btn_divide";
-            this.btn_divide.Size = new System.Drawing.Size(80, 46);
+            this.btn_divide.Size = new System.Drawing.Size(84, 50);
             this.btn_divide.TabIndex = 18;
             this.btn_divide.Text = "÷";
             this.btn_divide.UseVisualStyleBackColor = true;
@@ -363,9 +437,9 @@
             // btn_multiply
             // 
             this.btn_multiply.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_multiply.Location = new System.Drawing.Point(255, 107);
+            this.btn_multiply.Location = new System.Drawing.Point(270, 115);
             this.btn_multiply.Name = "btn_multiply";
-            this.btn_multiply.Size = new System.Drawing.Size(80, 46);
+            this.btn_multiply.Size = new System.Drawing.Size(84, 50);
             this.btn_multiply.TabIndex = 19;
             this.btn_multiply.Text = "×";
             this.btn_multiply.UseVisualStyleBackColor = true;
@@ -374,9 +448,9 @@
             // btn_bspace
             // 
             this.btn_bspace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_bspace.Location = new System.Drawing.Point(255, 3);
+            this.btn_bspace.Location = new System.Drawing.Point(270, 3);
             this.btn_bspace.Name = "btn_bspace";
-            this.btn_bspace.Size = new System.Drawing.Size(80, 46);
+            this.btn_bspace.Size = new System.Drawing.Size(84, 50);
             this.btn_bspace.TabIndex = 17;
             this.btn_bspace.Text = "←";
             this.btn_bspace.UseVisualStyleBackColor = true;
@@ -385,9 +459,9 @@
             // btn_SQR
             // 
             this.btn_SQR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_SQR.Location = new System.Drawing.Point(87, 55);
+            this.btn_SQR.Location = new System.Drawing.Point(92, 59);
             this.btn_SQR.Name = "btn_SQR";
-            this.btn_SQR.Size = new System.Drawing.Size(78, 46);
+            this.btn_SQR.Size = new System.Drawing.Size(83, 50);
             this.btn_SQR.TabIndex = 22;
             this.btn_SQR.Text = "x^2";
             this.btn_SQR.UseVisualStyleBackColor = true;
@@ -396,9 +470,9 @@
             // btn_SQRT
             // 
             this.btn_SQRT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_SQRT.Location = new System.Drawing.Point(171, 55);
+            this.btn_SQRT.Location = new System.Drawing.Point(181, 59);
             this.btn_SQRT.Name = "btn_SQRT";
-            this.btn_SQRT.Size = new System.Drawing.Size(78, 46);
+            this.btn_SQRT.Size = new System.Drawing.Size(83, 50);
             this.btn_SQRT.TabIndex = 23;
             this.btn_SQRT.Text = "√";
             this.btn_SQRT.UseVisualStyleBackColor = true;
@@ -408,152 +482,68 @@
             // 
             this.btn_clear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_clear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_clear.Location = new System.Drawing.Point(171, 3);
+            this.btn_clear.Location = new System.Drawing.Point(181, 3);
             this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(78, 46);
+            this.btn_clear.Size = new System.Drawing.Size(83, 50);
             this.btn_clear.TabIndex = 12;
             this.btn_clear.Text = "C";
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
-            // btn_MMinus
+            // tableLayoutPanel3
             // 
-            this.btn_MMinus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_MMinus.Location = new System.Drawing.Point(171, 3);
-            this.btn_MMinus.Name = "btn_MMinus";
-            this.btn_MMinus.Size = new System.Drawing.Size(50, 21);
-            this.btn_MMinus.TabIndex = 24;
-            this.btn_MMinus.Text = "M-";
-            this.btn_MMinus.UseVisualStyleBackColor = true;
-            this.btn_MMinus.Click += new System.EventHandler(this.btn_MMinus_Click);
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.panel3, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.75141F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.60452F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.64406F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(363, 502);
+            this.tableLayoutPanel3.TabIndex = 3;
             // 
-            // btn_MC
+            // listBox_MR
             // 
-            this.btn_MC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_MC.Location = new System.Drawing.Point(3, 3);
-            this.btn_MC.Name = "btn_MC";
-            this.btn_MC.Size = new System.Drawing.Size(50, 21);
-            this.btn_MC.TabIndex = 25;
-            this.btn_MC.Text = "MC";
-            this.btn_MC.UseVisualStyleBackColor = true;
-            this.btn_MC.Click += new System.EventHandler(this.btn_MC_Click);
+            this.listBox_MR.FormattingEnabled = true;
+            this.listBox_MR.Location = new System.Drawing.Point(196, 135);
+            this.listBox_MR.Name = "listBox_MR";
+            this.listBox_MR.Size = new System.Drawing.Size(93, 43);
+            this.listBox_MR.TabIndex = 3;
             // 
-            // splitContainer2
+            // panel3
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.tableLayoutPanel2);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer2.Size = new System.Drawing.Size(338, 346);
-            this.splitContainer2.SplitterDistance = 27;
-            this.splitContainer2.TabIndex = 13;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 6;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.Controls.Add(this.btn_MList, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_MS, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_MC, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_MR, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_MPlus, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btn_MMinus, 3, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(338, 27);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // btn_MS
-            // 
-            this.btn_MS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_MS.Location = new System.Drawing.Point(227, 3);
-            this.btn_MS.Name = "btn_MS";
-            this.btn_MS.Size = new System.Drawing.Size(50, 21);
-            this.btn_MS.TabIndex = 27;
-            this.btn_MS.Text = "MS";
-            this.btn_MS.UseVisualStyleBackColor = true;
-            // 
-            // btn_MList
-            // 
-            this.btn_MList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_MList.Location = new System.Drawing.Point(283, 3);
-            this.btn_MList.Name = "btn_MList";
-            this.btn_MList.Size = new System.Drawing.Size(52, 21);
-            this.btn_MList.TabIndex = 28;
-            this.btn_MList.Text = "M";
-            this.btn_MList.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(3, 55);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 46);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "1/x";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(87, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 46);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "СЕ";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // btn_Percent
-            // 
-            this.btn_Percent.Location = new System.Drawing.Point(3, 3);
-            this.btn_Percent.Name = "btn_Percent";
-            this.btn_Percent.Size = new System.Drawing.Size(78, 46);
-            this.btn_Percent.TabIndex = 1;
-            this.btn_Percent.Text = "%";
-            this.btn_Percent.UseVisualStyleBackColor = true;
+            this.panel3.Controls.Add(this.listBox_MR);
+            this.panel3.Controls.Add(this.tableLayoutPanel1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 160);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(357, 339);
+            this.panel3.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 502);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(363, 502);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.MinimumSize = new System.Drawing.Size(230, 390);
             this.Name = "Form1";
             this.Text = "Калькулятор";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btn_plus;
         private System.Windows.Forms.Button btn_minus;
@@ -581,13 +571,15 @@
         private System.Windows.Forms.Button btn_MPlus;
         private System.Windows.Forms.Button btn_MMinus;
         private System.Windows.Forms.Button btn_MC;
-        private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btn_MList;
         private System.Windows.Forms.Button btn_MS;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_Percent;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ListBox listBox_MR;
     }
 }
 

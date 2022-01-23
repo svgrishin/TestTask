@@ -199,11 +199,26 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
+            //short i = Convert.ToInt16(calc.index);
+            //calc.resPresCheck();
+
+            //calc.args[i] = calc.mr;
+
+            //if (calc.isResultPresent == false && calc.index==false) calc.calcFunc = null;
+            //calc.index = !calc.index;
+
+            //calc.btnType = false;
+
+            //label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
+            //calc.arg = "";
+
             short i = Convert.ToInt16(calc.index);
             calc.resPresCheck();
-            calc.args[i] = calc.mr;
 
-            if (calc.isResultPresent == false && calc.index==false) calc.calcFunc = null;
+            int l = calc.args.Length - 1;
+            calc.args[i] = calc.mr2[l];
+
+            if (calc.isResultPresent == false && calc.index == false) calc.calcFunc = null;
             calc.index = !calc.index;
 
             calc.btnType = false;
@@ -215,33 +230,33 @@ namespace Calc
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
-            //if (calc.arg == "") calc.mr += calc.args[0];
-            //else
+            //try
             //{
             //    calc.mr += Convert.ToDouble(calc.arg);
-            //    calc.args[0] = calc.mr;
+            //}
+            //catch
+            //{
+            //    calc.mr = calc.args[0];
+            //    calc.arg = Convert.ToString(calc.mr);
             //}
 
-            //calc.arg = "";
-            //calc.index = true;
+            //calc.btnType = true;
 
             //this.Text = Convert.ToString(calc.mr);
-
+            int l = calc.mr2.Length-1;
             try
             {
-                calc.mr += Convert.ToDouble(calc.arg);
+                calc.mr2[l]+= Convert.ToDouble(calc.arg);
             }
             catch
             {
-                calc.mr = calc.args[0];
-                calc.arg = Convert.ToString(calc.mr);
+                calc.mr2[l] = calc.args[0];
+                calc.arg = Convert.ToString(calc.mr2[l]);
             }
-            
-            //calc.args[0] = calc.mr;
-            //calc.index = true;
+
             calc.btnType = true;
 
-            this.Text = Convert.ToString(calc.mr);
+            this.Text = Convert.ToString(calc.mr2[l]);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -251,7 +266,7 @@ namespace Calc
 
         private void btn_MC_Click(object sender, EventArgs e)
         {
-            calc.mr = new double();
+            calc.mr2 = new double[1];
         }
 
         private void btn_MMinus_Click(object sender, EventArgs e)
@@ -267,6 +282,21 @@ namespace Calc
             calc.index = true;
 
             this.Text = Convert.ToString(calc.mr);
+        }
+
+        private void btn_MS_Click(object sender, EventArgs e)
+        {
+            int l = calc.mr2.Length;
+            Array.Resize(ref calc.mr2, l + 1);
+            l++;
+            this.btn_MPlus_Click(sender, e);
+
+
+        }
+
+        private void btn_MList_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

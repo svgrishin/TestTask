@@ -21,6 +21,7 @@ namespace Calc
         public bool isResultBtn = false;
         public bool btnType=false;
 
+        public double[] mr2 = new double[1];
         public void getArgs(Func<double> f)
         {
             index = !index;
