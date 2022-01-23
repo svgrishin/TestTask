@@ -114,9 +114,6 @@ namespace Calc
                 calc.args[1] = calc.args[0];
                 if (calc.calcFunc != null) calc.index = true;
             }
-            
-            //вернуть, если будут косяки
-            //if (f != calc.calcFunc && calc.calcFunc != null) calc.index = true;
 
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;
 
@@ -199,19 +196,6 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
-            //short i = Convert.ToInt16(calc.index);
-            //calc.resPresCheck();
-
-            //calc.args[i] = calc.mr;
-
-            //if (calc.isResultPresent == false && calc.index==false) calc.calcFunc = null;
-            //calc.index = !calc.index;
-
-            //calc.btnType = false;
-
-            //label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
-            //calc.arg = "";
-
             short i = Convert.ToInt16(calc.index);
             calc.resPresCheck();
 
@@ -225,30 +209,16 @@ namespace Calc
 
             label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
             calc.arg = "";
-
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    calc.mr += Convert.ToDouble(calc.arg);
-            //}
-            //catch
-            //{
-            //    calc.mr = calc.args[0];
-            //    calc.arg = Convert.ToString(calc.mr);
-            //}
-
-            //calc.btnType = true;
-
-            //this.Text = Convert.ToString(calc.mr);
             getMR(calc.mr2.Length - 1);
+            //btn_MList.Enabled = true;
         }
 
         public void getMR(int indexOf)
         {
-            //int l = calc.mr2.Length - 1;
             try
             {
                 calc.mr2[indexOf] += Convert.ToDouble(calc.arg);
@@ -264,6 +234,8 @@ namespace Calc
             setMrList(indexOf);
 
             this.Text = Convert.ToString(calc.mr2[indexOf]);
+
+            btn_MList.Enabled = true;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -274,6 +246,10 @@ namespace Calc
         private void btn_MC_Click(object sender, EventArgs e)
         {
             calc.mr2 = new double[1];
+            btn_MList.Enabled = false;
+            listBox_MR.Visible = false;
+            listBox_MR.Items.Clear();
+            switchMRButtons();
         }
 
         private void btn_MMinus_Click(object sender, EventArgs e)
@@ -293,13 +269,6 @@ namespace Calc
 
         private void btn_MS_Click(object sender, EventArgs e)
         {
-            //int l = calc.mr2.Length-1;
-            //if (calc.mr2.Length>1) Array.Resize(ref calc.mr2, l+2);
-            //getMR(l);
-            ////this.btn_MPlus_Click(sender, e);
-
-            //setMrList(l);
-
             int l = calc.mr2.Length-1;
             if (calc.mr2.Length > 0)
             {
@@ -307,18 +276,23 @@ namespace Calc
                 l++;
             }
             getMR(l);
-            //this.btn_MPlus_Click(sender, e);
-
         }
 
         private void btn_MList_Click(object sender, EventArgs e)
         {
             listBox_MR.Visible = !listBox_MR.Visible;
+            switchMRButtons();
         }
 
         public void setMrList(int indexOf)
         {
             this.listBox_MR.Items.Add(calc.mr2[indexOf]);
+        }
+
+        public void switchMRButtons()
+        {
+            btn_MR.Enabled = !btn_MR.Enabled;
+            btn_MS.Enabled = !btn_MS.Enabled;
         }
     }
 }

@@ -108,6 +108,7 @@
             // btn_MList
             // 
             this.btn_MList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MList.Enabled = false;
             this.btn_MList.Location = new System.Drawing.Point(298, 3);
             this.btn_MList.Name = "btn_MList";
             this.btn_MList.Size = new System.Drawing.Size(56, 36);
@@ -509,6 +510,7 @@
             // 
             // listBox_MR
             // 
+            this.listBox_MR.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBox_MR.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox_MR.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listBox_MR.FormattingEnabled = true;
