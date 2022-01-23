@@ -509,11 +509,16 @@
             // 
             // listBox_MR
             // 
+            this.listBox_MR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox_MR.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listBox_MR.FormattingEnabled = true;
-            this.listBox_MR.Location = new System.Drawing.Point(196, 135);
+            this.listBox_MR.ItemHeight = 37;
+            this.listBox_MR.Location = new System.Drawing.Point(0, 0);
             this.listBox_MR.Name = "listBox_MR";
-            this.listBox_MR.Size = new System.Drawing.Size(93, 43);
+            this.listBox_MR.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.listBox_MR.Size = new System.Drawing.Size(357, 339);
             this.listBox_MR.TabIndex = 3;
+            this.listBox_MR.Visible = false;
             // 
             // panel3
             // 

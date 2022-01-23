@@ -243,20 +243,27 @@ namespace Calc
             //calc.btnType = true;
 
             //this.Text = Convert.ToString(calc.mr);
-            int l = calc.mr2.Length-1;
+            getMR(calc.mr2.Length - 1);
+        }
+
+        public void getMR(int indexOf)
+        {
+            //int l = calc.mr2.Length - 1;
             try
             {
-                calc.mr2[l]+= Convert.ToDouble(calc.arg);
+                calc.mr2[indexOf] += Convert.ToDouble(calc.arg);
             }
             catch
             {
-                calc.mr2[l] = calc.args[0];
-                calc.arg = Convert.ToString(calc.mr2[l]);
+                calc.mr2[indexOf] = calc.args[0];
+                calc.arg = Convert.ToString(calc.mr2[indexOf]);
             }
 
             calc.btnType = true;
 
-            this.Text = Convert.ToString(calc.mr2[l]);
+            setMrList(indexOf);
+
+            this.Text = Convert.ToString(calc.mr2[indexOf]);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -286,17 +293,32 @@ namespace Calc
 
         private void btn_MS_Click(object sender, EventArgs e)
         {
-            int l = calc.mr2.Length;
-            Array.Resize(ref calc.mr2, l + 1);
-            l++;
-            this.btn_MPlus_Click(sender, e);
+            //int l = calc.mr2.Length-1;
+            //if (calc.mr2.Length>1) Array.Resize(ref calc.mr2, l+2);
+            //getMR(l);
+            ////this.btn_MPlus_Click(sender, e);
 
+            //setMrList(l);
+
+            int l = calc.mr2.Length-1;
+            if (calc.mr2.Length > 0)
+            {
+                Array.Resize(ref calc.mr2, l + 2);
+                l++;
+            }
+            getMR(l);
+            //this.btn_MPlus_Click(sender, e);
 
         }
 
         private void btn_MList_Click(object sender, EventArgs e)
         {
+            listBox_MR.Visible = !listBox_MR.Visible;
+        }
 
+        public void setMrList(int indexOf)
+        {
+            this.listBox_MR.Items.Add(calc.mr2[indexOf]);
         }
     }
 }
