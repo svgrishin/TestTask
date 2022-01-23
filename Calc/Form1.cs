@@ -199,18 +199,12 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
-            //calc.resPresCheck();
-            //calc.arg = Convert.ToString(calc.mr);
-            //if (calc.isResultPresent == false) calc.calcFunc = null;
-
-            //calc.btnType = false;
-
-            //label1.Text = calc.displayOut(calc.arg);
             short i = Convert.ToInt16(calc.index);
             calc.resPresCheck();
             calc.args[i] = calc.mr;
-            
-            if (calc.isResultPresent == false) calc.calcFunc = null;
+
+            if (calc.isResultPresent == false && calc.index==false) calc.calcFunc = null;
+            calc.index = !calc.index;
 
             calc.btnType = false;
 
