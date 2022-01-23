@@ -196,25 +196,25 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
-            short i = Convert.ToInt16(calc.index);
-            calc.resPresCheck();
+            //short i = Convert.ToInt16(calc.index);
+            //calc.resPresCheck();
 
-            int l = calc.args.Length - 1;
-            calc.args[i] = calc.mr2[l];
+            //int l = calc.mr2.Length - 1;
+            //calc.args[i] = calc.mr2[l];
 
-            if (calc.isResultPresent == false && calc.index == false) calc.calcFunc = null;
-            calc.index = !calc.index;
+            //if (calc.isResultPresent == false && calc.index == false) calc.calcFunc = null;
+            //calc.index = !calc.index;
 
-            calc.btnType = false;
+            //calc.btnType = false;
 
-            label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
-            calc.arg = "";
+            //label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
+            //calc.arg = "";
+            getFromMR(calc.mr2.Length - 1);
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
             getMR(calc.mr2.Length - 1);
-            //btn_MList.Enabled = true;
         }
 
         public void getMR(int indexOf)
@@ -293,6 +293,28 @@ namespace Calc
         {
             btn_MR.Enabled = !btn_MR.Enabled;
             btn_MS.Enabled = !btn_MS.Enabled;
+        }
+
+        public void getFromMR(int indexOf)
+        {
+            short i = Convert.ToInt16(calc.index);
+            calc.resPresCheck();
+
+            //int l = calc.mr2.Length - 1;
+            calc.args[i] = calc.mr2[indexOf];
+
+            if (calc.isResultPresent == false && calc.index == false) calc.calcFunc = null;
+            calc.index = !calc.index;
+
+            calc.btnType = false;
+
+            label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
+            calc.arg = "";
+        }
+
+        private void listBox_MR_DoubleClick(object sender, EventArgs e)
+        {
+            getFromMR(listBox_MR.SelectedIndex+1);
         }
     }
 }

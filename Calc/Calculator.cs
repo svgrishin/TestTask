@@ -45,7 +45,6 @@ namespace Calc
             isResultPresent = false;
             isResultBtn = false;
             btnType = false;
-            //mr = new double();
         }
 
         public string inputValues(char c)
