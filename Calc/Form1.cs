@@ -286,7 +286,14 @@ namespace Calc
 
         public void setMrList(int indexOf)
         {
-            this.listBox_MR.Items.Add(calc.mr2[indexOf]);
+            try
+            {
+                this.listBox_MR.Items[calc.mr2.Length-1] = calc.mr2[indexOf];
+            }
+            catch
+            {
+                this.listBox_MR.Items.Add(calc.mr2[indexOf]);
+            }
         }
 
         public void switchMRButtons()

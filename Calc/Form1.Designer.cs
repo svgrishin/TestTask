@@ -62,8 +62,8 @@
             this.btn_SQRT = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.listBox_MR = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.listBox_MR = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -508,6 +508,16 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(361, 502);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.listBox_MR);
+            this.panel3.Controls.Add(this.tableLayoutPanel1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 160);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(355, 339);
+            this.panel3.TabIndex = 4;
+            // 
             // listBox_MR
             // 
             this.listBox_MR.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -523,16 +533,6 @@
             this.listBox_MR.TabIndex = 3;
             this.listBox_MR.Visible = false;
             this.listBox_MR.DoubleClick += new System.EventHandler(this.listBox_MR_DoubleClick);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.listBox_MR);
-            this.panel3.Controls.Add(this.tableLayoutPanel1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 160);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(355, 339);
-            this.panel3.TabIndex = 4;
             // 
             // Form1
             // 
