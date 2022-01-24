@@ -65,13 +65,16 @@ namespace Calc
 
         private void btn_Zero_Click(object sender, EventArgs e)
         {
-            if (calc.arg == "") label1.Text = calc.inputValues("0,");
+            if (calc.arg == "")
+            {
+                typeZeroComa();
+            }
             else label1.Text = calc.inputValues('0');
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
-            calc.resetArgs();
+            calc.resetCalc();
             Array.Clear(calc.args, 0, 1);
             calc.calcFunc = null;
             label1.Text = "0";
@@ -85,16 +88,25 @@ namespace Calc
         private void btn_Negative_Click(object sender, EventArgs e)
         {
             calc.minus = !calc.minus;
-            label1.Text = calc.inputValues("-");
+            label1.Text = calc.inputValues('-');
         }
 
         private void btn_Coma_Click(object sender, EventArgs e)
         {
             if (calc.arg.Contains(',') == false)
             {
-                if (calc.arg == "") label1.Text = calc.inputValues("0,");
+                if (calc.arg == "")
+                {
+                    typeZeroComa();
+                }
                 else label1.Text = calc.inputValues(',');
             }
+        }
+
+        public void typeZeroComa()
+        {
+            label1.Text = calc.inputValues('0');
+            label1.Text = calc.inputValues(',');
         }
 
         private void btn_plus_Click(object sender, EventArgs e)
@@ -288,6 +300,11 @@ namespace Calc
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
         {
             getFromMR(listBox_MR.SelectedIndex+1);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //using (FileStream fs = new FileStream("user.json", FileMode.OpenOrCreate))
         }
     }
 }

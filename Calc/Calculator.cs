@@ -34,7 +34,7 @@ namespace Calc
             disp = Convert.ToString(args[0]);
         }
 
-        public void resetArgs()
+        public void resetCalc()
         {
             arg = "";
             disp = "0";
@@ -49,51 +49,61 @@ namespace Calc
         {
             resultBtnCheck();
 
-            
-
-            if (isResultPresent == true) resetArgs();
-
+            if (isResultPresent == true) resetCalc();
             if (btnType == true) arg = "";
 
-            if (c == '-') arg = arg.Insert(0, "-");
+            if (c == '-')
+            {
+                if (arg != "")
+                {
+                    switch (minus)
+                    {
+                        case true: arg = c + arg; break;
+                        case false: arg = arg.TrimStart(c); break;
+                    }
+                    disp = arg;
+                    return displayOut(arg);
+                }
+                else return displayOut(disp);
+            }   
             else arg += c;
-
             btnType = false;
 
             return displayOut(arg);
         }
 
-        public string inputValues(string c)
-        {
-            switch (c)
-            {
-                case "-":
-                    {
-                        if (arg != "" & arg != "0")
-                        {
-                            switch (minus)
-                            {
-                                case true: arg = arg.Insert(0, c); break;
-                                case false: arg = arg.TrimStart('-'); break;
-                            }
-                            disp = arg;
-                            return displayOut(arg);
-                        }
-                        else
-                        {
-                            arg = Convert.ToString(args[0]);
-                            inputValues(c);
-                            args[0] = args[0] * (-1);
-                        }
-                    }; break;
-                case "0,":
-                    {
-                        arg = arg + c;
-                        disp = arg;
-                    }; break;
-            }
-            return disp;
-        }
+        //public string inputValues(string c)
+        //{
+        //    //switch (c)
+        //    //{
+        //    //    case "-":
+        //    //        {
+        //    //            if (arg != "" & arg != "0")
+        //    //            {
+        //    //                switch (minus)
+        //    //                {
+        //    //                    case true: arg = arg.Insert(0, c); break;
+        //    //                    case false: arg = arg.TrimStart('-'); break;
+        //    //                }
+        //    //                disp = arg;
+        //    //                return displayOut(arg);
+        //    //            }
+        //    //            else
+        //    //            {
+        //    //                arg = Convert.ToString(args[0]);
+        //    //                inputValues(c);
+        //    //                args[0] = args[0] * (-1);
+        //    //            }
+        //    //        };
+        //    //        break;
+        //    //    case "0,":
+        //    //        {
+        //    //            arg = arg + c;
+        //    //            disp = arg;
+        //    //        }; break;
+        //    //}
+        //    return disp;
+        //}
 
         public string deleteSymbol()
         {
@@ -182,7 +192,7 @@ namespace Calc
 
         public void resPresCheck()
         {
-            if (isResultPresent == true) resetArgs();
+            if (isResultPresent == true) resetCalc();
         }
 
         public void resultBtnCheck(Func<double> f)
