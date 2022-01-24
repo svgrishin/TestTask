@@ -195,7 +195,6 @@
             this.tableLayoutPanel1.Controls.Add(this.btn_8, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.btn_6, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.btn_4, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btn_9, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.btn_5, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.btn_divide, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.btn_multiply, 3, 2);
@@ -203,6 +202,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btn_SQR, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.btn_SQRT, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.btn_clear, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_9, 2, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -509,8 +509,8 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.listBox_MR);
             this.panel3.Controls.Add(this.tableLayoutPanel1);
+            this.panel3.Controls.Add(this.listBox_MR);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 160);
             this.panel3.Name = "panel3";

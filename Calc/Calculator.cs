@@ -79,6 +79,12 @@ namespace Calc
                             disp = arg;
                             return displayOut(arg);
                         }
+                        else
+                        {
+                            arg = Convert.ToString(args[0]);
+                            inputValues(c);
+                            args[0] = args[0] * (-1);
+                        }
                     }; break;
                 case "0,":
                     {
