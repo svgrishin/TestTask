@@ -16,8 +16,6 @@ namespace Calc
         public bool minus = false;
         public Func<double> calcFunc;
 
-        public double mr;
-
         public bool isResultBtn = false;
         public bool btnType=false;
 

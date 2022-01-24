@@ -80,7 +80,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "0";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -528,7 +527,6 @@
             this.listBox_MR.ItemHeight = 37;
             this.listBox_MR.Location = new System.Drawing.Point(0, 0);
             this.listBox_MR.Name = "listBox_MR";
-            this.listBox_MR.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.listBox_MR.Size = new System.Drawing.Size(355, 339);
             this.listBox_MR.TabIndex = 3;
             this.listBox_MR.Visible = false;
@@ -543,7 +541,6 @@
             this.MinimumSize = new System.Drawing.Size(230, 390);
             this.Name = "Form1";
             this.Text = "Калькулятор";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);

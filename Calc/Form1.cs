@@ -18,11 +18,6 @@ namespace Calc
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_1_Click(object sender, EventArgs e)
         {
             label1.Text = calc.inputValues('1');
@@ -196,32 +191,19 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
-            //short i = Convert.ToInt16(calc.index);
-            //calc.resPresCheck();
-
-            //int l = calc.mr2.Length - 1;
-            //calc.args[i] = calc.mr2[l];
-
-            //if (calc.isResultPresent == false && calc.index == false) calc.calcFunc = null;
-            //calc.index = !calc.index;
-
-            //calc.btnType = false;
-
-            //label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
-            //calc.arg = "";
             getFromMR(calc.mr2.Length - 1);
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
-            getMR(calc.mr2.Length - 1);
+            getMR(calc.mr2.Length - 1, 1);
         }
 
-        public void getMR(int indexOf)
+        public void getMR(int indexOf, int negative)
         {
             try
             {
-                calc.mr2[indexOf] += Convert.ToDouble(calc.arg);
+                calc.mr2[indexOf] += Convert.ToDouble(calc.arg)*negative;
             }
             catch
             {
@@ -238,11 +220,6 @@ namespace Calc
             btn_MList.Enabled = true;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_MC_Click(object sender, EventArgs e)
         {
             calc.mr2 = new double[1];
@@ -254,17 +231,7 @@ namespace Calc
 
         private void btn_MMinus_Click(object sender, EventArgs e)
         {
-            if (calc.arg == "") calc.mr -= Math.Abs(calc.args[0]);
-            else
-            {
-                calc.mr -= Math.Abs(Convert.ToDouble(calc.arg));
-                calc.args[0] = calc.mr;
-            }
-
-            calc.arg = "";
-            calc.index = true;
-
-            this.Text = Convert.ToString(calc.mr);
+            getMR(calc.mr2.Length - 1,-1);
         }
 
         private void btn_MS_Click(object sender, EventArgs e)
@@ -275,7 +242,7 @@ namespace Calc
                 Array.Resize(ref calc.mr2, l + 2);
                 l++;
             }
-            getMR(l);
+            getMR(l,1);
         }
 
         private void btn_MList_Click(object sender, EventArgs e)
@@ -307,7 +274,6 @@ namespace Calc
             short i = Convert.ToInt16(calc.index);
             calc.resPresCheck();
 
-            //int l = calc.mr2.Length - 1;
             calc.args[i] = calc.mr2[indexOf];
 
             if (calc.isResultPresent == false && calc.index == false) calc.calcFunc = null;
