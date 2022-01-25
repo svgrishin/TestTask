@@ -19,7 +19,7 @@ namespace Calc
         public bool isResultBtn = false;
         public bool btnType=false;
 
-        public double[] mr2 = new double[1];
+        public double[] mr = new double[1];
         public void getArgs(Func<double> f)
         {
             index = !index;
@@ -71,39 +71,6 @@ namespace Calc
 
             return displayOut(arg);
         }
-
-        //public string inputValues(string c)
-        //{
-        //    //switch (c)
-        //    //{
-        //    //    case "-":
-        //    //        {
-        //    //            if (arg != "" & arg != "0")
-        //    //            {
-        //    //                switch (minus)
-        //    //                {
-        //    //                    case true: arg = arg.Insert(0, c); break;
-        //    //                    case false: arg = arg.TrimStart('-'); break;
-        //    //                }
-        //    //                disp = arg;
-        //    //                return displayOut(arg);
-        //    //            }
-        //    //            else
-        //    //            {
-        //    //                arg = Convert.ToString(args[0]);
-        //    //                inputValues(c);
-        //    //                args[0] = args[0] * (-1);
-        //    //            }
-        //    //        };
-        //    //        break;
-        //    //    case "0,":
-        //    //        {
-        //    //            arg = arg + c;
-        //    //            disp = arg;
-        //    //        }; break;
-        //    //}
-        //    return disp;
-        //}
 
         public string deleteSymbol()
         {
@@ -169,6 +136,10 @@ namespace Calc
 
         public void extraFunc(Func<double> f)
         {
+            //функция для одного аргумента
+            //особенность в том, что может быть успешно выполнена 
+            //по упрощённому алгоритму
+            
             tryToGetArg(arg);
             getResult(f);
 
@@ -190,27 +161,33 @@ namespace Calc
             index = !index;
         }
 
-        public void resPresCheck()
+        public void resultPresentCheck()
         {
+            //проверка наличия результата
             if (isResultPresent == true) resetCalc();
         }
 
         public void resultBtnCheck(Func<double> f)
         {
+            //Проверка нажатия "=" ранее
+            //необходимо для предотвращения автоматического вычисления результата
+            //при нажатии кнопок функций после "=".
+            //При выполнении условия необходимо определить тип кнопки:
+            //  1. Цифра (false)
+            //  2. Функция (true)
+            
             if (isResultBtn==true)
             {
                 switch(btnType)
                 {
                     case false:
                         {
-                            calcFunc = null;
-                            index = false;
+                            resultBtnCheckReset();
                             break;
                         }
                     case true:
                         {
-                            calcFunc = null;
-                            index = false;
+                            resultBtnCheckReset();
                             arg = Convert.ToString(args[0]);
                             break;
                         }
@@ -219,8 +196,19 @@ namespace Calc
             }
         }
 
+        public void resultBtnCheckReset()
+        {
+            calcFunc = null;
+            index = false;
+        }
+
         public void resultBtnCheck()
         {
+            //следует не допускать автоматическое выполнение функции
+            //над аргументом, который введён после "="
+            //необходимо подготовпть калькулятор к вводу второго аргумента
+            //после ввода первого, не допуская автоматического выполнения функции
+            //после ввода первого аргумента
             if (isResultBtn == true)
             {
                 switch (btnType)

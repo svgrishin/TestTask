@@ -119,22 +119,28 @@ namespace Calc
             if (f != calc.calcFunc)
             {
                 calc.args[1] = calc.args[0];
-                if (calc.calcFunc != null) calc.index = true;
+                if (calc.calcFunc != null) calc.index = true;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
             }
 
-            if (calc.calcFunc == f && calc.arg != "") calc.index = true;
+            if (calc.calcFunc == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
             calc.resultBtnCheck(f);
-            
             calc.tryToGetArg(calc.arg);
 
+            //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
+            //в конце заполнения аргумента индекс переключается на противоположный
+            //соответсвенно,
+            //если индекс 1, то 1-й аргумент пустой, нужно запомнить функцию и заполнить 1-й аргумент в дальнейшем
+            //если индекс 0, то оба аргумента заполнены и нужно вычислить результат в дальнейшем
             switch (calc.index)
             {
-                case true:
-                    {
-                        calc.calcFunc = f;
-                    }
-                    break;
+                case true: calc.calcFunc = f;break;
+                //есть вероятность, что подряд будут нажаты несколько функций
+                //глобальной переменной функции присваивается значение только после успешного выполнения функции
+                //всегда следует пытаться выполнить функцию, согласно глобальной переменной,
+                //так как обращение к процедуре может быть из кнопки "="
+                //если функция изменилась, то глобальная переменная сбрасывается
+                //и ожидается успешное выполнение новой функции
                 case false:
                     {
                         try
@@ -151,7 +157,6 @@ namespace Calc
                     break;
             }
             calc.arg = "";
-
             calc.btnType = true;
         }
 
@@ -172,14 +177,29 @@ namespace Calc
 
         private void btn_Result_Click(object sender, EventArgs e)
         {
-            calc.isResultBtn = false;
+            //есть правило, что получить результат можно
+            //только если ранее результат не был получен.
+            //Это правило изначально было для арифметических кнопок,
+            //так как такие кнопки выполняют либо запоминание функции
+            //либо получение результата
+            //Кнопка "=" уникальна тем,
+            //что возвращает только результат без попытки получить аргумент
+            //стандартным способом. Аргумент получается в обход стандартного метода
 
+            calc.isResultBtn = false;
+            
+            //Если "=" нажато после кнопки функции и ранее не был получен результат то необходимо
+            //пройти в обход стандартного метода,
+            //получить аргументы принудительно,
+            //а затем принудительно вычислить результат
             if (calc.btnType == true && calc.isResultPresent!= true)
             {
                 calc.args[1] = calc.args[0];                
                 calc.getResult(calc.calcFunc);
                 label1.Text = calc.disp;
             }
+            //Если "=" нажато после цифры или уже был получен результат
+            //то обрабатывать стандартным методом
             else
             {
                 funcClick(calc.calcFunc, sender);
@@ -203,38 +223,38 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
-            getFromMR(calc.mr2.Length - 1);
+            getFromMR(calc.mr.Length - 1);
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
-            getMR(calc.mr2.Length - 1, 1);
+            getMR(calc.mr.Length - 1, 1);
         }
 
         public void getMR(int indexOf, int negative)
         {
             try
             {
-                calc.mr2[indexOf] += Convert.ToDouble(calc.arg)*negative;
+                calc.mr[indexOf] += Convert.ToDouble(calc.arg)*negative;
             }
             catch
             {
-                calc.mr2[indexOf] = calc.args[0];
-                calc.arg = Convert.ToString(calc.mr2[indexOf]);
+                calc.mr[indexOf] = calc.args[0];
+                calc.arg = Convert.ToString(calc.mr[indexOf]);
             }
 
             calc.btnType = true;
 
             setMrList(indexOf);
 
-            this.Text = Convert.ToString(calc.mr2[indexOf]);
+            this.Text = Convert.ToString(calc.mr[indexOf]);
 
             btn_MList.Enabled = true;
         }
 
         private void btn_MC_Click(object sender, EventArgs e)
         {
-            calc.mr2 = new double[1];
+            calc.mr = new double[1];
             btn_MList.Enabled = false;
             listBox_MR.Visible = false;
             listBox_MR.Items.Clear();
@@ -243,15 +263,15 @@ namespace Calc
 
         private void btn_MMinus_Click(object sender, EventArgs e)
         {
-            getMR(calc.mr2.Length - 1,-1);
+            getMR(calc.mr.Length - 1,-1);
         }
 
         private void btn_MS_Click(object sender, EventArgs e)
         {
-            int l = calc.mr2.Length-1;
-            if (calc.mr2.Length > 0)
+            int l = calc.mr.Length-1;
+            if (calc.mr.Length > 0)
             {
-                Array.Resize(ref calc.mr2, l + 2);
+                Array.Resize(ref calc.mr, l + 2);
                 l++;
             }
             getMR(l,1);
@@ -267,11 +287,11 @@ namespace Calc
         {
             try
             {
-                this.listBox_MR.Items[calc.mr2.Length-1] = calc.mr2[indexOf];
+                this.listBox_MR.Items[calc.mr.Length-1] = calc.mr[indexOf];
             }
             catch
             {
-                this.listBox_MR.Items.Add(calc.mr2[indexOf]);
+                this.listBox_MR.Items.Add(calc.mr[indexOf]);
             }
         }
 
@@ -283,14 +303,21 @@ namespace Calc
 
         public void getFromMR(int indexOf)
         {
+            //вызов из памяти может произойти при двух обстоятельствах:
+            //  1.  Ожидание ввода второго аргумента при наличии первого
+            //  2.  Ожидание ввода первого аргумента (характерно для случаев
+            //      вызова памяти после "=")
+            //при случае 2 нужно подготовить калькулятор к заполнению с первого аргумента
+            
             short i = Convert.ToInt16(calc.index);
-            calc.resPresCheck();
+            
+            calc.resultPresentCheck();
 
-            calc.args[i] = calc.mr2[indexOf];
+            calc.args[i] = calc.mr[indexOf];
 
             if (calc.isResultPresent == false && calc.index == false) calc.calcFunc = null;
+            
             calc.index = !calc.index;
-
             calc.btnType = false;
 
             label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
