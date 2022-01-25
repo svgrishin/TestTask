@@ -228,10 +228,10 @@ namespace Calc
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
-            getMR(calc.mr.Length - 1, 1);
+            setMR(calc.mr.Length - 1, 1);
         }
 
-        public void getMR(int indexOf, int negative)
+        public void setMR(int indexOf, int negative)
         {
             try
             {
@@ -243,12 +243,9 @@ namespace Calc
                 calc.arg = Convert.ToString(calc.mr[indexOf]);
             }
 
-            calc.btnType = true;
-
             setMrList(indexOf);
 
-            this.Text = Convert.ToString(calc.mr[indexOf]);
-
+            calc.btnType = true;
             btn_MList.Enabled = true;
         }
 
@@ -263,18 +260,19 @@ namespace Calc
 
         private void btn_MMinus_Click(object sender, EventArgs e)
         {
-            getMR(calc.mr.Length - 1,-1);
+            setMR(calc.mr.Length - 1,-1);
         }
 
         private void btn_MS_Click(object sender, EventArgs e)
         {
             int l = calc.mr.Length-1;
+            
             if (calc.mr.Length > 0)
             {
                 Array.Resize(ref calc.mr, l + 2);
                 l++;
             }
-            getMR(l,1);
+            setMR(l,1);
         }
 
         private void btn_MList_Click(object sender, EventArgs e)
