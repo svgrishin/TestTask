@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+//using Newtonsoft.Json.Serialization;
+using System.IO;
+
 
 namespace Calc
 {
     public partial class Form1 : Form
     {
-        Calculator calc = new Calculator();
+        public static Calculator calc = new Calculator();
         public Form1()
         {
             InitializeComponent();
@@ -330,7 +333,13 @@ namespace Calc
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //using (FileStream fs = new FileStream("user.json", FileMode.OpenOrCreate))
+            FileStream fs = new FileStream("c:/temp/user.json", FileMode.OpenOrCreate);
+            calc.calcFunc = null;
+            string s = JsonConvert.SerializeObject(calc);
+            fs.Close();
+            //calc.calcFunc = calc.calcFunc;
+            File.WriteAllText(fs.Name, s);
+            fs.Close();
         }
     }
 }

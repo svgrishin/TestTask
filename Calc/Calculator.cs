@@ -4,24 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.IO;
 
 
 namespace Calc
 {
     public class Calculator
-    {
+    {        
         public double[] args = new double[2];
         public bool isResultPresent = false;
 
         public bool index = false;
         public string arg = "", disp = "0";
         public bool minus = false;
-        public Func<double> calcFunc;
+        public Func<double> calcFunc = null;
 
         public bool isResultBtn = false;
         public bool btnType=false;
 
         public double[] mr = new double[1];
+
         public void getArgs(Func<double> f)
         {
             index = !index;
@@ -230,5 +232,52 @@ namespace Calc
                 isResultBtn = false;
             }
         }
+
+
+        public void saveFile(Calculator c)
+        {
+
+        }
+
+        public Calculator(double[]Args, bool IsResultPresent, bool Index, string Arg, string Disp,bool Minus,Func<double> CalcFunc,bool IsResultBtn,bool BtnType, double[] Mr)
+        {
+            args = Args;
+            isResultPresent = IsResultPresent;
+            index = Index;
+            arg = Arg;
+            disp = Disp;
+            minus = Minus;
+            try
+            {
+                calcFunc = (Func<double>)CalcFunc.Clone();
+            }
+            catch
+            {
+                calcFunc = null;
+            }
+            isResultBtn = IsResultPresent;
+            btnType = BtnType;
+            mr = Mr;
+        }
+        public Calculator()
+        {
+            args = new double[2];
+            isResultPresent = false;
+
+            index = false;
+            arg = "";
+            disp = "0";
+            minus = false;
+            calcFunc = null;
+            isResultBtn = false;
+            btnType = false;
+            mr = new double[1];
+    }
+
+        //public object Clone()
+        //{
+        //    return new Calculator(args, isResultPresent, index, arg, disp, minus, calcFunc, isResultPresent, btnType, mr);
+        //}
+        
     }
 }
