@@ -5,25 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text;
 
 
 namespace Calc
 {
     public class Calculator
     {        
-        /*public double[] args = new double[2];
-        public bool isResultPresent = false;
-
-        public bool index = false;
-        public string arg = "", disp = "0";
-        public bool minus = false;
-        public Func<double> calcFunc = null;
-
-        public bool isResultBtn = false;
-        public bool btnType=false;
-
-        public double[] mr = new double[1];*/
-
         public double[] args;
         public bool isResultPresent;
 
@@ -36,6 +24,8 @@ namespace Calc
         public bool btnType;
 
         public double[] mr;
+
+        public string[] jsonString;
 
         public int functions;
         //0 - null
@@ -80,6 +70,8 @@ namespace Calc
             isResultBtn = false;
             btnType = false;
             mr = new double[1];
+            
+            jsonString = new string[1];
             
             functions = 0;
         }        
@@ -296,16 +288,10 @@ namespace Calc
         }
 
         public void saveMe()
-        {
+        {          
             calcFunc = null;
-
-            FileStream fs = new FileStream("c:/temp/user.json", FileMode.OpenOrCreate);
             string s = JsonConvert.SerializeObject(this);
-
-            fs.Close();
-            File.WriteAllText(fs.Name, s);
-            fs.Close();
-
+            File.AppendAllText("c:/temp/user.json", s+"\n");
             getFunc(functions);
         }
 

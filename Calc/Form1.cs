@@ -351,14 +351,19 @@ namespace Calc
 
         private void button3_Click(object sender, EventArgs e)
         {
-            calc.calcFunc = null;
-            
-            FileStream fs = new FileStream("c:/temp/user.json", FileMode.OpenOrCreate);       
-            string s = JsonConvert.SerializeObject(calc);
-            
+            FileStream fs = new FileStream("c:/temp/user.json", FileMode.OpenOrCreate);
+
+            using (StreamWriter writer = new StreamWriter(fs))
+            {
+                foreach (string str in calc.jsonString)
+                {
+                    writer.WriteLine(str+"/n");
+                }
+            }
+
             fs.Close();
-            File.WriteAllText(fs.Name, s);
-            fs.Close();
+            //File.WriteAllText(fs.Name, calc.jsonString);
+            //fs.Close();
 
             calc.getFunc(calc.functions);
         }
