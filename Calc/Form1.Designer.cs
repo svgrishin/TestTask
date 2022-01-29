@@ -53,7 +53,6 @@
             this.btn_8 = new System.Windows.Forms.Button();
             this.btn_6 = new System.Windows.Forms.Button();
             this.btn_4 = new System.Windows.Forms.Button();
-            this.btn_9 = new System.Windows.Forms.Button();
             this.btn_5 = new System.Windows.Forms.Button();
             this.btn_divide = new System.Windows.Forms.Button();
             this.btn_multiply = new System.Windows.Forms.Button();
@@ -61,6 +60,7 @@
             this.btn_SQR = new System.Windows.Forms.Button();
             this.btn_SQRT = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
+            this.btn_9 = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.listBox_MR = new System.Windows.Forms.ListBox();
@@ -226,6 +226,7 @@
             this.btn_Percent.TabIndex = 1;
             this.btn_Percent.Text = "%";
             this.btn_Percent.UseVisualStyleBackColor = true;
+            this.btn_Percent.Click += new System.EventHandler(this.btn_Percent_Click);
             // 
             // button2
             // 
@@ -236,6 +237,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "СЕ";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -246,6 +248,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "1/x";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_Result
             // 
@@ -400,18 +403,6 @@
             this.btn_4.UseVisualStyleBackColor = true;
             this.btn_4.Click += new System.EventHandler(this.btn_4_Click);
             // 
-            // btn_9
-            // 
-            this.btn_9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btn_9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_9.Location = new System.Drawing.Point(141, 101);
-            this.btn_9.Name = "btn_9";
-            this.btn_9.Size = new System.Drawing.Size(63, 43);
-            this.btn_9.TabIndex = 11;
-            this.btn_9.Text = "9";
-            this.btn_9.UseVisualStyleBackColor = true;
-            this.btn_9.Click += new System.EventHandler(this.btn_9_Click);
-            // 
             // btn_5
             // 
             this.btn_5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -490,6 +481,18 @@
             this.btn_clear.Text = "C";
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
+            // 
+            // btn_9
+            // 
+            this.btn_9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_9.Location = new System.Drawing.Point(141, 101);
+            this.btn_9.Name = "btn_9";
+            this.btn_9.Size = new System.Drawing.Size(63, 43);
+            this.btn_9.TabIndex = 11;
+            this.btn_9.Text = "9";
+            this.btn_9.UseVisualStyleBackColor = true;
+            this.btn_9.Click += new System.EventHandler(this.btn_9_Click);
             // 
             // tableLayoutPanel3
             // 

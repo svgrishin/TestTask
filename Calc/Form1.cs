@@ -69,10 +69,7 @@ namespace Calc
 
         private void btn_Zero_Click(object sender, EventArgs e)
         {
-            if (calc.arg == "")
-            {
-                typeZeroComa();
-            }
+            if (calc.arg == "") typeZeroComa();
             else label1.Text = calc.inputValues('0');
         }
 
@@ -80,13 +77,16 @@ namespace Calc
         {
             calc.resetCalc();
             Array.Clear(calc.args, 0, 1);
-            calc.calcFunc = null;
+            calc.resetFunc();
             label1.Text = "0";
+
+            calc.saveMe();
         }
 
         private void btn_bspace_Click(object sender, EventArgs e)
         {
             label1.Text = calc.deleteSymbol();
+            calc.saveMe();
         }
 
         private void btn_Negative_Click(object sender, EventArgs e)
@@ -111,10 +111,12 @@ namespace Calc
         {
             label1.Text = calc.inputValues('0');
             label1.Text = calc.inputValues(',');
+            calc.saveMe();
         }
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
+            calc.functions = 1;
             funcClick(calc.summ, sender);
         }
 
@@ -162,20 +164,25 @@ namespace Calc
             }
             calc.arg = "";
             calc.btnType = true;
+
+            calc.saveMe();
         }
 
         private void btn_multiply_Click(object sender, EventArgs e)
         {
+            calc.functions = 3;
             funcClick(calc.multiply, sender);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
+            calc.functions = 4;
             funcClick(calc.divide, sender);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
+            calc.functions = 2;
             funcClick(calc.differens, sender);
         }
 
@@ -211,18 +218,24 @@ namespace Calc
             }
             calc.index = false;
             calc.isResultPresent = true;
+
+            calc.saveMe();
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
         {
+            calc.functions = 5;
             calc.extraFunc(calc.sqrtOf);
-            label1.Text = calc.displayOut(calc.disp); 
+            label1.Text = calc.displayOut(calc.disp);
+            calc.saveMe();
         }
 
         private void btn_SQR_Click(object sender, EventArgs e)
         {
+            calc.functions = 6;
             calc.extraFunc(calc.sqrOf);
             label1.Text = calc.displayOut(calc.disp);
+            calc.saveMe();
         }
 
         private void btn_MR_Click(object sender, EventArgs e)
@@ -251,6 +264,8 @@ namespace Calc
 
             calc.btnType = true;
             btn_MList.Enabled = true;
+
+            calc.saveMe();
         }
 
         private void btn_MC_Click(object sender, EventArgs e)
@@ -301,6 +316,7 @@ namespace Calc
         {
             btn_MR.Enabled = !btn_MR.Enabled;
             btn_MS.Enabled = !btn_MS.Enabled;
+            calc.saveMe();
         }
 
         public void getFromMR(int indexOf)
@@ -317,13 +333,15 @@ namespace Calc
 
             calc.args[i] = calc.mr[indexOf];
 
-            if (calc.isResultPresent == false && calc.index == false) calc.calcFunc = null;
+            if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
             
             calc.index = !calc.index;
             calc.btnType = false;
 
             label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
             calc.arg = "";
+
+            calc.saveMe();
         }
 
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
@@ -333,13 +351,32 @@ namespace Calc
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FileStream fs = new FileStream("c:/temp/user.json", FileMode.OpenOrCreate);
             calc.calcFunc = null;
+            
+            FileStream fs = new FileStream("c:/temp/user.json", FileMode.OpenOrCreate);       
             string s = JsonConvert.SerializeObject(calc);
+            
             fs.Close();
-            //calc.calcFunc = calc.calcFunc;
             File.WriteAllText(fs.Name, s);
             fs.Close();
+
+            calc.getFunc(calc.functions);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            calc.functions = 7;
+            calc.saveMe();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            calc.saveMe();
+        }
+
+        private void btn_Percent_Click(object sender, EventArgs e)
+        {
+            calc.saveMe();
         }
     }
 }
