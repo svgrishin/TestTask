@@ -203,7 +203,9 @@ namespace Calc
             //пройти в обход стандартного метода,
             //получить аргументы принудительно,
             //а затем принудительно вычислить результат
-            if (calc.btnType == true && calc.isResultPresent!= true)
+            
+            //if (calc.btnType == true && calc.isResultPresent!= true)
+            if (calc.btnType == true)
             {
                 calc.args[1] = calc.args[0];                
                 calc.getResult(calc.calcFunc);
@@ -218,6 +220,8 @@ namespace Calc
             }
             calc.index = false;
             calc.isResultPresent = true;
+
+            calc.btnType = false;
 
             calc.saveMe();
         }
@@ -351,21 +355,7 @@ namespace Calc
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FileStream fs = new FileStream("c:/temp/user.json", FileMode.OpenOrCreate);
-
-            using (StreamWriter writer = new StreamWriter(fs))
-            {
-                foreach (string str in calc.jsonString)
-                {
-                    writer.WriteLine(str+"/n");
-                }
-            }
-
-            fs.Close();
-            //File.WriteAllText(fs.Name, calc.jsonString);
-            //fs.Close();
-
-            calc.getFunc(calc.functions);
+            calc.setFucn(calc.previousCalcFunc);
         }
 
         private void button1_Click(object sender, EventArgs e)

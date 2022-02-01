@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
-using System.Text;
+
 
 
 namespace Calc
 {
     public class Calculator
-    {        
+    {
         public double[] args;
         public bool isResultPresent;
 
         public bool index;
         public string arg, disp;
         public bool minus;
-        public Func<double> calcFunc;
+        public Func<double> calcFunc, previousCalcFunc;
 
         public bool isResultBtn;
         public bool btnType;
@@ -43,11 +43,13 @@ namespace Calc
             functions = 0;
         }
 
+        
+
         public void getFunc(int f)
         {
             switch (f)
             {
-                case 1:calcFunc = summ;break;
+                case 1: calcFunc = summ;break;
                 case 2: calcFunc = differens; break;
                 case 3: calcFunc = multiply; break;
                 case 4: calcFunc = divide; break;
@@ -187,9 +189,19 @@ namespace Calc
 
         public void getResult(Func<double> f)
         {
-            args[0] = f();
+            try
+            {
+                args[0] = f();
+            }
+            catch
+            {
+                args[0] = previousCalcFunc();
+            }
+            
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
+            
+            previousCalcFunc = f;
         }
 
         public void extraFunc(Func<double> f)
