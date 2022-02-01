@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
+using System.Linq;
 
 
 
@@ -43,19 +40,19 @@ namespace Calc
             functions = 0;
         }
 
-        
+
 
         public void getFunc(int f)
         {
             switch (f)
             {
-                case 1: calcFunc = summ;break;
+                case 1: calcFunc = summ; break;
                 case 2: calcFunc = differens; break;
                 case 3: calcFunc = multiply; break;
                 case 4: calcFunc = divide; break;
                 case 5: calcFunc = sqrtOf; break;
                 case 6: calcFunc = sqrOf; break;
-                //case 7: calcFunc = ???; break;
+                    //case 7: calcFunc = ???; break;
             }
         }
 
@@ -72,12 +69,12 @@ namespace Calc
             isResultBtn = false;
             btnType = false;
             mr = new double[1];
-            
+
             jsonString = new string[1];
-            
+
             functions = 0;
-        }        
-        
+        }
+
         public void getArgs(Func<double> f)
         {
             index = !index;
@@ -123,7 +120,7 @@ namespace Calc
                     return displayOut(arg);
                 }
                 else return displayOut(disp);
-            }   
+            }
             else arg += c;
             btnType = false;
 
@@ -150,7 +147,7 @@ namespace Calc
         public string displayOut(string s)
         {
             if (s.Contains(',') == false)
-            for (int i = 3; i <= s.Length - Convert.ToInt16(minus); i += 4)
+                for (int i = 3; i <= s.Length - Convert.ToInt16(minus); i += 4)
                 {
                     s = s.Insert(s.Length - i, " ");
                 }
@@ -197,10 +194,10 @@ namespace Calc
             {
                 args[0] = previousCalcFunc();
             }
-            
+
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
-            
+
             previousCalcFunc = f;
         }
 
@@ -209,7 +206,7 @@ namespace Calc
             //функция для одного аргумента
             //особенность в том, что может быть успешно выполнена 
             //по упрощённому алгоритму
-            
+
             tryToGetArg(arg);
             getResult(f);
 
@@ -245,10 +242,10 @@ namespace Calc
             //При выполнении условия необходимо определить тип кнопки:
             //  1. Цифра (false)
             //  2. Функция (true)
-            
-            if (isResultBtn==true)
+
+            if (isResultBtn == true)
             {
-                switch(btnType)
+                switch (btnType)
                 {
                     case false:
                         {
@@ -259,9 +256,13 @@ namespace Calc
                         {
                             resultBtnCheckReset();
                             arg = Convert.ToString(args[0]);
+
+                            
+
                             break;
                         }
                 }
+                index = true;
                 isResultBtn = false;
             }
         }
@@ -300,17 +301,17 @@ namespace Calc
         }
 
         public void saveMe()
-        {          
-            calcFunc = null;
-            string s = JsonConvert.SerializeObject(this);
-            File.AppendAllText("c:/temp/user.json", s+"\n");
-            getFunc(functions);
+        {
+            //calcFunc = null;
+            //string s = JsonConvert.SerializeObject(this);
+            //File.AppendAllText("c:/temp/user.json", s + "\n");
+            //getFunc(functions);
         }
 
 
         public void saveFile(Calculator c)
         {
 
-        }        
+        }
     }
 }

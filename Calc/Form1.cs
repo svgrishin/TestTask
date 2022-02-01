@@ -117,6 +117,7 @@ namespace Calc
         private void btn_plus_Click(object sender, EventArgs e)
         {
             calc.functions = 1;
+            calc.previousCalcFunc = calc.summ;
             funcClick(calc.summ, sender);
         }
 
@@ -155,7 +156,14 @@ namespace Calc
                         }
                         catch
                         {
-                            calc.getResult(f);
+                            try
+                            {
+                                calc.getResult(f);
+                            }
+                            catch
+                            {
+                                calc.getResult(calc.previousCalcFunc);
+                            }
                         }
                         label1.Text = calc.disp;
                         calc.calcFunc = f;
@@ -355,7 +363,7 @@ namespace Calc
 
         private void button3_Click(object sender, EventArgs e)
         {
-            calc.setFucn(calc.previousCalcFunc);
+            //calc.setFucn(calc.previousCalcFunc);
         }
 
         private void button1_Click(object sender, EventArgs e)
