@@ -117,7 +117,7 @@ namespace Calc
         private void btn_plus_Click(object sender, EventArgs e)
         {
             calc.functions = 1;
-            calc.previousCalcFunc = calc.summ;
+            calc.previousCalcFunc = calc.summ; 
             funcClick(calc.summ, sender);
         }
 
