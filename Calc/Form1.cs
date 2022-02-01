@@ -116,7 +116,8 @@ namespace Calc
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            calc.functions = 1;
+            calc.functions[0] = 1;
+            calc.functions[1] = 1;
             calc.previousCalcFunc = calc.summ; 
             funcClick(calc.summ, sender);
         }
@@ -182,21 +183,24 @@ namespace Calc
 
         private void btn_multiply_Click(object sender, EventArgs e)
         {
-            calc.functions = 3;
+            calc.functions[0] = 3;
+            calc.functions[1] = 3;
             calc.previousCalcFunc = calc.differens;
             funcClick(calc.multiply, sender);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
-            calc.functions = 4;
+            calc.functions[0] = 4;
+            calc.functions[1] = 4;
             calc.previousCalcFunc = calc.divide;
             funcClick(calc.divide, sender);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            calc.functions = 2;
+            calc.functions[0] = 2;
+            calc.functions[1] = 2;
             calc.previousCalcFunc = calc.differens;
             funcClick(calc.differens, sender);
         }
@@ -238,12 +242,15 @@ namespace Calc
 
             calc.btnType = false;
 
+            //calc.previousCalcFunc = calc.calcFunc;
+
             calc.saveMe();
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
         {
-            calc.functions = 5;
+            calc.functions[0] = 5;
+            calc.functions[1] = 5;
             calc.extraFunc(calc.sqrtOf);
             label1.Text = calc.displayOut(calc.disp);
             calc.saveMe();
@@ -251,7 +258,8 @@ namespace Calc
 
         private void btn_SQR_Click(object sender, EventArgs e)
         {
-            calc.functions = 6;
+            calc.functions[0] = 6;
+            calc.functions[1] = 6;
             calc.extraFunc(calc.sqrOf);
             label1.Text = calc.displayOut(calc.disp);
             calc.saveMe();
@@ -375,7 +383,8 @@ namespace Calc
 
         private void button1_Click(object sender, EventArgs e)
         {
-            calc.functions = 7;
+            calc.functions[0] = 7;
+            calc.functions[1] = 7;
             calc.saveMe();
         }
 

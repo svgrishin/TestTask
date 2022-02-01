@@ -24,7 +24,7 @@ namespace Calc
 
         public string[] jsonString;
 
-        public int functions;
+        public int[] functions;
         //0 - null
         //1 - Сумма
         //2 - Разность
@@ -37,14 +37,14 @@ namespace Calc
         public void resetFunc()
         {
             calcFunc = null;
-            functions = 0;
+            functions[0] = 0;
         }
 
 
 
-        public void getFunc(int f)
+        public void getFunc(int[] f)
         {
-            switch (f)
+            switch (f[0])
             {
                 case 1: calcFunc = summ; break;
                 case 2: calcFunc = differens; break;
@@ -53,6 +53,17 @@ namespace Calc
                 case 5: calcFunc = sqrtOf; break;
                 case 6: calcFunc = sqrOf; break;
                     //case 7: calcFunc = ???; break;
+            }
+
+            switch (f[1])
+            {
+                case 1: previousCalcFunc = summ; break;
+                case 2: previousCalcFunc = differens; break;
+                case 3: previousCalcFunc = multiply; break;
+                case 4: previousCalcFunc = divide; break;
+                case 5: previousCalcFunc = sqrtOf; break;
+                case 6: previousCalcFunc = sqrOf; break;
+                    //case 7: previousCalcFunc = ???; break;
             }
         }
 
@@ -72,7 +83,7 @@ namespace Calc
 
             jsonString = new string[1];
 
-            functions = 0;
+            functions = new int[2];
         }
 
         public void getArgs(Func<double> f)
@@ -192,6 +203,7 @@ namespace Calc
             {
                 args[0] = f();
                 previousCalcFunc = f;
+                functions[1] = functions[0];
             }
             catch
             {
@@ -200,8 +212,6 @@ namespace Calc
 
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
-
-            //if previousCalcFunc = f;
         }
 
         public void extraFunc(Func<double> f)
@@ -306,10 +316,11 @@ namespace Calc
 
         public void saveMe()
         {
-            //calcFunc = null;
-            //string s = JsonConvert.SerializeObject(this);
-            //File.AppendAllText("c:/temp/user.json", s + "\n");
-            //getFunc(functions);
+            calcFunc = null;
+            previousCalcFunc = null;
+            string s = JsonConvert.SerializeObject(this);
+            File.AppendAllText("c:/temp/user.json", s + "\n");
+            getFunc(functions);
         }
 
 
