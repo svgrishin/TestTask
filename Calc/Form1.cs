@@ -131,7 +131,11 @@ namespace Calc
 
             if (calc.calcFunc == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
+            
+
             calc.resultBtnCheck(f);
+
+            
             calc.tryToGetArg(calc.arg);
 
             //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
@@ -179,18 +183,21 @@ namespace Calc
         private void btn_multiply_Click(object sender, EventArgs e)
         {
             calc.functions = 3;
+            calc.previousCalcFunc = calc.differens;
             funcClick(calc.multiply, sender);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
             calc.functions = 4;
+            calc.previousCalcFunc = calc.divide;
             funcClick(calc.divide, sender);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
             calc.functions = 2;
+            calc.previousCalcFunc = calc.differens;
             funcClick(calc.differens, sender);
         }
 

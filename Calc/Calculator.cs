@@ -98,6 +98,8 @@ namespace Calc
             isResultPresent = false;
             isResultBtn = false;
             btnType = false;
+
+            calcFunc = null;
         }
 
         public string inputValues(char c)
@@ -189,6 +191,7 @@ namespace Calc
             try
             {
                 args[0] = f();
+                previousCalcFunc = f;
             }
             catch
             {
@@ -198,7 +201,7 @@ namespace Calc
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
 
-            previousCalcFunc = f;
+            //if previousCalcFunc = f;
         }
 
         public void extraFunc(Func<double> f)
@@ -265,6 +268,7 @@ namespace Calc
                 index = true;
                 isResultBtn = false;
             }
+            //index = true;
         }
 
         public void resultBtnCheckReset()
