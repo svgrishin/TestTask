@@ -9,6 +9,6 @@ namespace Calc
     public class CalcFunction: Calculator
     {
         public char funcSymbol;
-        public Func<double> functionOf;
+        public Func<double> functionOf; 
     }
 }
