@@ -9,6 +9,7 @@ namespace Calc
 {
     public class Calculator
     {
+        //Создай пустую функцию, а значения заполняй в funcClick :)
         public CalcFunction calcFuncOf;
         
         public DateTime dateTimeOf;
