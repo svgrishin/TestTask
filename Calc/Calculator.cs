@@ -9,6 +9,10 @@ namespace Calc
 {
     public class Calculator
     {
+        public CalcFunction calcFuncOf;
+        
+        public DateTime dateTimeOf;
+        
         public double[] args;
         public bool isResultPresent;
 
@@ -84,6 +88,7 @@ namespace Calc
             jsonString = new string[1];
 
             functions = new int[2];
+
         }
 
         public void getArgs(Func<double> f)
@@ -113,7 +118,7 @@ namespace Calc
             calcFunc = null;
         }
 
-        public string inputValues(char c)
+        public string inputValues(char c, Form1 f)
         {
             resultBtnCheck();
 
@@ -137,7 +142,7 @@ namespace Calc
             else arg += c;
             btnType = false;
 
-            saveMe();
+            f.saveMe();
 
             return displayOut(arg);
         }
@@ -314,14 +319,16 @@ namespace Calc
             }
         }
 
-        public void saveMe()
-        {
-            calcFunc = null;
-            previousCalcFunc = null;
-            string s = JsonConvert.SerializeObject(this);
-            File.AppendAllText("c:/temp/user.json", s + "\n");
-            getFunc(functions);
-        }
+        //public void saveMe()
+        //{
+        //    calcFunc = null;
+        //    previousCalcFunc = null;
+        //    string s = JsonConvert.SerializeObject(this);
+
+
+        //    File.AppendAllText("c:/temp/user.json", s + "\n");
+        //    getFunc(functions);
+        //}
 
 
         public void saveFile(Calculator c)
