@@ -37,7 +37,7 @@
             this.btn_MPlus = new System.Windows.Forms.Button();
             this.btn_MMinus = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_Percent = new System.Windows.Forms.Button();
+            this.btn_History = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btn_Result = new System.Windows.Forms.Button();
@@ -180,7 +180,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.btn_Percent, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_History, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.button2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.btn_Result, 3, 5);
@@ -217,16 +217,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(279, 295);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // btn_Percent
+            // btn_History
             // 
-            this.btn_Percent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_Percent.Location = new System.Drawing.Point(3, 3);
-            this.btn_Percent.Name = "btn_Percent";
-            this.btn_Percent.Size = new System.Drawing.Size(63, 43);
-            this.btn_Percent.TabIndex = 1;
-            this.btn_Percent.Text = "%";
-            this.btn_Percent.UseVisualStyleBackColor = true;
-            this.btn_Percent.Click += new System.EventHandler(this.btn_Percent_Click);
+            this.btn_History.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_History.Location = new System.Drawing.Point(3, 3);
+            this.btn_History.Name = "btn_History";
+            this.btn_History.Size = new System.Drawing.Size(63, 43);
+            this.btn_History.TabIndex = 1;
+            this.btn_History.Text = "H";
+            this.btn_History.UseVisualStyleBackColor = true;
+            this.btn_History.Click += new System.EventHandler(this.btn_Percent_Click);
             // 
             // button2
             // 
@@ -596,7 +596,7 @@
         private System.Windows.Forms.Button btn_MS;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btn_Percent;
+        private System.Windows.Forms.Button btn_History;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ListBox listBox_MR;

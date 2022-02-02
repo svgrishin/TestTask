@@ -17,6 +17,8 @@ namespace Calc
     public partial class Form1 : Form
     {
         public static Calculator calc = new Calculator();
+        public static Calculator[] calcs = new Calculator[0];
+        public HistoryForm hf = new HistoryForm();
         public Form1()
         {
             InitializeComponent();
@@ -24,53 +26,53 @@ namespace Calc
 
         private void btn_1_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('1');
+            label1.Text = calc.inputValues('1', this);
         }
 
         private void btn_2_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('2');
+            label1.Text = calc.inputValues('2', this);
         }
 
         private void btn_3_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('3');
+            label1.Text = calc.inputValues('3', this);
         }
 
         private void btn_4_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('4');
+            label1.Text = calc.inputValues('4', this);
         }
 
         private void btn_5_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('5');
+            label1.Text = calc.inputValues('5',this);
         }
 
         private void btn_6_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('6');
+            label1.Text = calc.inputValues('6',this);
         }
 
         private void btn_7_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('7');
+            label1.Text = calc.inputValues('7',this);
         }
 
         private void btn_8_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('8');
+            label1.Text = calc.inputValues('8',this);
         }
 
         private void btn_9_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('9');
+            label1.Text = calc.inputValues('9',this);
         }
 
         private void btn_Zero_Click(object sender, EventArgs e)
         {
             if (calc.arg == "") typeZeroComa();
-            else label1.Text = calc.inputValues('0');
+            else label1.Text = calc.inputValues('0',this);
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
@@ -80,19 +82,19 @@ namespace Calc
             calc.resetFunc();
             label1.Text = "0";
 
-            calc.saveMe();
+            saveMe();
         }
 
         private void btn_bspace_Click(object sender, EventArgs e)
         {
             label1.Text = calc.deleteSymbol();
-            calc.saveMe();
+            saveMe();
         }
 
         private void btn_Negative_Click(object sender, EventArgs e)
         {
             calc.minus = !calc.minus;
-            label1.Text = calc.inputValues('-');
+            label1.Text = calc.inputValues('-',this);
         }
 
         private void btn_Coma_Click(object sender, EventArgs e)
@@ -103,15 +105,15 @@ namespace Calc
                 {
                     typeZeroComa();
                 }
-                else label1.Text = calc.inputValues(',');
+                else label1.Text = calc.inputValues(',',this);
             }
         }
 
         public void typeZeroComa()
         {
-            label1.Text = calc.inputValues('0');
-            label1.Text = calc.inputValues(',');
-            calc.saveMe();
+            label1.Text = calc.inputValues('0',this);
+            label1.Text = calc.inputValues(',',this);
+            saveMe();
         }
 
         private void btn_plus_Click(object sender, EventArgs e)
@@ -178,7 +180,9 @@ namespace Calc
             calc.arg = "";
             calc.btnType = true;
 
-            calc.saveMe();
+            saveMe();
+            
+
         }
 
         private void btn_multiply_Click(object sender, EventArgs e)
@@ -244,7 +248,7 @@ namespace Calc
 
             //calc.previousCalcFunc = calc.calcFunc;
 
-            calc.saveMe();
+            //saveMe();
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
@@ -253,7 +257,7 @@ namespace Calc
             calc.functions[1] = 5;
             calc.extraFunc(calc.sqrtOf);
             label1.Text = calc.displayOut(calc.disp);
-            calc.saveMe();
+            saveMe();
         }
 
         private void btn_SQR_Click(object sender, EventArgs e)
@@ -262,7 +266,7 @@ namespace Calc
             calc.functions[1] = 6;
             calc.extraFunc(calc.sqrOf);
             label1.Text = calc.displayOut(calc.disp);
-            calc.saveMe();
+            saveMe();
         }
 
         private void btn_MR_Click(object sender, EventArgs e)
@@ -292,7 +296,7 @@ namespace Calc
             calc.btnType = true;
             btn_MList.Enabled = true;
 
-            calc.saveMe();
+            saveMe();
         }
 
         private void btn_MC_Click(object sender, EventArgs e)
@@ -343,7 +347,7 @@ namespace Calc
         {
             btn_MR.Enabled = !btn_MR.Enabled;
             btn_MS.Enabled = !btn_MS.Enabled;
-            calc.saveMe();
+            saveMe();
         }
 
         public void getFromMR(int indexOf)
@@ -368,7 +372,7 @@ namespace Calc
             label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
             calc.arg = "";
 
-            calc.saveMe();
+            saveMe();
         }
 
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
@@ -385,17 +389,48 @@ namespace Calc
         {
             calc.functions[0] = 7;
             calc.functions[1] = 7;
-            calc.saveMe();
+            saveMe();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            calc.saveMe();
+            saveMe();
         }
 
         private void btn_Percent_Click(object sender, EventArgs e)
         {
-            calc.saveMe();
+            hf.Show();
+        }
+
+        public void saveMe()
+        {
+            addCalc();
+            saveCalc();
+            //hf.HistoryList.Items.Add(s);
+            addToCalcList();
+        }
+
+        private void addCalc()
+        {
+            int i = calcs.Length;
+            Array.Resize(ref calcs, i + 1);
+            calcs[i] = calc;
+        }
+
+        private void saveCalc()
+        {
+            calc.calcFunc = null;
+            calc.previousCalcFunc = null;
+            string s = JsonConvert.SerializeObject(calc);
+
+            File.AppendAllText("c:/temp/user.json", s + "\n");
+            calc.getFunc(calc.functions);
+        }
+
+        private void addToCalcList()
+        {
+            string strCalc = string.Concat(calc.args[0],calc.calcFunc,calc.args[1],"=");
+            
         }
     }
 }
