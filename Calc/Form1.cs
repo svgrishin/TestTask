@@ -120,28 +120,39 @@ namespace Calc
         {
             calc.functions[0] = 1;
             calc.functions[1] = 1;
-            calc.previousCalcFunc = calc.summ; 
-            funcClick(calc.summ, sender);
-            funcClick(calc.summ,sender,'+')
+            calc.previousCalcFunc = calc.summ;
+            //funcClick(calc.summ, sender);
+            funcClick(calc.summ, sender, '+');
         }
 
         private void funcClick(Func<double> f, object sender, char c)
         {
-            calc.calcFuncOf = new CalcFunction(c, f);
-            
-            if (f != calc.calcFunc)
+            CalcFunction cf = new CalcFunction(c, f);
+
+            //if (f != calc.calcFunc)
+            //{
+            //    calc.args[1] = calc.args[0];
+            //    if (calc.calcFunc != null) calc.index = true;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
+            //}
+
+            //if (calc.calcFunc == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
+
+
+
+            //calc.resultBtnCheck(f);
+
+            if (cf != calc.calcFuncOf)
             {
                 calc.args[1] = calc.args[0];
-                if (calc.calcFunc != null) calc.index = true;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
+                if (calc.calcFuncOf != null) calc.index = true;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
             }
 
-            if (calc.calcFunc == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
+            if (calc.calcFuncOf == cf && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
-            
 
-            calc.resultBtnCheck(f);
+            calc.resultBtnCheck(cf.functionOf);
 
-            
+
             calc.tryToGetArg(calc.arg);
 
             //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
@@ -151,7 +162,7 @@ namespace Calc
             //если индекс 0, то оба аргумента заполнены и нужно вычислить результат в дальнейшем
             switch (calc.index)
             {
-                case true: calc.calcFunc = f;break;
+                case true: calc.calcFuncOf = cf;break;
                 //есть вероятность, что подряд будут нажаты несколько функций
                 //глобальной переменной функции присваивается значение только после успешного выполнения функции
                 //всегда следует пытаться выполнить функцию, согласно глобальной переменной,
@@ -162,16 +173,19 @@ namespace Calc
                     {
                         try
                         {
-                            calc.getResult(calc.calcFunc);
+                            //calc.getResult(calc.calcFunc);
+                            calc.getResult(calc.calcFuncOf.functionOf);
                         }
                         catch
                         {
                             try
                             {
-                                calc.getResult(f);
+                                //calc.getResult(f);
+                                calc.getResult(cf.functionOf);
                             }
                             catch
                             {
+                                //calc.getResult(calc.previousCalcFunc);
                                 calc.getResult(calc.previousCalcFunc);
                             }
                         }

@@ -10,7 +10,7 @@ namespace Calc
     public class Calculator
     {
         //Создай пустую функцию, а значения заполняй в funcClick :)
-        public CalcFunction calcFuncOf;
+        public CalcFunction calcFuncOf, previousCalcFunc;
         
         public DateTime dateTimeOf;
         
@@ -20,7 +20,7 @@ namespace Calc
         public bool index;
         public string arg, disp;
         public bool minus;
-        public Func<double> calcFunc, previousCalcFunc;
+        //public Func<double> calcFunc, previousCalcFunc;
 
         public bool isResultBtn;
         public bool btnType;
@@ -41,33 +41,59 @@ namespace Calc
 
         public void resetFunc()
         {
-            calcFunc = null;
+            //calcFunc = null;
+            calcFuncOf = new CalcFunction();
             functions[0] = 0;
         }
 
 
 
+        //public void getFunc(int[] f)
+        //{
+        //    switch (f[0])
+        //    {
+        //        case 1: calcFunc = summ; break;
+        //        case 2: calcFunc = differens; break;
+        //        case 3: calcFunc = multiply; break;
+        //        case 4: calcFunc = divide; break;
+        //        case 5: calcFunc = sqrtOf; break;
+        //        case 6: calcFunc = sqrOf; break;
+        //            //case 7: calcFunc = ???; break;
+        //    }
+
+        //    switch (f[1])
+        //    {
+        //        case 1: previousCalcFunc = summ; break;
+        //        case 2: previousCalcFunc = differens; break;
+        //        case 3: previousCalcFunc = multiply; break;
+        //        case 4: previousCalcFunc = divide; break;
+        //        case 5: previousCalcFunc = sqrtOf; break;
+        //        case 6: previousCalcFunc = sqrOf; break;
+        //            //case 7: previousCalcFunc = ???; break;
+        //    }
+        //}
+
         public void getFunc(int[] f)
         {
             switch (f[0])
             {
-                case 1: calcFunc = summ; break;
-                case 2: calcFunc = differens; break;
-                case 3: calcFunc = multiply; break;
-                case 4: calcFunc = divide; break;
-                case 5: calcFunc = sqrtOf; break;
-                case 6: calcFunc = sqrOf; break;
+                case 1: calcFuncOf = new CalcFunction("+",summ); break;
+                case 2: calcFuncOf = new CalcFunction("-", summ); break;
+                case 3: calcFuncOf = new CalcFunction("×", summ); break;
+                case 4: calcFuncOf = new CalcFunction("÷", summ); break;
+                case 5: calcFuncOf = new CalcFunction("√", summ); break;
+                case 6: calcFuncOf = new CalcFunction("x^2", summ); break;
                     //case 7: calcFunc = ???; break;
             }
 
             switch (f[1])
             {
-                case 1: previousCalcFunc = summ; break;
-                case 2: previousCalcFunc = differens; break;
-                case 3: previousCalcFunc = multiply; break;
-                case 4: previousCalcFunc = divide; break;
-                case 5: previousCalcFunc = sqrtOf; break;
-                case 6: previousCalcFunc = sqrOf; break;
+                case 1: previousCalcFunc = new CalcFunction("+", summ); break;
+                case 2: previousCalcFunc = new CalcFunction("-", summ); break;
+                case 3: previousCalcFunc = new CalcFunction("×", summ); break;
+                case 4: previousCalcFunc = new CalcFunction("÷", summ); break;
+                case 5: previousCalcFunc = new CalcFunction("√", summ); break;
+                case 6: previousCalcFunc = new CalcFunction("x^2", summ); break;
                     //case 7: previousCalcFunc = ???; break;
             }
         }
@@ -81,7 +107,7 @@ namespace Calc
             arg = "";
             disp = "0";
             minus = false;
-            calcFunc = null;
+            //calcFunc = null;
             isResultBtn = false;
             btnType = false;
             mr = new double[1];
@@ -90,9 +116,25 @@ namespace Calc
 
             functions = new int[2];
 
+            calcFuncOf = new CalcFunction();
+
         }
 
-        public void getArgs(Func<double> f)
+        //public void getArgs(Func<double> f)
+        //{
+        //    index = !index;
+
+        //    tryToGetArg(arg);
+
+        //    if (index == true)
+        //    {
+        //        getResult(f);
+        //    }
+        //    arg = "";
+        //    disp = Convert.ToString(args[0]);
+        //}
+
+        public void getArgs(CalcFunction cf)
         {
             index = !index;
 
@@ -100,7 +142,7 @@ namespace Calc
 
             if (index == true)
             {
-                getResult(f);
+                getResult(cf);
             }
             arg = "";
             disp = Convert.ToString(args[0]);
@@ -116,7 +158,8 @@ namespace Calc
             isResultBtn = false;
             btnType = false;
 
-            calcFunc = null;
+            //calcFunc = null;
+            calcFuncOf = new CalcFunction();
         }
 
         public string inputValues(char c, Form1 f)
@@ -203,31 +246,64 @@ namespace Calc
             return Math.Sqrt(args[0]);
         }
 
-        public void getResult(Func<double> f)
+        //public void getResult(Func<double> f)
+        //{
+        //    try
+        //    {
+        //        args[0] = f();
+        //        previousCalcFunc = f;
+        //        functions[1] = functions[0];
+        //    }
+        //    catch
+        //    {
+        //        //args[0] = previousCalcFunc();
+        //        args[0] = previousCalcFunc.functionOf();
+        //    }
+
+        //    isResultPresent = true;
+        //    disp = displayOut(Convert.ToString(args[0]));
+        //}
+
+        public void getResult(CalcFunction cf)
         {
             try
             {
-                args[0] = f();
-                previousCalcFunc = f;
+                args[0] = cf.functionOf();
+                previousCalcFunc = cf;
                 functions[1] = functions[0];
             }
             catch
             {
-                args[0] = previousCalcFunc();
+                //args[0] = previousCalcFunc();
+                args[0] = previousCalcFunc.functionOf();
             }
 
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
         }
 
-        public void extraFunc(Func<double> f)
+        //public void extraFunc(Func<double> f)
+        //{
+        //    //функция для одного аргумента
+        //    //особенность в том, что может быть успешно выполнена 
+        //    //по упрощённому алгоритму
+
+        //    tryToGetArg(arg);
+        //    getResult(f);
+
+        //    disp = Convert.ToString(args[0]);
+        //    arg = "";
+        //    index = !index;
+        //}
+
+        public void extraFunc(CalcFunction cf)
         {
             //функция для одного аргумента
             //особенность в том, что может быть успешно выполнена 
             //по упрощённому алгоритму
 
             tryToGetArg(arg);
-            getResult(f);
+            getResult(cf);
 
             disp = Convert.ToString(args[0]);
             arg = "";

@@ -6,9 +6,21 @@ using System.Threading.Tasks;
 
 namespace Calc
 {
-    public class CalcFunction: Calculator
+    public class CalcFunction : Calculator
     {
-        public char funcSymbol;
-        public Func<double> functionOf; 
+        public string funcSymbol;
+        public Func<double> functionOf;
+
+        public CalcFunction()
+        {
+            functionOf = null;
+        }
+
+        public CalcFunction(string c, Func<double> f)
+        {
+            funcSymbol = c;
+            functionOf = f;
+        }
     }
+
 }
