@@ -105,7 +105,7 @@ namespace Calc
                 {
                     typeZeroComa();
                 }
-                else label1.Text = calc.inputValues(',',this);
+                else label1.Text = calc.inputValues(',',this); 
             }
         }
 
