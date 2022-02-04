@@ -21,7 +21,6 @@ namespace Calc
         public bool index;
         public string arg, disp;
         public bool minus;
-        //public Func<double> calcFunc, previousCalcFunc;
 
         public bool isResultBtn;
         public bool btnType;
@@ -40,6 +39,38 @@ namespace Calc
         //6 - Степень
         //7 - дробь
 
+        public Calculator(Calculator c)
+        {
+            calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,c.calcFuncOf.functionOf);
+            
+            previousCalcFunc=c.previousCalcFunc;
+
+            dateTimeOf=c.dateTimeOf;
+
+            args = new double[c.args.Length];
+            args[0] = c.args[0];
+            args[1] = c.args[1];
+
+            resultString="";
+            isResultPresent=c.isResultPresent;
+
+            index=c.index;
+            arg = args[1].ToString();
+            disp=c.disp;
+            minus=c.minus;
+
+            isResultBtn=c.isResultPresent;
+            btnType=false;
+
+            mr=c.mr;
+
+            jsonString=c.jsonString;
+
+            functions=c.functions;
+
+            getFunc(functions);
+        }
+        
         public void resetFunc()
         {
             //calcFunc = null;
@@ -189,8 +220,6 @@ namespace Calc
             else arg += c;
             btnType = false;
 
-            f.saveMe();
-
             return displayOut(arg);
         }
 
@@ -269,10 +298,17 @@ namespace Calc
 
         public void getResult(CalcFunction cf)
         {
-            addToCalcString(args[0]);
-            addToCalcString(cf.funcSymbol);
-            addToCalcString(args[1]);
-            addToCalcString("=");
+            try
+            {
+                addToCalcString(args[0]);
+                addToCalcString(cf.funcSymbol);
+                addToCalcString(args[1]);
+                addToCalcString("=");
+
+
+            }
+            catch { }
+
             try
             {
                 args[0] = cf.functionOf();
@@ -437,18 +473,6 @@ namespace Calc
         {
             resultString=string.Concat(resultString,s.ToString());
         }
-
-        //public void saveMe()
-        //{
-        //    calcFunc = null;
-        //    previousCalcFunc = null;
-        //    string s = JsonConvert.SerializeObject(this);
-
-
-        //    File.AppendAllText("c:/temp/user.json", s + "\n");
-        //    getFunc(functions);
-        //}
-
 
         public void saveFile(Calculator c)
         {

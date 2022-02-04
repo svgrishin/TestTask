@@ -18,10 +18,11 @@ namespace Calc
     {
         public static Calculator calc = new Calculator();
         public static Calculator[] calcs = new Calculator[0];
-        public HistoryForm hf = new HistoryForm();
+        public HistoryForm hf;
         public Form1()
         {
             InitializeComponent();
+            hf = new HistoryForm(this);
         }
 
         private void btn_1_Click(object sender, EventArgs e)
@@ -81,14 +82,11 @@ namespace Calc
             Array.Clear(calc.args, 0, 1);
             calc.resetFunc();
             label1.Text = "0";
-
-            saveMe();
         }
 
         private void btn_bspace_Click(object sender, EventArgs e)
         {
             label1.Text = calc.deleteSymbol();
-            saveMe();
         }
 
         private void btn_Negative_Click(object sender, EventArgs e)
@@ -113,7 +111,6 @@ namespace Calc
         {
             label1.Text = calc.inputValues('0',this);
             label1.Text = calc.inputValues(',',this);
-            saveMe();
         }
 
        private void btn_Func_Click(int i, string funcSymbol, Func<double> f, object sender, bool isExtraFunc)
@@ -167,32 +164,26 @@ namespace Calc
                     {
                         try
                         {
-                            //calc.getResult(calc.calcFunc);
                             getResult(calc.calcFuncOf);
                         }
                         catch
                         {
                             try
                             {
-                                //calc.getResult(f);
                                 getResult(f);
                             }
                             catch
                             {
-                                //calc.getResult(calc.previousCalcFunc);
                                 calc.getResult(calc.previousCalcFunc);
                             }
                         }
                         label1.Text = calc.disp;
-                        //calc.calcFunc = f;
                         calc.calcFuncOf = f;
                     }
                     break;
             }
             calc.arg = "";
             calc.btnType = true;
-
-            saveMe();
         }
 
         private void btn_multiply_Click(object sender, EventArgs e)
@@ -240,7 +231,6 @@ namespace Calc
             //то обрабатывать стандартным методом
             else
             {
-                //funcClick(calc.calcFunc, sender);
                 funcClick(calc.calcFuncOf,sender);
                 calc.isResultBtn = true;
             }
@@ -250,8 +240,6 @@ namespace Calc
             calc.btnType = false;
 
             calc.previousCalcFunc = calc.calcFuncOf;
-
-            saveMe();
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
@@ -290,8 +278,6 @@ namespace Calc
 
             calc.btnType = true;
             btn_MList.Enabled = true;
-
-            saveMe();
         }
 
         private void btn_MC_Click(object sender, EventArgs e)
@@ -342,7 +328,6 @@ namespace Calc
         {
             btn_MR.Enabled = !btn_MR.Enabled;
             btn_MS.Enabled = !btn_MS.Enabled;
-            saveMe();
         }
 
         public void getFromMR(int indexOf)
@@ -366,8 +351,6 @@ namespace Calc
 
             label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
             calc.arg = "";
-
-            saveMe();
         }
 
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
@@ -377,19 +360,18 @@ namespace Calc
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //calc.setFucn(calc.previousCalcFunc);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             calc.functions[0] = 7;
             calc.functions[1] = 7;
-            saveMe();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            saveMe();
+
         }
 
         private void btn_Percent_Click(object sender, EventArgs e)
@@ -401,21 +383,24 @@ namespace Calc
         {
             addCalc();
             saveCalc();
-            //hf.HistoryList.Items.Add(s);
-            //addToCalcList();
+        }
+
+        public void loadMe(int i)
+        {
+            calc = new Calculator(calcs[i]);
+            label1.Text = calc.displayOut(calc.disp);
         }
 
         private void addCalc()
         {
             int i = calcs.Length;
             Array.Resize(ref calcs, i + 1);
-            calcs[i] = calc;
+            calcs[i] = new Calculator(calc);
+            
         }
 
         private void saveCalc()
         {
-            
-            
             calc.calcFuncOf = null;
             calc.previousCalcFunc = null;
             string s = JsonConvert.SerializeObject(calc);
@@ -433,6 +418,7 @@ namespace Calc
         private void getResult(CalcFunction cf)
         {
             calc.getResult(cf);
+            saveMe();
             if (calc.resultString!="") addToCalcList();
             calc.resultString = "";
         }

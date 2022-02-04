@@ -41,6 +41,7 @@
             this.HistoryList.Name = "HistoryList";
             this.HistoryList.Size = new System.Drawing.Size(271, 365);
             this.HistoryList.TabIndex = 0;
+            this.HistoryList.DoubleClick += new System.EventHandler(this.HistoryList_DoubleClick);
             // 
             // HistoryForm
             // 

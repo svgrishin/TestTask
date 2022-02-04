@@ -21,6 +21,8 @@ namespace Calc
             funcSymbol = c;
             functionOf = f;
         }
+
+
     }
 
 }

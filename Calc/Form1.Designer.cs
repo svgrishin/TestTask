@@ -582,7 +582,6 @@
         private System.Windows.Forms.Button btn_5;
         private System.Windows.Forms.Button btn_divide;
         private System.Windows.Forms.Button btn_multiply;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_bspace;
         private System.Windows.Forms.Button btn_Result;
         private System.Windows.Forms.Button btn_SQR;
@@ -601,6 +600,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ListBox listBox_MR;
         private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.Label label1;
     }
 }
 

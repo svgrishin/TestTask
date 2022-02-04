@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace Calc
 {
-    public partial class HistoryForm : Form
+    public partial class HistoryForm: Form
     {
-        public HistoryForm()
+        Form1 calcForm;
+        public HistoryForm(Form1 f)
         {
             InitializeComponent();
+            calcForm = f; 
+        }
+
+        private void HistoryList_DoubleClick(object sender, EventArgs e)
+        {
+            calcForm.loadMe(HistoryList.SelectedIndex);
         }
     }
 }
