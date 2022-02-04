@@ -42,7 +42,7 @@ namespace Calc
         public void resetFunc()
         {
             //calcFunc = null;
-            calcFuncOf = new CalcFunction();
+            //calcFuncOf = new CalcFunction();
             functions[0] = 0;
         }
 
@@ -78,22 +78,22 @@ namespace Calc
             switch (f[0])
             {
                 case 1: calcFuncOf = new CalcFunction("+",summ); break;
-                case 2: calcFuncOf = new CalcFunction("-", summ); break;
-                case 3: calcFuncOf = new CalcFunction("×", summ); break;
-                case 4: calcFuncOf = new CalcFunction("÷", summ); break;
-                case 5: calcFuncOf = new CalcFunction("√", summ); break;
-                case 6: calcFuncOf = new CalcFunction("x^2", summ); break;
+                case 2: calcFuncOf = new CalcFunction("-", differens); break;
+                case 3: calcFuncOf = new CalcFunction("×", multiply); break;
+                case 4: calcFuncOf = new CalcFunction("÷", divide); break;
+                case 5: calcFuncOf = new CalcFunction("√", sqrtOf); break;
+                case 6: calcFuncOf = new CalcFunction("^", sqrOf); break;
                     //case 7: calcFunc = ???; break;
             }
 
             switch (f[1])
             {
                 case 1: previousCalcFunc = new CalcFunction("+", summ); break;
-                case 2: previousCalcFunc = new CalcFunction("-", summ); break;
-                case 3: previousCalcFunc = new CalcFunction("×", summ); break;
-                case 4: previousCalcFunc = new CalcFunction("÷", summ); break;
-                case 5: previousCalcFunc = new CalcFunction("√", summ); break;
-                case 6: previousCalcFunc = new CalcFunction("x^2", summ); break;
+                case 2: previousCalcFunc = new CalcFunction("-", differens); break;
+                case 3: previousCalcFunc = new CalcFunction("×", multiply); break;
+                case 4: previousCalcFunc = new CalcFunction("÷", divide); break;
+                case 5: previousCalcFunc = new CalcFunction("√", sqrtOf); break;
+                case 6: previousCalcFunc = new CalcFunction("^", sqrOf); break;
                     //case 7: previousCalcFunc = ???; break;
             }
         }
@@ -103,7 +103,7 @@ namespace Calc
             args = new double[2];
             isResultPresent = false;
 
-            index = false;
+            index=false;
             arg = "";
             disp = "0";
             minus = false;
@@ -116,7 +116,7 @@ namespace Calc
 
             functions = new int[2];
 
-            calcFuncOf = new CalcFunction();
+            calcFuncOf = null;
 
         }
 
@@ -329,6 +329,7 @@ namespace Calc
             if (isResultPresent == true) resetCalc();
         }
 
+        //public void resultBtnCheck(Func<double> f)
         public void resultBtnCheck(Func<double> f)
         {
             //Проверка нажатия "=" ранее

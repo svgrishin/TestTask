@@ -116,43 +116,34 @@ namespace Calc
             saveMe();
         }
 
+       private void btn_Func_Click(int i, string funcSymbol, Func<double> f, object sender, bool isExtraFunc)
+        {
+            calc.functions[0] = i;
+            calc.functions[1] = i;
+
+            CalcFunction cf = new CalcFunction(funcSymbol, f);
+            calc.previousCalcFunc = cf;
+
+            if (isExtraFunc == true) calc.extraFunc(calc.calcFuncOf);
+            else funcClick(cf, sender);
+        }
+        
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            calc.functions[0] = 1;
-            calc.functions[1] = 1;
-            calc.previousCalcFunc = calc.summ;
-            //funcClick(calc.summ, sender);
-            funcClick(calc.summ, sender, '+');
+            btn_Func_Click(1, "+", calc.summ, sender,false);
         }
 
-        private void funcClick(Func<double> f, object sender, char c)
+        private void funcClick(CalcFunction f, object sender)
         {
-            CalcFunction cf = new CalcFunction(c, f);
-
-            //if (f != calc.calcFunc)
-            //{
-            //    calc.args[1] = calc.args[0];
-            //    if (calc.calcFunc != null) calc.index = true;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
-            //}
-
-            //if (calc.calcFunc == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
-
-
-
-            //calc.resultBtnCheck(f);
-
-            if (cf != calc.calcFuncOf)
+            if (f != calc.calcFuncOf)
             {
                 calc.args[1] = calc.args[0];
                 if (calc.calcFuncOf != null) calc.index = true;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
             }
 
-            if (calc.calcFuncOf == cf && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
+            if (calc.calcFuncOf == f && calc.arg != "")calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
-
-            calc.resultBtnCheck(cf.functionOf);
-
-
+            calc.resultBtnCheck(f.functionOf);
             calc.tryToGetArg(calc.arg);
 
             //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
@@ -162,7 +153,7 @@ namespace Calc
             //если индекс 0, то оба аргумента заполнены и нужно вычислить результат в дальнейшем
             switch (calc.index)
             {
-                case true: calc.calcFuncOf = cf;break;
+                case true: calc.calcFuncOf = f;break;
                 //есть вероятность, что подряд будут нажаты несколько функций
                 //глобальной переменной функции присваивается значение только после успешного выполнения функции
                 //всегда следует пытаться выполнить функцию, согласно глобальной переменной,
@@ -174,14 +165,14 @@ namespace Calc
                         try
                         {
                             //calc.getResult(calc.calcFunc);
-                            calc.getResult(calc.calcFuncOf.functionOf);
+                            calc.getResult(calc.calcFuncOf);
                         }
                         catch
                         {
                             try
                             {
                                 //calc.getResult(f);
-                                calc.getResult(cf.functionOf);
+                                calc.getResult(f);
                             }
                             catch
                             {
@@ -190,7 +181,8 @@ namespace Calc
                             }
                         }
                         label1.Text = calc.disp;
-                        calc.calcFunc = f;
+                        //calc.calcFunc = f;
+                        calc.calcFuncOf = f;
                     }
                     break;
             }
@@ -198,32 +190,21 @@ namespace Calc
             calc.btnType = true;
 
             saveMe();
-            
-
         }
 
         private void btn_multiply_Click(object sender, EventArgs e)
         {
-            calc.functions[0] = 3;
-            calc.functions[1] = 3;
-            calc.previousCalcFunc = calc.differens;
-            funcClick(calc.multiply, sender);
+            btn_Func_Click(3, "×", calc.multiply, sender, false);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
-            calc.functions[0] = 4;
-            calc.functions[1] = 4;
-            calc.previousCalcFunc = calc.divide;
-            funcClick(calc.divide, sender);
+            btn_Func_Click(4, "÷", calc.divide, sender, false);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            calc.functions[0] = 2;
-            calc.functions[1] = 2;
-            calc.previousCalcFunc = calc.differens;
-            funcClick(calc.differens, sender);
+            btn_Func_Click(2, "-", calc.differens, sender, false);
         }
 
         private void btn_Result_Click(object sender, EventArgs e)
@@ -247,15 +228,17 @@ namespace Calc
             //if (calc.btnType == true && calc.isResultPresent!= true)
             if (calc.btnType == true)
             {
-                calc.args[1] = calc.args[0];                
-                calc.getResult(calc.calcFunc);
+                calc.args[1] = calc.args[0];
+                //calc.getResult(calc.calcFunc);
+                calc.getResult(calc.calcFuncOf);
                 label1.Text = calc.disp;
             }
             //Если "=" нажато после цифры или уже был получен результат
             //то обрабатывать стандартным методом
             else
             {
-                funcClick(calc.calcFunc, sender);
+                //funcClick(calc.calcFunc, sender);
+                funcClick(calc.calcFuncOf,sender);
                 calc.isResultBtn = true;
             }
             calc.index = false;
@@ -263,27 +246,19 @@ namespace Calc
 
             calc.btnType = false;
 
-            //calc.previousCalcFunc = calc.calcFunc;
+            calc.previousCalcFunc = calc.calcFuncOf;
 
-            //saveMe();
+            saveMe();
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
         {
-            calc.functions[0] = 5;
-            calc.functions[1] = 5;
-            calc.extraFunc(calc.sqrtOf);
-            label1.Text = calc.displayOut(calc.disp);
-            saveMe();
+            btn_Func_Click(5, "√", calc.sqrtOf,sender, true);
         }
 
         private void btn_SQR_Click(object sender, EventArgs e)
         {
-            calc.functions[0] = 6;
-            calc.functions[1] = 6;
-            calc.extraFunc(calc.sqrOf);
-            label1.Text = calc.displayOut(calc.disp);
-            saveMe();
+            btn_Func_Click(5, "^", calc.sqrOf, sender, true);
         }
 
         private void btn_MR_Click(object sender, EventArgs e)
@@ -436,7 +411,9 @@ namespace Calc
 
         private void saveCalc()
         {
-            calc.calcFunc = null;
+            
+            
+            calc.calcFuncOf = null;
             calc.previousCalcFunc = null;
             string s = JsonConvert.SerializeObject(calc);
 
@@ -446,8 +423,7 @@ namespace Calc
 
         private void addToCalcList()
         {
-            string strCalc = string.Concat(calc.args[0],calc.calcFunc,calc.args[1],"=");
-            
+            string strCalc = string.Concat(calc.args[0],calc.calcFuncOf.funcSymbol,calc.args[1],"=");
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calc
 {
-    public class CalcFunction : Calculator
+    public class CalcFunction
     {
         public string funcSymbol;
         public Func<double> functionOf;
