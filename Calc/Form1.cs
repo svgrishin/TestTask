@@ -118,6 +118,7 @@ namespace Calc
 
        private void btn_Func_Click(int i, string funcSymbol, Func<double> f, object sender, bool isExtraFunc)
         {
+            
             calc.functions[0] = i;
             calc.functions[1] = i;
 
@@ -135,6 +136,8 @@ namespace Calc
 
         private void funcClick(CalcFunction f, object sender)
         {
+
+            
             if (f != calc.calcFuncOf)
             {
                 calc.args[1] = calc.args[0];
@@ -165,14 +168,14 @@ namespace Calc
                         try
                         {
                             //calc.getResult(calc.calcFunc);
-                            calc.getResult(calc.calcFuncOf);
+                            getResult(calc.calcFuncOf);
                         }
                         catch
                         {
                             try
                             {
                                 //calc.getResult(f);
-                                calc.getResult(f);
+                                getResult(f);
                             }
                             catch
                             {
@@ -230,7 +233,7 @@ namespace Calc
             {
                 calc.args[1] = calc.args[0];
                 //calc.getResult(calc.calcFunc);
-                calc.getResult(calc.calcFuncOf);
+                getResult(calc.calcFuncOf);
                 label1.Text = calc.disp;
             }
             //Если "=" нажато после цифры или уже был получен результат
@@ -399,7 +402,7 @@ namespace Calc
             addCalc();
             saveCalc();
             //hf.HistoryList.Items.Add(s);
-            addToCalcList();
+            //addToCalcList();
         }
 
         private void addCalc()
@@ -418,12 +421,20 @@ namespace Calc
             string s = JsonConvert.SerializeObject(calc);
 
             File.AppendAllText("c:/temp/user.json", s + "\n");
+            
             calc.getFunc(calc.functions);
         }
 
         private void addToCalcList()
         {
-            string strCalc = string.Concat(calc.args[0],calc.calcFuncOf.funcSymbol,calc.args[1],"=");
+            hf.HistoryList.Items.Add(calc.resultString);
+        }
+
+        private void getResult(CalcFunction cf)
+        {
+            calc.getResult(cf);
+            if (calc.resultString!="") addToCalcList();
+            calc.resultString = "";
         }
     }
 }

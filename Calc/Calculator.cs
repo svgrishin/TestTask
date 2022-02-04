@@ -15,6 +15,7 @@ namespace Calc
         public DateTime dateTimeOf;
         
         public double[] args;
+        public string resultString;
         public bool isResultPresent;
 
         public bool index;
@@ -164,6 +165,8 @@ namespace Calc
 
         public string inputValues(char c, Form1 f)
         {
+            //addToCalcString(c);
+
             resultBtnCheck();
 
             if (isResultPresent == true) resetCalc();
@@ -266,18 +269,26 @@ namespace Calc
 
         public void getResult(CalcFunction cf)
         {
+            addToCalcString(args[0]);
+            addToCalcString(cf.funcSymbol);
+            addToCalcString(args[1]);
+            addToCalcString("=");
             try
             {
                 args[0] = cf.functionOf();
                 previousCalcFunc = cf;
                 functions[1] = functions[0];
+                
+                //resultString = addToCalcList();
             }
             catch
             {
                 //args[0] = previousCalcFunc();
                 args[0] = previousCalcFunc.functionOf();
+                resultString = "";
             }
-
+            
+            addToCalcString(args[0]);
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
         }
@@ -301,8 +312,11 @@ namespace Calc
             //функция для одного аргумента
             //особенность в том, что может быть успешно выполнена 
             //по упрощённому алгоритму
+            addToCalcString(cf.funcSymbol);
 
             tryToGetArg(arg);
+            addToCalcString(arg);
+
             getResult(cf);
 
             disp = Convert.ToString(args[0]);
@@ -395,6 +409,33 @@ namespace Calc
                 }
                 isResultBtn = false;
             }
+        }
+
+        private string addToCalcList()
+        {
+            string s1, s2, s3, s4;
+            s1 = args[0].ToString();
+            s3 = args[1].ToString();
+            try
+            {
+                s2 = calcFuncOf.funcSymbol;
+            }
+            catch { s2 = ""; }
+
+            return string.Concat(s1, s2, s3, "=");
+        }
+
+        private void addToCalcString(string s)
+        {
+            resultString=string.Concat(resultString,s);
+        }
+        private void addToCalcString(char s)
+        {
+            resultString = resultString + s;
+        }
+        private void addToCalcString(double s)
+        {
+            resultString=string.Concat(resultString,s.ToString());
         }
 
         //public void saveMe()
