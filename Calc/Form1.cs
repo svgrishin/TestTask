@@ -138,7 +138,8 @@ namespace Calc
             if (f != calc.calcFuncOf)
             {
                 calc.args[1] = calc.args[0];
-                if (calc.calcFuncOf != null) calc.index = true;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
+                if (calc.calcFuncOf != null) calc.index = true;
+                calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
             }
 
             if (calc.calcFuncOf == f && calc.arg != "")calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции

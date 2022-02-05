@@ -9,7 +9,6 @@ namespace Calc
 {
     public class Calculator
     {
-        //Создай пустую функцию, а значения заполняй в funcClick :)
         public CalcFunction calcFuncOf, previousCalcFunc;
         
         public DateTime dateTimeOf;
@@ -321,6 +320,8 @@ namespace Calc
             {
                 //args[0] = previousCalcFunc();
                 args[0] = previousCalcFunc.functionOf();
+    
+                getFunc(functions);
                 resultString = "";
             }
             
