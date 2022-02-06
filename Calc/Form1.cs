@@ -133,8 +133,6 @@ namespace Calc
 
         private void funcClick(CalcFunction f, object sender)
         {
-
-            
             if (f != calc.calcFuncOf)
             {
                 calc.args[1] = calc.args[0];
@@ -144,6 +142,8 @@ namespace Calc
 
             if (calc.calcFuncOf == f && calc.arg != "")calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
+            
+            if (calc.isResultPresent==false)
             calc.resultBtnCheck(f.functionOf);
             calc.tryToGetArg(calc.arg);
 
@@ -402,13 +402,13 @@ namespace Calc
 
         private void saveCalc()
         {
-            calc.calcFuncOf = null;
-            calc.previousCalcFunc = null;
-            string s = JsonConvert.SerializeObject(calc);
+            Calculator c = new Calculator(calc);
+            c.calcFuncOf = null;
+            c.previousCalcFunc = null;
+            
+            string s = JsonConvert.SerializeObject(c);
 
             File.AppendAllText("c:/temp/user.json", s + "\n");
-            
-            calc.getFunc(calc.functions);
         }
 
         private void addToCalcList()

@@ -10,6 +10,7 @@ namespace Calc
     {
         public string funcSymbol;
         public Func<double> functionOf;
+        public int indexOf;
 
         public CalcFunction()
         {
@@ -20,6 +21,7 @@ namespace Calc
         {
             funcSymbol = c;
             functionOf = f;
+            //indexOf = i;
         }
 
 

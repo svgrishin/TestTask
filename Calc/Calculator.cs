@@ -73,7 +73,7 @@ namespace Calc
         public void resetFunc()
         {
             //calcFunc = null;
-            //calcFuncOf = new CalcFunction();
+            calcFuncOf = new CalcFunction();
             functions[0] = 0;
         }
 
@@ -150,20 +150,6 @@ namespace Calc
             calcFuncOf = null;
 
         }
-
-        //public void getArgs(Func<double> f)
-        //{
-        //    index = !index;
-
-        //    tryToGetArg(arg);
-
-        //    if (index == true)
-        //    {
-        //        getResult(f);
-        //    }
-        //    arg = "";
-        //    disp = Convert.ToString(args[0]);
-        //}
 
         public void getArgs(CalcFunction cf)
         {
@@ -277,24 +263,6 @@ namespace Calc
             return Math.Sqrt(args[0]);
         }
 
-        //public void getResult(Func<double> f)
-        //{
-        //    try
-        //    {
-        //        args[0] = f();
-        //        previousCalcFunc = f;
-        //        functions[1] = functions[0];
-        //    }
-        //    catch
-        //    {
-        //        //args[0] = previousCalcFunc();
-        //        args[0] = previousCalcFunc.functionOf();
-        //    }
-
-        //    isResultPresent = true;
-        //    disp = displayOut(Convert.ToString(args[0]));
-        //}
-
         public void getResult(CalcFunction cf)
         {
             try
@@ -312,7 +280,7 @@ namespace Calc
             {
                 args[0] = cf.functionOf();
                 previousCalcFunc = cf;
-                functions[1] = functions[0];
+                //functions[1] = functions[0];
                 
                 //resultString = addToCalcList();
             }
@@ -329,20 +297,6 @@ namespace Calc
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
         }
-
-        //public void extraFunc(Func<double> f)
-        //{
-        //    //функция для одного аргумента
-        //    //особенность в том, что может быть успешно выполнена 
-        //    //по упрощённому алгоритму
-
-        //    tryToGetArg(arg);
-        //    getResult(f);
-
-        //    disp = Convert.ToString(args[0]);
-        //    arg = "";
-        //    index = !index;
-        //}
 
         public void extraFunc(CalcFunction cf)
         {
