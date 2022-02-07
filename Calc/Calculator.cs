@@ -9,7 +9,8 @@ namespace Calc
 {
     public class Calculator
     {
-        public CalcFunction calcFuncOf, previousCalcFunc;
+        public CalcFunction calcFuncOf = new CalcFunction();
+        public CalcFunction previousCalcFunc = new CalcFunction();
         
         public DateTime dateTimeOf;
         
@@ -38,15 +39,15 @@ namespace Calc
         //6 - Степень
         //7 - дробь
 
-        public Calculator(Calculator c)
+        public Calculator(Calculator c, Func<double> f)
         {
-            calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,c.calcFuncOf.functionOf);
-            
-            previousCalcFunc=c.previousCalcFunc;
+            calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,f);
+            previousCalcFunc = c.previousCalcFunc;
 
             dateTimeOf=c.dateTimeOf;
 
             args = new double[c.args.Length];
+            
             args[0] = c.args[0];
             args[1] = c.args[1];
 
@@ -54,12 +55,14 @@ namespace Calc
             isResultPresent=c.isResultPresent;
 
             index=c.index;
-            arg = args[1].ToString();
+            //arg = args[1].ToString(); вернуть, если сломается
+            arg = "";
             disp=c.disp;
             minus=c.minus;
 
-            isResultBtn=c.isResultPresent;
-            btnType=false;
+            //isResultBtn=c.isResultPresent; //вернуть, если сломается
+            isResultBtn = false;
+            btnType=c.btnType;
 
             mr=c.mr;
 
@@ -128,6 +131,7 @@ namespace Calc
                     //case 7: previousCalcFunc = ???; break;
             }
         }
+
 
         public Calculator()
         {
@@ -278,10 +282,11 @@ namespace Calc
 
             try
             {
-                args[0] = cf.functionOf();
-                previousCalcFunc = cf;
-                //functions[1] = functions[0];
-                
+                args[0] = this.calcFuncOf.functionOf();
+                //args[0] = cf.functionOf();
+                //previousCalcFunc = cf;
+                previousCalcFunc = this.calcFuncOf;
+
                 //resultString = addToCalcList();
             }
             catch

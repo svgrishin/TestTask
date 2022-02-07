@@ -143,7 +143,7 @@ namespace Calc
             if (calc.calcFuncOf == f && calc.arg != "")calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
             
-            if (calc.isResultPresent==false)
+            //if (calc.isResultPresent==false)
             calc.resultBtnCheck(f.functionOf);
             calc.tryToGetArg(calc.arg);
 
@@ -388,7 +388,7 @@ namespace Calc
 
         public void loadMe(int i)
         {
-            calc = new Calculator(calcs[i]);
+            calc = new Calculator(calcs[i],calc.calcFuncOf.functionOf);
             label1.Text = calc.displayOut(calc.disp);
         }
 
@@ -396,13 +396,12 @@ namespace Calc
         {
             int i = calcs.Length;
             Array.Resize(ref calcs, i + 1);
-            calcs[i] = new Calculator(calc);
-            
+            calcs[i] = new Calculator(calc, calc.calcFuncOf.functionOf);   
         }
 
         private void saveCalc()
         {
-            Calculator c = new Calculator(calc);
+            Calculator c = new Calculator(calc, calc.calcFuncOf.functionOf);
             c.calcFuncOf = null;
             c.previousCalcFunc = null;
             
@@ -425,4 +424,3 @@ namespace Calc
         }
     }
 }
-
