@@ -7,10 +7,12 @@ using System.Linq;
 
 namespace Calc
 {
+    
+    //Изучить вложенные классы. Там ответ. Если не выйдет, то забить и вернуть как было, пусть и колхозно
     public class Calculator
     {
-        public CalcFunction calcFuncOf = new CalcFunction();
-        public CalcFunction previousCalcFunc = new CalcFunction();
+        public CalcFunction calcFuncOf;
+        public CalcFunction previousCalcFunc;
         
         public DateTime dateTimeOf;
         

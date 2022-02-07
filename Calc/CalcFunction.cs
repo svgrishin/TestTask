@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calc
 {
-    public class CalcFunction
+    public class CalcFunction:Calculator
     {
         public string funcSymbol;
         public Func<double> functionOf;
@@ -20,7 +20,7 @@ namespace Calc
         public CalcFunction(string c, Func<double> f)
         {
             funcSymbol = c;
-            functionOf = f;
+            this.functionOf = new Func<double>(f);
             //indexOf = i;
         }
 
