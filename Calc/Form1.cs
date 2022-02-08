@@ -16,8 +16,8 @@ namespace Calc
 {
     public partial class Form1 : Form
     {
-        public static Calculator calc = new Calculator();
-        public static Calculator[] calcs = new Calculator[0];
+        public  Calculator calc = new Calculator();
+        public  Calculator[] calcs = new Calculator[0];
         public HistoryForm hf;
         public Form1()
         {
@@ -79,7 +79,7 @@ namespace Calc
         private void btn_clear_Click(object sender, EventArgs e)
         {
             calc.resetCalc();
-            Array.Clear(calc.args, 0, 1);
+            Array.Clear(calc.calcFuncOf.args, 0, 1);
             calc.resetFunc();
             label1.Text = "0";
         }
@@ -119,7 +119,7 @@ namespace Calc
             calc.functions[0] = i;
             calc.functions[1] = i;
 
-            CalcFunction cf = new CalcFunction(funcSymbol, f);
+            Calculator.CalcFunction cf = new Calculator.CalcFunction(funcSymbol, f,calc);
             calc.previousCalcFunc = cf;
 
             if (isExtraFunc == true) calc.extraFunc(calc.calcFuncOf);
@@ -128,14 +128,14 @@ namespace Calc
         
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            btn_Func_Click(1, "+", calc.summ, sender,false);
+            btn_Func_Click(1, "+", calc.calcFuncOf.summ, sender,false);
         }
 
-        private void funcClick(CalcFunction f, object sender)
+        private void funcClick(Calculator.CalcFunction f, object sender)
         {
             if (f != calc.calcFuncOf)
             {
-                calc.args[1] = calc.args[0];
+                calc.calcFuncOf.args[1] = calc.calcFuncOf.args[0];
                 if (calc.calcFuncOf != null) calc.index = true;
                 calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
             }
@@ -165,17 +165,17 @@ namespace Calc
                     {
                         try
                         {
-                            getResult(calc.calcFuncOf);
+                            getResult(calc, calc.calcFuncOf);
                         }
                         catch
                         {
                             try
                             {
-                                getResult(f);
+                                getResult(calc, f);
                             }
                             catch
                             {
-                                calc.getResult(calc.previousCalcFunc);
+                                calc.getResult(calc, calc.previousCalcFunc);
                             }
                         }
                         label1.Text = calc.disp;
@@ -189,17 +189,17 @@ namespace Calc
 
         private void btn_multiply_Click(object sender, EventArgs e)
         {
-            btn_Func_Click(3, "×", calc.multiply, sender, false);
+            btn_Func_Click(3, "×", calc.calcFuncOf.multiply, sender, false);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
-            btn_Func_Click(4, "÷", calc.divide, sender, false);
+            btn_Func_Click(4, "÷", calc.calcFuncOf.divide, sender, false);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            btn_Func_Click(2, "-", calc.differens, sender, false);
+            btn_Func_Click(2, "-", calc.calcFuncOf.differens, sender, false);
         }
 
         private void btn_Result_Click(object sender, EventArgs e)
@@ -223,9 +223,9 @@ namespace Calc
             //if (calc.btnType == true && calc.isResultPresent!= true)
             if (calc.btnType == true)
             {
-                calc.args[1] = calc.args[0];
+                calc.calcFuncOf.args[1] = calc.calcFuncOf.args[0];
                 //calc.getResult(calc.calcFunc);
-                getResult(calc.calcFuncOf);
+                getResult(calc, calc.calcFuncOf);
                 label1.Text = calc.disp;
             }
             //Если "=" нажато после цифры или уже был получен результат
@@ -271,7 +271,7 @@ namespace Calc
             }
             catch
             {
-                calc.mr[indexOf] = calc.args[0];
+                calc.mr[indexOf] = calc.calcFuncOf.args[0];
                 calc.arg = Convert.ToString(calc.mr[indexOf]);
             }
 
@@ -343,14 +343,14 @@ namespace Calc
             
             calc.resultPresentCheck();
 
-            calc.args[i] = calc.mr[indexOf];
+            calc.calcFuncOf.args[i] = calc.mr[indexOf];
 
             if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
             
             calc.index = !calc.index;
             calc.btnType = false;
 
-            label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
+            label1.Text = calc.displayOut(Convert.ToString(calc.calcFuncOf.args[i]));
             calc.arg = "";
         }
 
@@ -388,7 +388,7 @@ namespace Calc
 
         public void loadMe(int i)
         {
-            calc = new Calculator(calcs[i],calc.calcFuncOf.functionOf);
+            calc = new Calculator(calcs[i],calcs[i].calcFuncOf.functionOf);
             label1.Text = calc.displayOut(calc.disp);
         }
 
@@ -415,9 +415,9 @@ namespace Calc
             hf.HistoryList.Items.Add(calc.resultString);
         }
 
-        private void getResult(CalcFunction cf)
+        private void getResult(Calculator c, Calculator.CalcFunction cf)
         {
-            calc.getResult(cf);
+            calc.getResult(c, cf);
             saveMe();
             if (calc.resultString!="") addToCalcList();
             calc.resultString = "";
