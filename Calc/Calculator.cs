@@ -11,6 +11,8 @@ namespace Calc
     //Изучить вложенные классы. Там ответ. Если не выйдет, то забить и вернуть как было, пусть и колхозно
     public class Calculator
     {
+        public string symbol;
+
         public delegate double funcDeleg(double[] a);
 
         public funcDeleg fDeleg;
@@ -87,6 +89,16 @@ namespace Calc
             {
                 return a[0]-a[1];
             }
+
+            public double sqrOf(double[] a)
+            {
+                return Math.Pow(a[0],2);
+            }
+
+            public double sqrtOf(double[] a)
+            {
+                return Math.Sqrt(a[0]);
+            }
         }
 
         public Calculator(Calculator c, Func<double> f)
@@ -101,21 +113,17 @@ namespace Calc
 
             args = new double[2];
             args[0] = c.args[0];
-            args[1] = c.args[1];
-            
-            //args[0] = c.args[0];
-            //args[1] = c.args[1];
+            args[1] = c.args[1];;
 
             resultString="";
             isResultPresent=c.isResultPresent;
 
             index=c.index;
-            //arg = args[1].ToString(); вернуть, если сломается
+
             arg = "";
             disp=c.disp;
             minus=c.minus;
 
-            //isResultBtn=c.isResultPresent; //вернуть, если сломается
             isResultBtn = false;
             btnType=false;
 
@@ -124,8 +132,6 @@ namespace Calc
             jsonString=c.jsonString;
 
             functions=c.functions;
-
-            //getFunc(c.functions);
         }
         
         public void resetFunc()
@@ -142,11 +148,11 @@ namespace Calc
         //    {
         //        case 1: calcFuncOf = new CalcFunction("+", calcFuncOf.summ(args)); break;
         //        case 2: calcFuncOf = new CalcFunction("-", calcFuncOf.differens); break;
-        //        case 3: calcFuncOf = new CalcFunction("×", calcFuncOf.multiply, this); break;
-        //        case 4: calcFuncOf = new CalcFunction("÷", calcFuncOf.divide, this); break;
-        //        //case 5: calcFuncOf = new CalcFunction("√", sqrtOf, this); break;
-        //        //case 6: calcFuncOf = new CalcFunction("^", sqrOf, this); break;
-        //            //case 7: calcFunc = ???; break;
+        //        case 3: calcFuncOf = new CalcFunction("×", calcFuncOf.multiply); break;
+        //        case 4: calcFuncOf = new CalcFunction("÷", calcFuncOf.divide); break;
+        //        case 5: calcFuncOf = new CalcFunction("√", sqrtOf); break;
+        //        case 6: calcFuncOf = new CalcFunction("^", sqrOf); break;
+        //        //case 7: calcFunc = ???; break;
         //    }
 
         //    switch (f[1])
@@ -155,11 +161,25 @@ namespace Calc
         //        case 2: previousCalcFunc = new CalcFunction("-", calcFuncOf.differens, this); break;
         //        case 3: previousCalcFunc = new CalcFunction("×", calcFuncOf.multiply, this); break;
         //        case 4: previousCalcFunc = new CalcFunction("÷", calcFuncOf.divide, this); break;
-        //        //case 5: previousCalcFunc = new CalcFunction("√", sqrtOf, this); break;
-        //        //case 6: previousCalcFunc = new CalcFunction("^", sqrOf, this); break;
-        //            //case 7: previousCalcFunc = ???; break;
+        //        case 5: previousCalcFunc = new CalcFunction("√", sqrtOf, this); break;
+        //        case 6: previousCalcFunc = new CalcFunction("^", sqrOf, this); break;
+        //        case 7: previousCalcFunc = ???; break;
         //    }
         //}
+
+        public void getDeleg(int[] f)
+        {
+            switch (f[0])
+            {
+                case 1: fDeleg = calcFuncOf.summ; break;
+                case 2: fDeleg = calcFuncOf.differens; break;
+                case 3: fDeleg = calcFuncOf.multiply; break;
+                case 4: fDeleg = calcFuncOf.divide; break;
+                case 5: fDeleg = calcFuncOf.sqrtOf; break;
+                case 6: fDeleg = calcFuncOf.sqrOf; break;
+              //case 7: calcFunc = ???; break;
+            }
+        }
 
 
         public Calculator()
@@ -208,14 +228,11 @@ namespace Calc
             isResultBtn = false;
             btnType = false;
 
-            //calcFunc = null;
             calcFuncOf = new CalcFunction(this);
         }
 
         public string inputValues(char c, Form1 f)
         {
-            //addToCalcString(c);
-
             resultBtnCheck();
 
             if (isResultPresent == true) resetCalc();
@@ -283,26 +300,20 @@ namespace Calc
             try
             {
                 addToCalcString(args[0]);
-                addToCalcString(calcFuncOf.funcSymbol);
+                addToCalcString(symbol);
                 addToCalcString(args[1]);
                 addToCalcString("=");
-
-
             }
             catch { }
 
             try
             {
-                //c.args[0] = c.calcFuncOf.functionOf();
                 args[0] = cf(args);
                 previousCalcFunc = this.calcFuncOf;
             }
             catch
             {
-                //c.args[0] = previousCalcFunc.functionOf();
                 args[0] = fDeleg(args);
-    
-                //getFunc(functions);
                 resultString = "";
             }
             
@@ -311,21 +322,25 @@ namespace Calc
             disp = displayOut(Convert.ToString(args[0]));
         }
 
-        public void extraFunc(CalcFunction cf)
+        public string extraFunc(funcDeleg cf)
         {
             //функция для одного аргумента
             //особенность в том, что может быть успешно выполнена 
             //по упрощённому алгоритму
-            addToCalcString(cf.funcSymbol);
 
             tryToGetArg(arg);
+            args[1] = 2;
+            
             addToCalcString(arg);
+            addToCalcString(symbol);
+            
+            getResult(cf);
 
-            getResult(fDeleg);
-
-            disp = Convert.ToString(args[0]);
+            //disp = Convert.ToString(args[0]);
             arg = "";
             index = !index;
+
+            return disp;
         }
 
         public void tryToGetArg(string s)
@@ -379,7 +394,6 @@ namespace Calc
                 index = true;
                 isResultBtn = false;
             }
-            //index = true;
         }
 
         public void resultBtnCheckReset()

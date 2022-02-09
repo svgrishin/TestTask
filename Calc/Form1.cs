@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-//using Newtonsoft.Json.Serialization;
 using System.IO;
 
 
@@ -113,23 +112,22 @@ namespace Calc
             label1.Text = calc.inputValues(',', this);
         }
 
-        //private void btn_Func_Click(int i, string funcSymbol, Func<double> f, object sender, bool isExtraFunc)
-        private void btn_Func_Click(int i, string funcSymbol, Calculator.funcDeleg f, object sender, bool isExtraFunc)
+        private void btn_Func_Click(int i, Calculator.funcDeleg f, object sender, bool isExtraFunc)
         {
             calc.functions[0] = i;
             calc.functions[1] = i;
 
-            //Calculator.CalcFunction cf = new Calculator.CalcFunction(funcSymbol, f, calc);
             calc.previousCalcFunc = calc.calcFuncOf;
 
-            if (isExtraFunc == true) calc.extraFunc(calc.calcFuncOf);
+            if (isExtraFunc == true) label1.Text = calc.extraFunc(f);
             else funcClick(f, sender);
         }
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
+            calc.symbol = "+";
             calc.fDeleg = calc.calcFuncOf.summ;
-            btn_Func_Click(1, "+", calc.fDeleg, sender, false);
+            btn_Func_Click(1, calc.fDeleg, sender, false);
         }
 
         private void resetResultGetting()
@@ -141,11 +139,17 @@ namespace Calc
         private void funcClick(Calculator.funcDeleg f, object sender)
         {
             //когда ввод первого аргумента, потом ввод функции, а потом замена функций
-            if (f != calc.fDeleg) resetResultGetting();
+            if (calc.btnType != false)
+            {
+                if (f != calc.fDeleg)
+                    resetResultGetting();
 
-            if (calc.fDeleg == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
+                if (calc.fDeleg == f && calc.arg != "")
+                    calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
-            if (calc.btnType == false && calc.index == true && f==calc.fDeleg) resetResultGetting();
+                if (calc.btnType == false && calc.index == true && f == calc.fDeleg)
+                    resetResultGetting();
+            }
 
             calc.resultBtnCheck(f);
             calc.tryToGetArg(calc.arg);
@@ -190,75 +194,25 @@ namespace Calc
             calc.btnType = true;
         }
 
-        //private void funcClick(Calculator.funcDeleg f, object sender)
-        //{
-        //    if (f != calc.calcFuncOf)
-        //    {
-        //        calc.args[1] = calc.args[0];
-        //        if (calc.calcFuncOf != null) calc.index = true;
-        //        calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
-        //    }
-
-        //    if (calc.calcFuncOf == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
-
-
-        //    //if (calc.isResultPresent==false)
-        //    calc.resultBtnCheck(f.functionOf);
-        //    calc.tryToGetArg(calc.arg);
-
-        //    //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
-        //    //в конце заполнения аргумента индекс переключается на противоположный
-        //    //соответсвенно,
-        //    //если индекс 1, то 1-й аргумент пустой, нужно запомнить функцию и заполнить 1-й аргумент в дальнейшем
-        //    //если индекс 0, то оба аргумента заполнены и нужно вычислить результат в дальнейшем
-        //    switch (calc.index)
-        //    {
-        //        case true: calc.calcFuncOf = f; break;
-        //        //есть вероятность, что подряд будут нажаты несколько функций
-        //        //глобальной переменной функции присваивается значение только после успешного выполнения функции
-        //        //всегда следует пытаться выполнить функцию, согласно глобальной переменной,
-        //        //так как обращение к процедуре может быть из кнопки "="
-        //        //если функция изменилась, то глобальная переменная сбрасывается
-        //        //и ожидается успешное выполнение новой функции
-        //        case false:
-        //            {
-        //                try
-        //                {
-        //                    getResult(calc, calc.calcFuncOf);
-        //                }
-        //                catch
-        //                {
-        //                    try
-        //                    {
-        //                        getResult(calc, f);
-        //                    }
-        //                    catch
-        //                    {
-        //                        calc.getResult(calc, calc.previousCalcFunc);
-        //                    }
-        //                }
-        //                label1.Text = calc.disp;
-        //                calc.calcFuncOf = f;
-        //            }
-        //            break;
-        //    }
-        //    calc.arg = "";
-        //    calc.btnType = true;
-        //}
-
         private void btn_multiply_Click(object sender, EventArgs e)
         {
-            btn_Func_Click(3, "×", calc.calcFuncOf.multiply, sender, false);
+            calc.symbol = "×";
+            calc.fDeleg = calc.calcFuncOf.multiply;
+            btn_Func_Click(3, calc.fDeleg, sender, false);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
-            btn_Func_Click(4, "÷", calc.calcFuncOf.divide, sender, false);
+            calc.symbol = "÷";
+            calc.fDeleg = calc.calcFuncOf.divide;
+            btn_Func_Click(4, calc.fDeleg, sender, false);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            btn_Func_Click(2, "-", calc.calcFuncOf.differens, sender, false);
+            calc.symbol = "-";
+            calc.fDeleg = calc.calcFuncOf.differens;
+            btn_Func_Click(2, calc.fDeleg, sender, false);
         }
 
         private void btn_Result_Click(object sender, EventArgs e)
@@ -279,11 +233,9 @@ namespace Calc
             //получить аргументы принудительно,
             //а затем принудительно вычислить результат
 
-            //if (calc.btnType == true && calc.isResultPresent!= true)
             if (calc.btnType == true)
             {
                 calc.args[1] = calc.args[0];
-                //calc.getResult(calc.calcFunc);
                 getResult(calc, calc.fDeleg);
                 label1.Text = calc.disp;
             }
@@ -302,15 +254,20 @@ namespace Calc
             calc.previousCalcFunc = calc.calcFuncOf;
         }
 
-        //private void btn_SQRT_Click(object sender, EventArgs e)
-        //{
-        //    btn_Func_Click(5, "√", calc.sqrtOf, sender, true);
-        //}
+        private void btn_SQRT_Click(object sender, EventArgs e)
+        {
+            calc.symbol = "√";
+            calc.fDeleg = calc.calcFuncOf.sqrtOf;
+            btn_Func_Click(5, calc.fDeleg, sender, true);
+        }
 
-        //private void btn_SQR_Click(object sender, EventArgs e)
-        //{
-        //    btn_Func_Click(5, "^", calc.sqrOf, sender, true);
-        //}
+        private void btn_SQR_Click(object sender, EventArgs e)
+        {
+            calc.symbol = "^";
+            calc.fDeleg = calc.calcFuncOf.sqrOf;
+            btn_Func_Click(6, calc.fDeleg, sender, true);
+            //label1.Text = calc.disp;
+        }
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
