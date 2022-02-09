@@ -132,19 +132,21 @@ namespace Calc
             btn_Func_Click(1, "+", calc.fDeleg, sender, false);
         }
 
+        private void resetResultGetting()
+        {
+            calc.index = false;
+            calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
+        }
+        
         private void funcClick(Calculator.funcDeleg f, object sender)
         {
-            if (f != calc.fDeleg)
-            {
-                calc.args[1] = calc.args[0];
-                if (calc.calcFuncOf != null) calc.index = true;
-                calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
-            }
+            //когда ввод первого аргумента, потом ввод функции, а потом замена функций
+            if (f != calc.fDeleg) resetResultGetting();
 
             if (calc.fDeleg == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
+            if (calc.btnType == false && calc.index == true && f==calc.fDeleg) resetResultGetting();
 
-            //if (calc.isResultPresent==false)
             calc.resultBtnCheck(f);
             calc.tryToGetArg(calc.arg);
 
