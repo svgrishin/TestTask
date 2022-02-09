@@ -457,7 +457,7 @@
             this.btn_SQR.TabIndex = 22;
             this.btn_SQR.Text = "x^2";
             this.btn_SQR.UseVisualStyleBackColor = true;
-            this.btn_SQR.Click += new System.EventHandler(this.btn_SQR_Click);
+            //this.btn_SQR.Click += new System.EventHandler(this.btn_SQR_Click);
             // 
             // btn_SQRT
             // 
@@ -468,7 +468,7 @@
             this.btn_SQRT.TabIndex = 23;
             this.btn_SQRT.Text = "√";
             this.btn_SQRT.UseVisualStyleBackColor = true;
-            this.btn_SQRT.Click += new System.EventHandler(this.btn_SQRT_Click);
+            //this.btn_SQRT.Click += new System.EventHandler(this.btn_SQRT_Click);
             // 
             // btn_clear
             // 

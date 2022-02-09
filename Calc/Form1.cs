@@ -16,8 +16,8 @@ namespace Calc
 {
     public partial class Form1 : Form
     {
-        public  Calculator calc = new Calculator();
-        public  Calculator[] calcs = new Calculator[0];
+        public Calculator calc = new Calculator();
+        public Calculator[] calcs = new Calculator[0];
         public HistoryForm hf;
         public Form1()
         {
@@ -47,39 +47,39 @@ namespace Calc
 
         private void btn_5_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('5',this);
+            label1.Text = calc.inputValues('5', this);
         }
 
         private void btn_6_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('6',this);
+            label1.Text = calc.inputValues('6', this);
         }
 
         private void btn_7_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('7',this);
+            label1.Text = calc.inputValues('7', this);
         }
 
         private void btn_8_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('8',this);
+            label1.Text = calc.inputValues('8', this);
         }
 
         private void btn_9_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('9',this);
+            label1.Text = calc.inputValues('9', this);
         }
 
         private void btn_Zero_Click(object sender, EventArgs e)
         {
             if (calc.arg == "") typeZeroComa();
-            else label1.Text = calc.inputValues('0',this);
+            else label1.Text = calc.inputValues('0', this);
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
             calc.resetCalc();
-            Array.Clear(calc.calcFuncOf.args, 0, 1);
+            Array.Clear(calc.args, 0, 1);
             calc.resetFunc();
             label1.Text = "0";
         }
@@ -92,7 +92,7 @@ namespace Calc
         private void btn_Negative_Click(object sender, EventArgs e)
         {
             calc.minus = !calc.minus;
-            label1.Text = calc.inputValues('-',this);
+            label1.Text = calc.inputValues('-', this);
         }
 
         private void btn_Coma_Click(object sender, EventArgs e)
@@ -103,48 +103,49 @@ namespace Calc
                 {
                     typeZeroComa();
                 }
-                else label1.Text = calc.inputValues(',',this); 
+                else label1.Text = calc.inputValues(',', this);
             }
         }
 
         public void typeZeroComa()
         {
-            label1.Text = calc.inputValues('0',this);
-            label1.Text = calc.inputValues(',',this);
+            label1.Text = calc.inputValues('0', this);
+            label1.Text = calc.inputValues(',', this);
         }
 
-       private void btn_Func_Click(int i, string funcSymbol, Func<double> f, object sender, bool isExtraFunc)
+        //private void btn_Func_Click(int i, string funcSymbol, Func<double> f, object sender, bool isExtraFunc)
+        private void btn_Func_Click(int i, string funcSymbol, Calculator.funcDeleg f, object sender, bool isExtraFunc)
         {
-            
             calc.functions[0] = i;
             calc.functions[1] = i;
 
-            Calculator.CalcFunction cf = new Calculator.CalcFunction(funcSymbol, f,calc);
-            calc.previousCalcFunc = cf;
+            //Calculator.CalcFunction cf = new Calculator.CalcFunction(funcSymbol, f, calc);
+            calc.previousCalcFunc = calc.calcFuncOf;
 
             if (isExtraFunc == true) calc.extraFunc(calc.calcFuncOf);
-            else funcClick(cf, sender);
-        }
-        
-        private void btn_plus_Click(object sender, EventArgs e)
-        {
-            btn_Func_Click(1, "+", calc.calcFuncOf.summ, sender,false);
+            else funcClick(f, sender);
         }
 
-        private void funcClick(Calculator.CalcFunction f, object sender)
+        private void btn_plus_Click(object sender, EventArgs e)
         {
-            if (f != calc.calcFuncOf)
+            calc.fDeleg = calc.calcFuncOf.summ;
+            btn_Func_Click(1, "+", calc.fDeleg, sender, false);
+        }
+
+        private void funcClick(Calculator.funcDeleg f, object sender)
+        {
+            if (f != calc.fDeleg)
             {
-                calc.calcFuncOf.args[1] = calc.calcFuncOf.args[0];
+                calc.args[1] = calc.args[0];
                 if (calc.calcFuncOf != null) calc.index = true;
                 calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
             }
 
-            if (calc.calcFuncOf == f && calc.arg != "")calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
+            if (calc.fDeleg == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
-            
+
             //if (calc.isResultPresent==false)
-            calc.resultBtnCheck(f.functionOf);
+            calc.resultBtnCheck(f);
             calc.tryToGetArg(calc.arg);
 
             //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
@@ -154,7 +155,7 @@ namespace Calc
             //если индекс 0, то оба аргумента заполнены и нужно вычислить результат в дальнейшем
             switch (calc.index)
             {
-                case true: calc.calcFuncOf = f;break;
+                case true: calc.fDeleg = f; break;
                 //есть вероятность, что подряд будут нажаты несколько функций
                 //глобальной переменной функции присваивается значение только после успешного выполнения функции
                 //всегда следует пытаться выполнить функцию, согласно глобальной переменной,
@@ -165,7 +166,7 @@ namespace Calc
                     {
                         try
                         {
-                            getResult(calc, calc.calcFuncOf);
+                            getResult(calc, calc.fDeleg);
                         }
                         catch
                         {
@@ -175,17 +176,73 @@ namespace Calc
                             }
                             catch
                             {
-                                calc.getResult(calc, calc.previousCalcFunc);
+                                calc.getResult(calc.fDeleg);
                             }
                         }
                         label1.Text = calc.disp;
-                        calc.calcFuncOf = f;
+                        calc.fDeleg = f;
                     }
                     break;
             }
             calc.arg = "";
             calc.btnType = true;
         }
+
+        //private void funcClick(Calculator.funcDeleg f, object sender)
+        //{
+        //    if (f != calc.calcFuncOf)
+        //    {
+        //        calc.args[1] = calc.args[0];
+        //        if (calc.calcFuncOf != null) calc.index = true;
+        //        calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
+        //    }
+
+        //    if (calc.calcFuncOf == f && calc.arg != "") calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
+
+
+        //    //if (calc.isResultPresent==false)
+        //    calc.resultBtnCheck(f.functionOf);
+        //    calc.tryToGetArg(calc.arg);
+
+        //    //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
+        //    //в конце заполнения аргумента индекс переключается на противоположный
+        //    //соответсвенно,
+        //    //если индекс 1, то 1-й аргумент пустой, нужно запомнить функцию и заполнить 1-й аргумент в дальнейшем
+        //    //если индекс 0, то оба аргумента заполнены и нужно вычислить результат в дальнейшем
+        //    switch (calc.index)
+        //    {
+        //        case true: calc.calcFuncOf = f; break;
+        //        //есть вероятность, что подряд будут нажаты несколько функций
+        //        //глобальной переменной функции присваивается значение только после успешного выполнения функции
+        //        //всегда следует пытаться выполнить функцию, согласно глобальной переменной,
+        //        //так как обращение к процедуре может быть из кнопки "="
+        //        //если функция изменилась, то глобальная переменная сбрасывается
+        //        //и ожидается успешное выполнение новой функции
+        //        case false:
+        //            {
+        //                try
+        //                {
+        //                    getResult(calc, calc.calcFuncOf);
+        //                }
+        //                catch
+        //                {
+        //                    try
+        //                    {
+        //                        getResult(calc, f);
+        //                    }
+        //                    catch
+        //                    {
+        //                        calc.getResult(calc, calc.previousCalcFunc);
+        //                    }
+        //                }
+        //                label1.Text = calc.disp;
+        //                calc.calcFuncOf = f;
+        //            }
+        //            break;
+        //    }
+        //    calc.arg = "";
+        //    calc.btnType = true;
+        //}
 
         private void btn_multiply_Click(object sender, EventArgs e)
         {
@@ -214,25 +271,25 @@ namespace Calc
             //стандартным способом. Аргумент получается в обход стандартного метода
 
             calc.isResultBtn = false;
-            
+
             //Если "=" нажато после кнопки функции и ранее не был получен результат то необходимо
             //пройти в обход стандартного метода,
             //получить аргументы принудительно,
             //а затем принудительно вычислить результат
-            
+
             //if (calc.btnType == true && calc.isResultPresent!= true)
             if (calc.btnType == true)
             {
-                calc.calcFuncOf.args[1] = calc.calcFuncOf.args[0];
+                calc.args[1] = calc.args[0];
                 //calc.getResult(calc.calcFunc);
-                getResult(calc, calc.calcFuncOf);
+                getResult(calc, calc.fDeleg);
                 label1.Text = calc.disp;
             }
             //Если "=" нажато после цифры или уже был получен результат
             //то обрабатывать стандартным методом
             else
             {
-                funcClick(calc.calcFuncOf,sender);
+                funcClick(calc.fDeleg, sender);
                 calc.isResultBtn = true;
             }
             calc.index = false;
@@ -243,15 +300,15 @@ namespace Calc
             calc.previousCalcFunc = calc.calcFuncOf;
         }
 
-        private void btn_SQRT_Click(object sender, EventArgs e)
-        {
-            btn_Func_Click(5, "√", calc.sqrtOf,sender, true);
-        }
+        //private void btn_SQRT_Click(object sender, EventArgs e)
+        //{
+        //    btn_Func_Click(5, "√", calc.sqrtOf, sender, true);
+        //}
 
-        private void btn_SQR_Click(object sender, EventArgs e)
-        {
-            btn_Func_Click(5, "^", calc.sqrOf, sender, true);
-        }
+        //private void btn_SQR_Click(object sender, EventArgs e)
+        //{
+        //    btn_Func_Click(5, "^", calc.sqrOf, sender, true);
+        //}
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
@@ -267,11 +324,11 @@ namespace Calc
         {
             try
             {
-                calc.mr[indexOf] += Convert.ToDouble(calc.arg)*negative;
+                calc.mr[indexOf] += Convert.ToDouble(calc.arg) * negative;
             }
             catch
             {
-                calc.mr[indexOf] = calc.calcFuncOf.args[0];
+                calc.mr[indexOf] = calc.args[0];
                 calc.arg = Convert.ToString(calc.mr[indexOf]);
             }
 
@@ -292,19 +349,19 @@ namespace Calc
 
         private void btn_MMinus_Click(object sender, EventArgs e)
         {
-            setMR(calc.mr.Length - 1,-1);
+            setMR(calc.mr.Length - 1, -1);
         }
 
         private void btn_MS_Click(object sender, EventArgs e)
         {
-            int l = calc.mr.Length-1;
-            
+            int l = calc.mr.Length - 1;
+
             if (calc.mr.Length > 0)
             {
                 Array.Resize(ref calc.mr, l + 2);
                 l++;
             }
-            setMR(l,1);
+            setMR(l, 1);
         }
 
         private void btn_MList_Click(object sender, EventArgs e)
@@ -317,7 +374,7 @@ namespace Calc
         {
             try
             {
-                this.listBox_MR.Items[calc.mr.Length-1] = calc.mr[indexOf];
+                this.listBox_MR.Items[calc.mr.Length - 1] = calc.mr[indexOf];
             }
             catch
             {
@@ -338,31 +395,34 @@ namespace Calc
             //  2.  Ожидание ввода первого аргумента (характерно для случаев
             //      вызова памяти после "=")
             //при случае 2 нужно подготовить калькулятор к заполнению с первого аргумента
-            
+
             short i = Convert.ToInt16(calc.index);
-            
+
             calc.resultPresentCheck();
 
-            calc.calcFuncOf.args[i] = calc.mr[indexOf];
+            calc.args[i] = calc.mr[indexOf];
 
             if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
-            
+
             calc.index = !calc.index;
             calc.btnType = false;
 
-            label1.Text = calc.displayOut(Convert.ToString(calc.calcFuncOf.args[i]));
+            label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
             calc.arg = "";
         }
 
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
         {
-            getFromMR(listBox_MR.SelectedIndex+1);
+            getFromMR(listBox_MR.SelectedIndex + 1);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Calculator.funcDeleg fd;
+            fd = calc.calcFuncOf.summ;
+            //double a = fd(1, 2);
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -415,9 +475,9 @@ namespace Calc
             hf.HistoryList.Items.Add(calc.resultString);
         }
 
-        private void getResult(Calculator c, Calculator.CalcFunction cf)
+        private void getResult(Calculator c, Calculator.funcDeleg cf)
         {
-            calc.getResult(c, cf);
+            calc.getResult(cf);
             saveMe();
             if (calc.resultString!="") addToCalcList();
             calc.resultString = "";

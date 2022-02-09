@@ -11,12 +11,18 @@ namespace Calc
     //Изучить вложенные классы. Там ответ. Если не выйдет, то забить и вернуть как было, пусть и колхозно
     public class Calculator
     {
+        public delegate double funcDeleg(double[] a);
+
+        public funcDeleg fDeleg;
+        //public funcDeleg previousCalcFunc;
+
+        public double[] args = new double[2];
+
         public CalcFunction calcFuncOf;
         public CalcFunction previousCalcFunc;
-        
+
         public DateTime dateTimeOf;
-        
-        //public double[] args;
+
         public string resultString;
         public bool isResultPresent;
 
@@ -43,7 +49,7 @@ namespace Calc
 
         public class CalcFunction
         {
-            public double[] args = new double[2];
+            
 
             public string funcSymbol;
             public Func<double> functionOf;
@@ -56,43 +62,46 @@ namespace Calc
                 c=calcArg;
             }
 
-            public CalcFunction(string s, Func<double> f, Calculator calcArg)
+            public CalcFunction(string s, Func<double> f)
             {
                 funcSymbol = s;
-                functionOf = new Func<double>(f);
-                c = calcArg;
+                functionOf = f;
             }
 
-            public double summ()
+            public double summ(double[] a)
             {
-                return c.calcFuncOf.args[0] + c.calcFuncOf.args[1];
+                return a[0]+a[1];
             }
 
-            public double multiply()
+            public double multiply(double[] a)
             {
-                return c.calcFuncOf.args[0] * c.calcFuncOf.args[1];
+                return a[0]*a[1];
             }
 
-            public double divide()
+            public double divide(double[] a)
             {
-                return c.calcFuncOf.args[0] / c.calcFuncOf.args[1];
+                return a[0]/a[1];
             }
 
-            public double differens()
+            public double differens(double[] a)
             {
-                return c.calcFuncOf.args[0] - c.calcFuncOf.args[1];
+                return a[0]-a[1];
             }
         }
 
         public Calculator(Calculator c, Func<double> f)
         {
-            //calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,f);
-            calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,c.calcFuncOf.functionOf,this);
-            previousCalcFunc = calcFuncOf;
+            fDeleg = c.fDeleg;
 
-            dateTimeOf=c.dateTimeOf;
+            calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,f);
+            //calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,c.fDeleg,this);
+            previousCalcFunc = new CalcFunction(c.calcFuncOf.funcSymbol, f);
 
-            c.calcFuncOf.args = new double[c.calcFuncOf.args.Length];
+            dateTimeOf =c.dateTimeOf;
+
+            args = new double[2];
+            args[0] = c.args[0];
+            args[1] = c.args[1];
             
             //args[0] = c.args[0];
             //args[1] = c.args[1];
@@ -116,7 +125,7 @@ namespace Calc
 
             functions=c.functions;
 
-            getFunc(c.functions);
+            //getFunc(c.functions);
         }
         
         public void resetFunc()
@@ -127,61 +136,34 @@ namespace Calc
         }
 
 
-
         //public void getFunc(int[] f)
         //{
         //    switch (f[0])
         //    {
-        //        case 1: calcFunc = summ; break;
-        //        case 2: calcFunc = differens; break;
-        //        case 3: calcFunc = multiply; break;
-        //        case 4: calcFunc = divide; break;
-        //        case 5: calcFunc = sqrtOf; break;
-        //        case 6: calcFunc = sqrOf; break;
+        //        case 1: calcFuncOf = new CalcFunction("+", calcFuncOf.summ(args)); break;
+        //        case 2: calcFuncOf = new CalcFunction("-", calcFuncOf.differens); break;
+        //        case 3: calcFuncOf = new CalcFunction("×", calcFuncOf.multiply, this); break;
+        //        case 4: calcFuncOf = new CalcFunction("÷", calcFuncOf.divide, this); break;
+        //        //case 5: calcFuncOf = new CalcFunction("√", sqrtOf, this); break;
+        //        //case 6: calcFuncOf = new CalcFunction("^", sqrOf, this); break;
         //            //case 7: calcFunc = ???; break;
         //    }
 
         //    switch (f[1])
         //    {
-        //        case 1: previousCalcFunc = summ; break;
-        //        case 2: previousCalcFunc = differens; break;
-        //        case 3: previousCalcFunc = multiply; break;
-        //        case 4: previousCalcFunc = divide; break;
-        //        case 5: previousCalcFunc = sqrtOf; break;
-        //        case 6: previousCalcFunc = sqrOf; break;
+        //        case 1: previousCalcFunc = new CalcFunction("+", calcFuncOf.summ, this); break;
+        //        case 2: previousCalcFunc = new CalcFunction("-", calcFuncOf.differens, this); break;
+        //        case 3: previousCalcFunc = new CalcFunction("×", calcFuncOf.multiply, this); break;
+        //        case 4: previousCalcFunc = new CalcFunction("÷", calcFuncOf.divide, this); break;
+        //        //case 5: previousCalcFunc = new CalcFunction("√", sqrtOf, this); break;
+        //        //case 6: previousCalcFunc = new CalcFunction("^", sqrOf, this); break;
         //            //case 7: previousCalcFunc = ???; break;
         //    }
         //}
 
-        public void getFunc(int[] f)
-        {
-            switch (f[0])
-            {
-                case 1: calcFuncOf = new CalcFunction("+", calcFuncOf.summ, this); break;
-                case 2: calcFuncOf = new CalcFunction("-", calcFuncOf.differens, this); break;
-                case 3: calcFuncOf = new CalcFunction("×", calcFuncOf.multiply, this); break;
-                case 4: calcFuncOf = new CalcFunction("÷", calcFuncOf.divide, this); break;
-                case 5: calcFuncOf = new CalcFunction("√", sqrtOf, this); break;
-                case 6: calcFuncOf = new CalcFunction("^", sqrOf, this); break;
-                    //case 7: calcFunc = ???; break;
-            }
-
-            switch (f[1])
-            {
-                case 1: previousCalcFunc = new CalcFunction("+", calcFuncOf.summ, this); break;
-                case 2: previousCalcFunc = new CalcFunction("-", calcFuncOf.differens, this); break;
-                case 3: previousCalcFunc = new CalcFunction("×", calcFuncOf.multiply, this); break;
-                case 4: previousCalcFunc = new CalcFunction("÷", calcFuncOf.divide, this); break;
-                case 5: previousCalcFunc = new CalcFunction("√", sqrtOf, this); break;
-                case 6: previousCalcFunc = new CalcFunction("^", sqrOf, this); break;
-                    //case 7: previousCalcFunc = ???; break;
-            }
-        }
-
 
         public Calculator()
         {
-            
             isResultPresent = false;
 
             index=false;
@@ -198,7 +180,7 @@ namespace Calc
             functions = new int[2];
 
             calcFuncOf = new CalcFunction(this);
-            calcFuncOf.args = new double[2];
+            args = new double[2];
 
         }
 
@@ -210,10 +192,10 @@ namespace Calc
 
             if (index == true)
             {
-                getResult(this, this.calcFuncOf);
+                getResult(fDeleg);
             }
             arg = "";
-            disp = Convert.ToString(calcFuncOf.args[0]);
+            disp = Convert.ToString(args[0]);
         }
 
         public void resetCalc()
@@ -288,21 +270,21 @@ namespace Calc
 
         public double sqrOf()
         {
-            return Math.Pow(calcFuncOf.args[0], 2);
+            return Math.Pow(args[0], 2);
         }
 
         public double sqrtOf()
         {
-            return Math.Sqrt(calcFuncOf.args[0]);
+            return Math.Sqrt(args[0]);
         }
 
-        public void getResult(Calculator c, CalcFunction cf)
+        public void getResult(funcDeleg cf)
         {
             try
             {
-                addToCalcString(c.calcFuncOf.args[0]);
-                addToCalcString(c.calcFuncOf.funcSymbol);
-                addToCalcString(c.calcFuncOf.args[1]);
+                addToCalcString(args[0]);
+                addToCalcString(calcFuncOf.funcSymbol);
+                addToCalcString(args[1]);
                 addToCalcString("=");
 
 
@@ -311,26 +293,22 @@ namespace Calc
 
             try
             {
-                //c.calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol, c.calcFuncOf.functionOf, this);
-                c.calcFuncOf.args[0] = c.calcFuncOf.functionOf();
-                //args[0] = cf.functionOf();
-                //previousCalcFunc = cf;
-                c.previousCalcFunc = this.calcFuncOf;
-
-                //resultString = addToCalcList();
+                //c.args[0] = c.calcFuncOf.functionOf();
+                args[0] = cf(args);
+                previousCalcFunc = this.calcFuncOf;
             }
             catch
             {
-                //args[0] = previousCalcFunc();
-                c.calcFuncOf.args[0] = previousCalcFunc.functionOf();
+                //c.args[0] = previousCalcFunc.functionOf();
+                args[0] = fDeleg(args);
     
-                getFunc(functions);
+                //getFunc(functions);
                 resultString = "";
             }
             
-            addToCalcString(c.calcFuncOf.args[0]);
+            addToCalcString(args[0]);
             isResultPresent = true;
-            disp = displayOut(Convert.ToString(c.calcFuncOf.args[0]));
+            disp = displayOut(Convert.ToString(args[0]));
         }
 
         public void extraFunc(CalcFunction cf)
@@ -343,9 +321,9 @@ namespace Calc
             tryToGetArg(arg);
             addToCalcString(arg);
 
-            getResult(this, this.calcFuncOf);
+            getResult(fDeleg);
 
-            disp = Convert.ToString(calcFuncOf.args[0]);
+            disp = Convert.ToString(args[0]);
             arg = "";
             index = !index;
         }
@@ -354,7 +332,7 @@ namespace Calc
         {
             try
             {
-                calcFuncOf.args[Convert.ToByte(index)] = Convert.ToDouble(s);
+                args[Convert.ToByte(index)] = Convert.ToDouble(s);
             }
             catch
             {
@@ -370,7 +348,7 @@ namespace Calc
         }
 
         //public void resultBtnCheck(Func<double> f)
-        public void resultBtnCheck(Func<double> f)
+        public void resultBtnCheck(Calculator.funcDeleg f)
         {
             //Проверка нажатия "=" ранее
             //необходимо для предотвращения автоматического вычисления результата
@@ -391,7 +369,7 @@ namespace Calc
                     case true:
                         {
                             resultBtnCheckReset();
-                            arg = Convert.ToString(calcFuncOf.args[0]);
+                            arg = Convert.ToString(args[0]);
 
                             
 
@@ -440,8 +418,8 @@ namespace Calc
         private string addToCalcList()
         {
             string s1, s2, s3, s4;
-            s1 = calcFuncOf.args[0].ToString();
-            s3 = calcFuncOf.args[1].ToString();
+            s1 = args[0].ToString();
+            s3 = args[1].ToString();
             try
             {
                 s2 = calcFuncOf.funcSymbol;
