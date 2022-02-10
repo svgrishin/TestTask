@@ -16,7 +16,7 @@ namespace Calc
         public HistoryForm(Form1 f)
         {
             InitializeComponent();
-            calcForm = f; 
+            calcForm = f;
         }
 
         private void HistoryList_DoubleClick(object sender, EventArgs e)
@@ -27,6 +27,7 @@ namespace Calc
         private void HistoryForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Visible = false;
+            calcForm.Enabled = true;
             e.Cancel = true;
         }
     }

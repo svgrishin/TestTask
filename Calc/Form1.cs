@@ -18,10 +18,12 @@ namespace Calc
         public Calculator calc = new Calculator();
         public Calculator[] calcs = new Calculator[0];
         public HistoryForm hf;
+        public MRForm mf;
         public Form1()
         {
             InitializeComponent();
             hf = new HistoryForm(this);
+            mf = new MRForm(this);
         }
 
         private void btn_1_Click(object sender, EventArgs e)
@@ -270,7 +272,7 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
-            getFromMR(calc.mr.Length - 1);
+            getFromMR(calc.mr.Length-1);
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
@@ -300,8 +302,8 @@ namespace Calc
         {
             calc.mr = new double[1];
             btn_MList.Enabled = false;
-            listBox_MR.Visible = false;
-            listBox_MR.Items.Clear();
+            //listBox_MR.Visible = false;
+            mf.listBox_MR.Items.Clear();
             switchMRButtons();
         }
 
@@ -324,7 +326,10 @@ namespace Calc
 
         private void btn_MList_Click(object sender, EventArgs e)
         {
-            listBox_MR.Visible = !listBox_MR.Visible;
+            mf.Left = Left + (Width - hf.Width) / 2;
+            mf.Top = Top + (Height - hf.Height) / 2;
+            mf.Show();
+            Enabled = false;
             switchMRButtons();
         }
 
@@ -332,11 +337,11 @@ namespace Calc
         {
             try
             {
-                this.listBox_MR.Items[calc.mr.Length - 1] = calc.mr[indexOf];
+                mf.listBox_MR.Items[calc.mr.Length - 1] = calc.mr[indexOf];
             }
             catch
             {
-                this.listBox_MR.Items.Add(calc.mr[indexOf]);
+                mf.listBox_MR.Items.Add(calc.mr[indexOf]);
             }
         }
 
@@ -358,6 +363,7 @@ namespace Calc
 
             calc.resultPresentCheck();
 
+            //calc.args[i] = calc.mr[indexOf];
             calc.args[i] = calc.mr[indexOf];
 
             if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
@@ -371,7 +377,7 @@ namespace Calc
 
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
         {
-            getFromMR(listBox_MR.SelectedIndex + 1);
+            getFromMR(mf.listBox_MR.SelectedIndex + 1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -392,6 +398,9 @@ namespace Calc
 
         private void btn_Percent_Click(object sender, EventArgs e)
         {
+            hf.Left = Left + (Width-hf.Width) / 2;
+            hf.Top = Top + (Height-hf.Height) / 2;
+            Enabled = false;
             hf.Show();
         }
 
@@ -428,6 +437,7 @@ namespace Calc
         private void addToCalcList()
         {
             hf.HistoryList.Items.Add(calc.resultString);
+            comboBox1.Items.Add(calc.resultString);
         }
 
         private void getResult(Calculator c, Calculator.funcDeleg cf)
@@ -436,6 +446,11 @@ namespace Calc
             saveMe();
             if (calc.resultString!="") addToCalcList();
             calc.resultString = "";
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

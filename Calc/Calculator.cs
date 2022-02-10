@@ -323,7 +323,7 @@ namespace Calc
             if (isResultPresent == true) resetCalc();
         }
 
-        public void resultBtnCheck(Calculator.funcDeleg f)
+        public void resultBtnCheck(funcDeleg f)
         {
             //Проверка нажатия "=" ранее
             //необходимо для предотвращения автоматического вычисления результата
