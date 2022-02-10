@@ -51,9 +51,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(273, 330);
             this.Controls.Add(this.listBox_MR);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MRForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "MRForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MRForm_FormClosing);
             this.ResumeLayout(false);
 
         }

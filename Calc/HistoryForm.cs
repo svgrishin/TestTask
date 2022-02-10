@@ -26,7 +26,7 @@ namespace Calc
 
         private void HistoryForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Visible = false;
+            Visible = false;
             calcForm.Enabled = true;
             e.Cancel = true;
         }

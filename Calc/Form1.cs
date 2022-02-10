@@ -302,7 +302,6 @@ namespace Calc
         {
             calc.mr = new double[1];
             btn_MList.Enabled = false;
-            //listBox_MR.Visible = false;
             mf.listBox_MR.Items.Clear();
             switchMRButtons();
         }
@@ -451,6 +450,11 @@ namespace Calc
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadMe(comboBox1.SelectedIndex);
         }
     }
 }

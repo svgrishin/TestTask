@@ -26,5 +26,12 @@ namespace Calc
             this.Visible = false;
             mainForm.Enabled = true;
         }
+
+        private void MRForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Visible = false;
+            mainForm.Enabled = true;
+            e.Cancel = true;
+        }
     }
 }
