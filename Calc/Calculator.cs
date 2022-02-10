@@ -16,7 +16,6 @@ namespace Calc
         public delegate double funcDeleg(double[] a);
 
         public funcDeleg fDeleg;
-        //public funcDeleg previousCalcFunc;
 
         public double[] args = new double[2];
 
@@ -99,7 +98,6 @@ namespace Calc
             fDeleg = c.fDeleg;
             symbol = c.symbol;
 
-            //calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,f);
             calcFuncOf = new CalcFunction(c.calcFuncOf.functionOf);
             previousCalcFunc = new CalcFunction(c.calcFuncOf.functionOf);
 
@@ -118,9 +116,6 @@ namespace Calc
             disp=c.disp;
             minus=c.minus;
 
-            //isResultBtn = false;
-            //btnType=false;
-
             isResultBtn = c.isResultBtn;
             btnType = c.btnType;
 
@@ -133,7 +128,6 @@ namespace Calc
         
         public void resetFunc()
         {
-            //calcFunc = null;
             calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
             functions[0] = 0;
         }
@@ -152,7 +146,6 @@ namespace Calc
             }
         }
 
-
         public Calculator()
         {
             isResultPresent = false;
@@ -161,7 +154,6 @@ namespace Calc
             arg = "";
             disp = "0";
             minus = false;
-            //calcFunc = null;
             isResultBtn = false;
             btnType = false;
             mr = new double[1];
@@ -254,8 +246,6 @@ namespace Calc
             return s;
         }
 
-        
-
         public double sqrOf()
         {
             return Math.Pow(args[0], 2);
@@ -333,7 +323,6 @@ namespace Calc
             if (isResultPresent == true) resetCalc();
         }
 
-        //public void resultBtnCheck(Func<double> f)
         public void resultBtnCheck(Calculator.funcDeleg f)
         {
             //Проверка нажатия "=" ранее
@@ -400,28 +389,25 @@ namespace Calc
             }
         }
 
-        private string addToCalcList()
-        {
-            string s1, s2, s3, s4;
-            s1 = args[0].ToString();
-            s3 = args[1].ToString();
-            try
-            {
-                s2 = symbol;
-            }
-            catch { s2 = ""; }
+        //private string addToCalcList()
+        //{
+        //    string s1, s2, s3, s4;
+        //    s1 = args[0].ToString();
+        //    s3 = args[1].ToString();
+        //    try
+        //    {
+        //        s2 = symbol;
+        //    }
+        //    catch { s2 = ""; }
 
-            return string.Concat(s1, s2, s3, "=");
-        }
+        //    return string.Concat(s1, s2, s3, "=");
+        //}
 
         private void addToCalcString(string s)
         {
             resultString=string.Concat(resultString,s);
         }
-        private void addToCalcString(char s)
-        {
-            resultString = resultString + s;
-        }
+
         private void addToCalcString(double s)
         {
             resultString=string.Concat(resultString,s.ToString());

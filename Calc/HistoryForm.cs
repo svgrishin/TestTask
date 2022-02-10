@@ -23,5 +23,11 @@ namespace Calc
         {
             calcForm.loadMe(HistoryList.SelectedIndex);
         }
+
+        private void HistoryForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Visible = false;
+            e.Cancel = true;
+        }
     }
 }

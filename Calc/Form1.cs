@@ -266,7 +266,6 @@ namespace Calc
             calc.symbol = "^";
             calc.fDeleg = calc.calcFuncOf.sqrOf;
             btn_Func_Click(6, calc.fDeleg, sender, true);
-            //label1.Text = calc.disp;
         }
 
         private void btn_MR_Click(object sender, EventArgs e)
@@ -377,11 +376,8 @@ namespace Calc
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Calculator.funcDeleg fd;
-            fd = calc.calcFuncOf.summ;
-            //double a = fd(1, 2);
-        }
 
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
