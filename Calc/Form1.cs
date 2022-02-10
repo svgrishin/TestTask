@@ -407,7 +407,7 @@ namespace Calc
 
         public void loadMe(int i)
         {
-            calc = new Calculator(calcs[i],calcs[i].calcFuncOf.functionOf);
+            calc = new Calculator(calcs[i]);
             label1.Text = calc.displayOut(calc.disp);
         }
 
@@ -415,12 +415,12 @@ namespace Calc
         {
             int i = calcs.Length;
             Array.Resize(ref calcs, i + 1);
-            calcs[i] = new Calculator(calc, calc.calcFuncOf.functionOf);   
+            calcs[i] = new Calculator(calc);   
         }
 
         private void saveCalc()
         {
-            Calculator c = new Calculator(calc, calc.calcFuncOf.functionOf);
+            Calculator c = new Calculator(calc);
             c.calcFuncOf = null;
             c.previousCalcFunc = null;
             

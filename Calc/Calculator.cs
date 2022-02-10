@@ -51,23 +51,16 @@ namespace Calc
 
         public class CalcFunction
         {
-            
-
-            public string funcSymbol;
             public Func<double> functionOf;
-            public int indexOf;
 
-            Calculator c;
-
-            public CalcFunction(Calculator calcArg)
+            public CalcFunction(Func<double> f)
             {
-                c=calcArg;
+                functionOf = f;
             }
 
-            public CalcFunction(string s, Func<double> f)
+            public CalcFunction()
             {
-                funcSymbol = s;
-                functionOf = f;
+                functionOf = null;
             }
 
             public double summ(double[] a)
@@ -101,13 +94,14 @@ namespace Calc
             }
         }
 
-        public Calculator(Calculator c, Func<double> f)
+        public Calculator(Calculator c)
         {
             fDeleg = c.fDeleg;
+            symbol = c.symbol;
 
-            calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,f);
-            //calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,c.fDeleg,this);
-            previousCalcFunc = new CalcFunction(c.calcFuncOf.funcSymbol, f);
+            //calcFuncOf = new CalcFunction(c.calcFuncOf.funcSymbol,f);
+            calcFuncOf = new CalcFunction(c.calcFuncOf.functionOf);
+            previousCalcFunc = new CalcFunction(c.calcFuncOf.functionOf);
 
             dateTimeOf =c.dateTimeOf;
 
@@ -124,8 +118,11 @@ namespace Calc
             disp=c.disp;
             minus=c.minus;
 
-            isResultBtn = false;
-            btnType=false;
+            //isResultBtn = false;
+            //btnType=false;
+
+            isResultBtn = c.isResultBtn;
+            btnType = c.btnType;
 
             mr=c.mr;
 
@@ -137,35 +134,9 @@ namespace Calc
         public void resetFunc()
         {
             //calcFunc = null;
-            calcFuncOf = new CalcFunction(this);
+            calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
             functions[0] = 0;
         }
-
-
-        //public void getFunc(int[] f)
-        //{
-        //    switch (f[0])
-        //    {
-        //        case 1: calcFuncOf = new CalcFunction("+", calcFuncOf.summ(args)); break;
-        //        case 2: calcFuncOf = new CalcFunction("-", calcFuncOf.differens); break;
-        //        case 3: calcFuncOf = new CalcFunction("×", calcFuncOf.multiply); break;
-        //        case 4: calcFuncOf = new CalcFunction("÷", calcFuncOf.divide); break;
-        //        case 5: calcFuncOf = new CalcFunction("√", sqrtOf); break;
-        //        case 6: calcFuncOf = new CalcFunction("^", sqrOf); break;
-        //        //case 7: calcFunc = ???; break;
-        //    }
-
-        //    switch (f[1])
-        //    {
-        //        case 1: previousCalcFunc = new CalcFunction("+", calcFuncOf.summ, this); break;
-        //        case 2: previousCalcFunc = new CalcFunction("-", calcFuncOf.differens, this); break;
-        //        case 3: previousCalcFunc = new CalcFunction("×", calcFuncOf.multiply, this); break;
-        //        case 4: previousCalcFunc = new CalcFunction("÷", calcFuncOf.divide, this); break;
-        //        case 5: previousCalcFunc = new CalcFunction("√", sqrtOf, this); break;
-        //        case 6: previousCalcFunc = new CalcFunction("^", sqrOf, this); break;
-        //        case 7: previousCalcFunc = ???; break;
-        //    }
-        //}
 
         public void getDeleg(int[] f)
         {
@@ -199,7 +170,7 @@ namespace Calc
 
             functions = new int[2];
 
-            calcFuncOf = new CalcFunction(this);
+            calcFuncOf = new CalcFunction();
             args = new double[2];
 
         }
@@ -228,7 +199,7 @@ namespace Calc
             isResultBtn = false;
             btnType = false;
 
-            calcFuncOf = new CalcFunction(this);
+            calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
         }
 
         public string inputValues(char c, Form1 f)
@@ -436,7 +407,7 @@ namespace Calc
             s3 = args[1].ToString();
             try
             {
-                s2 = calcFuncOf.funcSymbol;
+                s2 = symbol;
             }
             catch { s2 = ""; }
 
