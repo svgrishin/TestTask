@@ -128,7 +128,7 @@ namespace Calc
         private void btn_plus_Click(object sender, EventArgs e)
         {
             calc.symbol = "+";
-            calc.fDeleg = calc.calcFuncOf.summ;
+            calc.fDeleg = new Calculator().calcFuncOf.summ;
             btn_Func_Click(1, calc.fDeleg, sender, false);
         }
 
@@ -386,6 +386,7 @@ namespace Calc
 
         private void button1_Click(object sender, EventArgs e)
         {
+            saveCalc();
             calc.functions[0] = 7;
             calc.functions[1] = 7;
         }
@@ -397,6 +398,28 @@ namespace Calc
 
         private void btn_Percent_Click(object sender, EventArgs e)
         {
+            calcs = new Calculator[1];
+            
+            string[] s = File.ReadAllLines("c:/temp/calc.json");
+
+            int i = 0;
+            foreach (string str in s)
+            {
+                try
+                {
+                    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+                }
+                catch
+                {
+                    Array.Resize(ref calcs, i+1);
+                    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+                }
+                addToCalcList(calcs[i]);
+                i++;
+            }
+
+
+
             hf.Left = Left + (Width-hf.Width) / 2;
             hf.Top = Top + (Height-hf.Height) / 2;
             Enabled = false;
@@ -427,23 +450,24 @@ namespace Calc
             Calculator c = new Calculator(calc);
             c.calcFuncOf = null;
             c.previousCalcFunc = null;
+            //c.fDeleg = 
             
             string s = JsonConvert.SerializeObject(c);
 
-            File.AppendAllText("c:/temp/user.json", s + "\n");
+            File.AppendAllText("c:/temp/calc.json", s + "\n");
         }
 
-        private void addToCalcList()
+        private void addToCalcList(Calculator c)
         {
-            hf.HistoryList.Items.Add(calc.resultString);
-            comboBox1.Items.Add(calc.resultString);
+            hf.HistoryList.Items.Add(c.resultString);
+            comboBox1.Items.Add(c.resultString);
         }
 
         private void getResult(Calculator c, Calculator.funcDeleg cf)
         {
             calc.getResult(cf);
             saveMe();
-            if (calc.resultString!="") addToCalcList();
+            if (calc.resultString!="") addToCalcList(calc);
             calc.resultString = "";
         }
 

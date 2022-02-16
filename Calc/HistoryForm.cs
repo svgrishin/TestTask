@@ -22,6 +22,7 @@ namespace Calc
         private void HistoryList_DoubleClick(object sender, EventArgs e)
         {
             calcForm.loadMe(HistoryList.SelectedIndex);
+            Close();
         }
 
         private void HistoryForm_FormClosing(object sender, FormClosingEventArgs e)

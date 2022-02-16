@@ -8,7 +8,7 @@ using System.Linq;
 namespace Calc
 {
     
-    //Что если просто обнулить функцию при загрузке класса. Пусть будет null и индексы соответствующие
+    //остледить состояние переменных при вводе первого аргумента и отразить в конструкторе класса с параметром
     public class Calculator
     {
         public string symbol;
@@ -95,11 +95,11 @@ namespace Calc
 
         public Calculator(Calculator c)
         {
-            fDeleg = c.fDeleg;
+            //fDeleg = c.fDeleg;
             symbol = c.symbol;
 
-            calcFuncOf = new CalcFunction(c.calcFuncOf.functionOf);
-            previousCalcFunc = new CalcFunction(c.calcFuncOf.functionOf);
+            //calcFuncOf = new CalcFunction(c.calcFuncOf.functionOf);
+            //previousCalcFunc = new CalcFunction(c.calcFuncOf.functionOf);
 
             dateTimeOf =c.dateTimeOf;
 
@@ -107,12 +107,13 @@ namespace Calc
             args[0] = c.args[0];
             args[1] = c.args[1];;
 
-            resultString="";
+            resultString=c.resultString;
             isResultPresent=c.isResultPresent;
 
-            index=c.index;
+            //index=c.index;
+            index = true;
 
-            arg = "";
+            arg = args[0].ToString();
             disp=c.disp;
             minus=c.minus;
 
@@ -191,7 +192,7 @@ namespace Calc
             isResultBtn = false;
             btnType = false;
 
-            calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
+            //calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
         }
 
         public string inputValues(char c, Form1 f)
@@ -275,7 +276,7 @@ namespace Calc
             catch
             {
                 args[0] = fDeleg(args);
-                resultString = "";
+                //resultString = "";
             }
             
             addToCalcString(args[0]);
