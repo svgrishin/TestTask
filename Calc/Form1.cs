@@ -199,14 +199,14 @@ namespace Calc
         private void btn_multiply_Click(object sender, EventArgs e)
         {
             calc.symbol = "×";
-            calc.fDeleg = calc.calcFuncOf.multiply;
+            calc.fDeleg = new Calculator().calcFuncOf.multiply;
             btn_Func_Click(3, calc.fDeleg, sender, false);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
             calc.symbol = "÷";
-            calc.fDeleg = calc.calcFuncOf.divide;
+            calc.fDeleg = new Calculator().calcFuncOf.divide;
             btn_Func_Click(4, calc.fDeleg, sender, false);
         }
 
@@ -214,6 +214,7 @@ namespace Calc
         {
             calc.symbol = "-";
             calc.fDeleg = calc.calcFuncOf.differens;
+            calc.fDeleg = new Calculator().calcFuncOf.differens;
             btn_Func_Click(2, calc.fDeleg, sender, false);
         }
 
@@ -259,14 +260,14 @@ namespace Calc
         private void btn_SQRT_Click(object sender, EventArgs e)
         {
             calc.symbol = "√";
-            calc.fDeleg = calc.calcFuncOf.sqrtOf;
+            calc.fDeleg = new Calculator().calcFuncOf.sqrtOf;
             btn_Func_Click(5, calc.fDeleg, sender, true);
         }
 
         private void btn_SQR_Click(object sender, EventArgs e)
         {
             calc.symbol = "^";
-            calc.fDeleg = calc.calcFuncOf.sqrOf;
+            calc.fDeleg = new Calculator().calcFuncOf.sqrtOf;
             btn_Func_Click(6, calc.fDeleg, sender, true);
         }
 
@@ -435,7 +436,11 @@ namespace Calc
         public void loadMe(int i)
         {
             calc = new Calculator(calcs[i]);
+            
             label1.Text = calc.displayOut(calc.disp);
+
+            calc.resetCalc();
+            calc.arg = calc.args[0].ToString();
         }
 
         private void addCalc()
