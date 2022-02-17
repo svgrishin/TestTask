@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Calc
 {
-    
+   
     //остледить состояние переменных при вводе первого аргумента и отразить в конструкторе класса с параметром
     public class Calculator
     {
