@@ -435,11 +435,7 @@ namespace Calc
         public void loadMe(int i)
         {
             calc = new Calculator(calcs[i]);
-            
             label1.Text = calc.displayOut(calc.disp);
-
-            calc.resetCalc();
-            calc.arg = calc.args[0].ToString();
         }
 
         private void addCalc()
