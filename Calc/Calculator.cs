@@ -313,7 +313,7 @@ namespace Calc
             }
             catch
             {
-                if (index == false)
+                //if (index == false)
                 index = !index;
             }
             index = !index;

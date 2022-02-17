@@ -134,12 +134,14 @@ namespace Calc
 
         private void resetResultGetting()
         {
-            calc.index = false;
+            //calc.index = false;
+            //calc.index = !calc.index;
             calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
         }
         
         private void funcClick(Calculator.funcDeleg f, object sender)
         {
+            //calc.btnType = true;
             //когда ввод первого аргумента, потом ввод функции, а потом замена функций
             if (calc.btnType != false)
             {
@@ -149,9 +151,11 @@ namespace Calc
                 if (calc.fDeleg == f && calc.arg != "")
                     calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
-                if (calc.btnType == false && calc.index == true && f == calc.fDeleg)
+                //if (calc.btnType == false && calc.index == true && f == calc.fDeleg)
+                if (calc.index == true && f == calc.fDeleg)
                     resetResultGetting();
             }
+            else if (calc.index == true && f == calc.fDeleg) resetResultGetting();
 
             calc.resultBtnCheck(f);
             calc.tryToGetArg(calc.arg);
@@ -213,7 +217,7 @@ namespace Calc
         private void btn_minus_Click(object sender, EventArgs e)
         {
             calc.symbol = "-";
-            calc.fDeleg = calc.calcFuncOf.differens;
+            //calc.fDeleg = calc.calcFuncOf.differens;
             calc.fDeleg = new Calculator().calcFuncOf.differens;
             btn_Func_Click(2, calc.fDeleg, sender, false);
         }
