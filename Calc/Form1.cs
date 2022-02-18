@@ -362,7 +362,6 @@ namespace Calc
 
             calc.resultPresentCheck();
 
-            //calc.args[i] = calc.mr[indexOf];
             calc.args[i] = calc.mr[indexOf];
 
             if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
@@ -377,11 +376,6 @@ namespace Calc
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
         {
             getFromMR(mf.listBox_MR.SelectedIndex + 1);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -469,11 +463,6 @@ namespace Calc
             saveMe();
             if (calc.resultString!="") addToCalcList(calc);
             calc.resultString = "";
-        }
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

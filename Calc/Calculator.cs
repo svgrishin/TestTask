@@ -169,10 +169,6 @@ namespace Calc
 
             tryToGetArg(arg);
 
-            if (index == true)
-            {
-                getResult(fDeleg);
-            }
             arg = "";
             disp = Convert.ToString(args[0]);
         }
@@ -190,28 +186,33 @@ namespace Calc
 
         public string inputValues(char c, Form1 f)
         {
+            int i=15;
+            if (c == '-') i = 17;
+
+            if (arg.Length<=i)
+            { 
             resultBtnCheck();
 
-            if (isResultPresent == true) resetCalc();
-            if (btnType == true) arg = "";
+                if (isResultPresent == true) resetCalc();
+                if (btnType == true) arg = "";
 
-            if (c == '-')
-            {
-                if (arg != "")
+                if (c == '-')
                 {
-                    switch (minus)
+                    if (arg != "")
                     {
-                        case true: arg = c + arg; break;
-                        case false: arg = arg.TrimStart(c); break;
+                        switch (minus)
+                        {
+                            case true: arg = c + arg; break;
+                            case false: arg = arg.TrimStart(c); break;
+                        }
+                        disp = arg;
+                        return displayOut(arg);
                     }
-                    disp = arg;
-                    return displayOut(arg);
+                    else return displayOut(disp);
                 }
-                else return displayOut(disp);
-            }
-            else arg += c;
-            btnType = false;
-
+                else arg += c;
+                btnType = false;
+            }       
             return displayOut(arg);
         }
 
