@@ -419,7 +419,7 @@ namespace Calc
                     Array.Resize(ref calcs, i+1);
                     calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
                 }
-                addToCalcList(calcs[i]);
+                hf.HistoryList.Items.Add(calcs[i].resultString);
                 i++;
             }
 

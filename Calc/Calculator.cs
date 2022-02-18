@@ -95,11 +95,7 @@ namespace Calc
 
         public Calculator(Calculator c)
         {
-            //fDeleg = c.fDeleg;
             symbol = c.symbol;
-
-            //calcFuncOf = new CalcFunction(c.calcFuncOf.functionOf);
-            //previousCalcFunc = new CalcFunction(c.calcFuncOf.functionOf);
 
             dateTimeOf =c.dateTimeOf;
 
@@ -110,7 +106,6 @@ namespace Calc
             resultString=c.resultString;
             isResultPresent=c.isResultPresent;
 
-            //index=c.index;
             index = true;
 
             arg = args[0].ToString();
@@ -191,8 +186,6 @@ namespace Calc
             isResultPresent = false;
             isResultBtn = false;
             btnType = false;
-
-            //calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
         }
 
         public string inputValues(char c, Form1 f)
@@ -276,7 +269,6 @@ namespace Calc
             catch
             {
                 args[0] = fDeleg(args);
-                //resultString = "";
             }
             
             addToCalcString(args[0]);
@@ -298,7 +290,6 @@ namespace Calc
             
             getResult(cf);
 
-            //disp = Convert.ToString(args[0]);
             arg = "";
             index = !index;
 
@@ -313,7 +304,6 @@ namespace Calc
             }
             catch
             {
-                //if (index == false)
                 index = !index;
             }
             index = !index;
@@ -390,20 +380,6 @@ namespace Calc
                 isResultBtn = false;
             }
         }
-
-        //private string addToCalcList()
-        //{
-        //    string s1, s2, s3, s4;
-        //    s1 = args[0].ToString();
-        //    s3 = args[1].ToString();
-        //    try
-        //    {
-        //        s2 = symbol;
-        //    }
-        //    catch { s2 = ""; }
-
-        //    return string.Concat(s1, s2, s3, "=");
-        //}
 
         private void addToCalcString(string s)
         {
