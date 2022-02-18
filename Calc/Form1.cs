@@ -134,14 +134,11 @@ namespace Calc
 
         private void resetResultGetting()
         {
-            //calc.index = false;
-            //calc.index = !calc.index;
             calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
         }
         
         private void funcClick(Calculator.funcDeleg f, object sender)
         {
-            //calc.btnType = true;
             //когда ввод первого аргумента, потом ввод функции, а потом замена функций
             if (calc.btnType != false)
             {
@@ -151,7 +148,6 @@ namespace Calc
                 if (calc.fDeleg == f && calc.arg != "")
                     calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
-                //if (calc.btnType == false && calc.index == true && f == calc.fDeleg)
                 if (calc.index == true && f == calc.fDeleg)
                     resetResultGetting();
             }
@@ -217,7 +213,6 @@ namespace Calc
         private void btn_minus_Click(object sender, EventArgs e)
         {
             calc.symbol = "-";
-            //calc.fDeleg = calc.calcFuncOf.differens;
             calc.fDeleg = new Calculator().calcFuncOf.differens;
             btn_Func_Click(2, calc.fDeleg, sender, false);
         }
@@ -403,28 +398,25 @@ namespace Calc
 
         private void btn_Percent_Click(object sender, EventArgs e)
         {
-            calcs = new Calculator[1];
-            
-            string[] s = File.ReadAllLines("c:/temp/calc.json");
-
-            int i = 0;
-            foreach (string str in s)
+            if (calcs.Length == 0)
             {
-                try
+                string[] s = File.ReadAllLines("c:/temp/calc.json");
+                int i = calcs.Length;
+                foreach (string str in s)
                 {
-                    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+                    try
+                    {
+                        calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+                    }
+                    catch
+                    {
+                        Array.Resize(ref calcs, i+1);
+                        calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+                    }
+                    hf.HistoryList.Items.Add(calcs[i].resultString);
+                    i++;
                 }
-                catch
-                {
-                    Array.Resize(ref calcs, i+1);
-                    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
-                }
-                hf.HistoryList.Items.Add(calcs[i].resultString);
-                i++;
             }
-
-
-
             hf.Left = Left + (Width-hf.Width) / 2;
             hf.Top = Top + (Height-hf.Height) / 2;
             Enabled = false;
@@ -459,7 +451,6 @@ namespace Calc
             Calculator c = new Calculator(calc);
             c.calcFuncOf = null;
             c.previousCalcFunc = null;
-            //c.fDeleg = 
             
             string s = JsonConvert.SerializeObject(c);
 
