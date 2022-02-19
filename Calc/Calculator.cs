@@ -213,7 +213,8 @@ namespace Calc
                     }
                     else s = displayOut(disp);
                 }
-                else arg += c;
+                else 
+                    arg += c;
                 btnType = false;
             }
             
@@ -224,7 +225,6 @@ namespace Calc
                 case 14: f.label1.Font = new System.Drawing.Font("Arial", 23); break;
                 case 18: f.label1.Font = new System.Drawing.Font("Arial", 18); break;
             }
-
             return s;
         }
 
@@ -245,16 +245,21 @@ namespace Calc
 
         public string displayOut(string s)
         {
-            if (minus == true) s=s.TrimStart('-');
+            bool b = false;
+            if (s[0] == '-')
+            {
+                s = s.TrimStart('-');
+                b = true;
+            }
             if (s.Contains(',') == false)
             {
-                for (int i = 3; i <= s.Length - Convert.ToInt16(minus); i += 4)
+                for (int i = 3; i <= s.Length; i += 4)
                 {
                     s = s.Insert(s.Length - i, " ");
                 }
             }
             s = s.TrimStart(' ');
-            if (minus == true) s=s.Insert(0,"-");
+            if (b == true) s=s.Insert(0,"-");
             return s;
         }
 

@@ -128,6 +128,7 @@ namespace Calc
 
             if (isExtraFunc == true) label1.Text = calc.extraFunc(f);
             else funcClick(f, sender);
+            
         }
 
         private void btn_plus_Click(object sender, EventArgs e)
@@ -199,6 +200,8 @@ namespace Calc
             }
             calc.arg = "";
             calc.btnType = true;
+
+            calc.minus = false;
         }
 
         private void btn_multiply_Click(object sender, EventArgs e)
