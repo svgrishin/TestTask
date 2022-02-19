@@ -93,6 +93,7 @@ namespace Calc
         private void btn_bspace_Click(object sender, EventArgs e)
         {
             label1.Text = calc.deleteSymbol();
+            label1.Font = setTextSize(label1.Text);
         }
 
         private void btn_Negative_Click(object sender, EventArgs e)
@@ -117,6 +118,34 @@ namespace Calc
         {
             label1.Text = calc.inputValues('0', this);
             label1.Text = calc.inputValues(',', this);
+        }
+
+        public Font setTextSize(string s)
+        {
+            //if (s.Length > 13 && s.Length <= 22)
+            //    switch (s.Length)
+            //    {
+            //        case 14: return new Font("Arial", 23);
+            //        case 18: return new Font("Arial", 19);
+            //    }
+            //else
+            //{
+            //    switch (s.Length)
+            //    {
+            //        case 13: return new Font("Arial", 30);
+            //        case 17: return new Font("Arial", 23);
+            //    }
+            //}
+
+            switch (s.Length)
+            {
+                case 14: return new Font("Arial", 23);
+                case 18: return new Font("Arial", 19);
+                case 13: return new Font("Arial", 30);
+                case 17: return new Font("Arial", 23);
+            }
+
+            return label1.Font;
         }
 
         private void btn_Func_Click(int i, Calculator.funcDeleg f, object sender, bool isExtraFunc)

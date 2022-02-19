@@ -558,7 +558,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(290, 487);
             this.Controls.Add(this.tableLayoutPanel4);
-            this.MinimumSize = new System.Drawing.Size(228, 384);
+            this.MinimumSize = new System.Drawing.Size(306, 526);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Калькулятор";

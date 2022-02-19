@@ -187,13 +187,14 @@ namespace Calc
 
         public string inputValues(char c, Form1 f)
         {
-            string s="";
-
             int i=15;
+            
             if (c == '-') i = 17;
 
-            if (arg.Length<=i)
-            { 
+            if (arg.Length <= i)
+            {
+                string s;
+
                 resultBtnCheck();
 
                 if (isResultPresent == true) resetCalc();
@@ -211,22 +212,22 @@ namespace Calc
                         disp = arg;
                         s = displayOut(arg);
                     }
-                    else s = displayOut(disp);
+                    else s = disp;
                 }
-                else 
+                else
+                {
                     arg += c;
+                    s = displayOut(arg);
+                }
                 btnType = false;
-            }
-            
-            if (s.Length==0) s = displayOut(arg);
+                f.label1.Font = f.setTextSize(s);
 
-            switch (s.Length)
-            {
-                case 14: f.label1.Font = new System.Drawing.Font("Arial", 23); break;
-                case 18: f.label1.Font = new System.Drawing.Font("Arial", 18); break;
+                return s;
             }
-            return s;
+            else return displayOut(arg);
         }
+
+        
 
         public string deleteSymbol()
         {
