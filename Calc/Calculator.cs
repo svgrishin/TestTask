@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 
 
@@ -186,12 +187,14 @@ namespace Calc
 
         public string inputValues(char c, Form1 f)
         {
+            string s="";
+
             int i=15;
             if (c == '-') i = 17;
 
             if (arg.Length<=i)
             { 
-            resultBtnCheck();
+                resultBtnCheck();
 
                 if (isResultPresent == true) resetCalc();
                 if (btnType == true) arg = "";
@@ -206,14 +209,23 @@ namespace Calc
                             case false: arg = arg.TrimStart(c); break;
                         }
                         disp = arg;
-                        return displayOut(arg);
+                        s = displayOut(arg);
                     }
-                    else return displayOut(disp);
+                    else s = displayOut(disp);
                 }
                 else arg += c;
                 btnType = false;
-            }       
-            return displayOut(arg);
+            }
+            
+            if (s.Length==0) s = displayOut(arg);
+
+            switch (s.Length)
+            {
+                case 14: f.label1.Font = new System.Drawing.Font("Arial", 23); break;
+                case 18: f.label1.Font = new System.Drawing.Font("Arial", 18); break;
+            }
+
+            return s;
         }
 
         public string deleteSymbol()
@@ -233,11 +245,16 @@ namespace Calc
 
         public string displayOut(string s)
         {
+            if (minus == true) s=s.TrimStart('-');
             if (s.Contains(',') == false)
+            {
                 for (int i = 3; i <= s.Length - Convert.ToInt16(minus); i += 4)
                 {
                     s = s.Insert(s.Length - i, " ");
                 }
+            }
+            s = s.TrimStart(' ');
+            if (minus == true) s=s.Insert(0,"-");
             return s;
         }
 

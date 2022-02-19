@@ -71,6 +71,11 @@ namespace Calc
             label1.Text = calc.inputValues('9', this);
         }
 
+        private void inputVal(char c)
+        {
+            string s = calc.inputValues(c, this);
+        }
+
         private void btn_Zero_Click(object sender, EventArgs e)
         {
             if (calc.arg == "") typeZeroComa();
