@@ -93,7 +93,7 @@ namespace Calc
         private void btn_bspace_Click(object sender, EventArgs e)
         {
             label1.Text = calc.deleteSymbol();
-            label1.Font = setTextSize(label1.Text);
+            setTextSize();
         }
 
         private void btn_Negative_Click(object sender, EventArgs e)
@@ -120,16 +120,18 @@ namespace Calc
             label1.Text = calc.inputValues(',', this);
         }
 
-        public Font setTextSize(string s)
+        public void setTextSize()
         {
-            switch (s.Length)
+            float symWidth = label1.Font.Size * 4 / 5;
+            float strWidth = symWidth * label1.Text.Length;
+            
+            if (strWidth>label1.Width || label1.Font.Size < 30)
             {
-                case 14: return new Font("Arial", 23);
-                case 18: return new Font("Arial", 19);
-                case 13: return new Font("Arial", 30);
-                case 17: return new Font("Arial", 23);
-            }
-            return label1.Font;
+                Font f;
+                f = new Font("Arial", label1.Font.Size * label1.Width / strWidth);
+                if (f.Size > 30) f = new Font("Arial", 30);
+                label1.Font = f;
+            } 
         }
 
         private void btn_Func_Click(Calculator.funcDeleg f, bool isExtraFunc)
@@ -220,7 +222,7 @@ namespace Calc
             calc.symbol = s;
             calc.fDeleg = f;
             btn_Func_Click(calc.fDeleg, isExtraFunc);
-            setTextSize(calc.disp);
+            setTextSize();
         }
         
         private void btn_multiply_Click(object sender, EventArgs e)
@@ -281,6 +283,8 @@ namespace Calc
             calc.btnType = false;
 
             calc.previousCalcFunc = calc.calcFuncOf;
+
+            setTextSize();
         }
 
         private void btn_SQRT_Click(object sender, EventArgs e)
@@ -447,7 +451,11 @@ namespace Calc
         public void saveMe()
         {
             addCalc();
-            saveCalc();
+            try
+            {
+                saveCalc();
+            }
+            catch { this.Text = "Не удалось сохранить в файл"; }
         }
 
         public void loadMe(int i)

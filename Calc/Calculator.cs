@@ -220,7 +220,7 @@ namespace Calc
                     s = displayOut(arg);
                 }
                 btnType = false;
-                f.label1.Font = f.setTextSize(s);
+                f.setTextSize();
 
                 return s;
             }
