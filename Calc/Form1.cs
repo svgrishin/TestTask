@@ -520,5 +520,15 @@ namespace Calc
         {
             loadMe(comboBox1.SelectedIndex);
         }
+
+        private void Form1_ResizeEnd(object sender, EventArgs e)
+        {
+            setTextSize();
+        }
+
+        private void Form1_Layout(object sender, LayoutEventArgs e)
+        {
+            setTextSize();
+        }
     }
 }
