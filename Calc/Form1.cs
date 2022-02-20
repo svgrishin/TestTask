@@ -136,7 +136,7 @@ namespace Calc
 
         private void btn_Func_Click(Calculator.funcDeleg f, bool isExtraFunc)
         {
-            //calc.previousCalcFunc = calc.calcFuncOf;
+            //calc.previousCalcFunc = calc.calcFuncOf; 
 
             if (isExtraFunc == true)
             {
