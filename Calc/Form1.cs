@@ -84,7 +84,7 @@ namespace Calc
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
-            calc.resetCalc();
+            resetCalc();
             Array.Clear(calc.args, 0, 1);
             calc.resetFunc();
             label1.Text = "0";
@@ -464,8 +464,15 @@ namespace Calc
             
             label1.Text = calc.displayOut(calc.disp);
 
-            calc.resetCalc();
+            resetCalc();
+
             calc.arg = calc.args[0].ToString();
+        }
+
+        public void resetCalc()
+        {
+            calc.resetCalc();
+            label1.Font = new Font("Arial", 30);
         }
 
         private void addCalc()
