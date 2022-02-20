@@ -136,11 +136,15 @@ namespace Calc
 
         private void btn_Func_Click(Calculator.funcDeleg f, bool isExtraFunc)
         {
-            calc.previousCalcFunc = calc.calcFuncOf;
+            //calc.previousCalcFunc = calc.calcFuncOf;
 
-            if (isExtraFunc == true) label1.Text = calc.extraFunc(f);
+            if (isExtraFunc == true)
+            {
+                label1.Text = calc.extraFunc(f);
+                saveStatus();
+                setTextSize();
+            }
             else funcClick(f);
-            
         }
 
         private void btn_plus_Click(object sender, EventArgs e)
@@ -192,13 +196,13 @@ namespace Calc
                     {
                         try
                         {
-                            getResult(calc, calc.fDeleg);
+                            getResult(calc.fDeleg);
                         }
                         catch
                         {
                             try
                             {
-                                getResult(calc, f);
+                                getResult(f);
                             }
                             catch
                             {
@@ -267,7 +271,7 @@ namespace Calc
             if (calc.btnType == true)
             {
                 calc.args[1] = calc.args[0];
-                getResult(calc, calc.fDeleg);
+                getResult(calc.fDeleg);
                 label1.Text = calc.disp;
             }
             //Если "=" нажато после цифры или уже был получен результат
@@ -297,7 +301,7 @@ namespace Calc
         private void btn_SQR_Click(object sender, EventArgs e)
         {
             calc.symbol = "^";
-            calc.fDeleg = new Calculator().calcFuncOf.sqrtOf;
+            calc.fDeleg = new Calculator().calcFuncOf.sqrOf;
             btn_Func_Click(calc.fDeleg, true);
         }
 
@@ -411,9 +415,9 @@ namespace Calc
 
         private void button1_Click(object sender, EventArgs e)
         {
-            saveCalc();
-            calc.functions[0] = 7;
-            calc.functions[1] = 7;
+            calc.symbol = "1/";
+            calc.fDeleg = new Calculator().calcFuncOf.fraction;
+            btn_Func_Click(calc.fDeleg, true);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -499,11 +503,16 @@ namespace Calc
             comboBox1.Items.Add(c.resultString);
         }
 
-        private void getResult(Calculator c, Calculator.funcDeleg cf)
+        private void getResult(Calculator.funcDeleg cf)
         {
             calc.getResult(cf);
+            saveStatus();
+        }
+
+        private void saveStatus()
+        {
             saveMe();
-            if (calc.resultString!="") addToCalcList(calc);
+            if (calc.resultString != "") addToCalcList(calc);
             calc.resultString = "";
         }
 

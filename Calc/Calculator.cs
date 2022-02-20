@@ -92,6 +92,11 @@ namespace Calc
             {
                 return Math.Sqrt(a[0]);
             }
+
+            public double fraction(double[] a)
+            {
+                return 1/a[0];
+            }
         }
 
         public Calculator(Calculator c)
@@ -274,14 +279,28 @@ namespace Calc
             return Math.Sqrt(args[0]);
         }
 
-        public void getResult(funcDeleg cf)
+        private void addingCalcToList(string s)
         {
-            try
+            if (s == "√" || s == "1/")
+            {
+                addToCalcString(symbol);
+                addToCalcString(args[0]);
+                addToCalcString("=");
+            }
+            else
             {
                 addToCalcString(args[0]);
                 addToCalcString(symbol);
                 addToCalcString(args[1]);
                 addToCalcString("=");
+            }
+        }
+
+        public void getResult(funcDeleg cf)
+        {
+            try
+            {
+                addingCalcToList(symbol);
             }
             catch { }
 
@@ -309,8 +328,8 @@ namespace Calc
             tryToGetArg(arg);
             args[1] = 2;
             
-            addToCalcString(arg);
-            addToCalcString(symbol);
+            //addToCalcString(arg);
+            //addToCalcString(symbol);
             
             getResult(cf);
 
