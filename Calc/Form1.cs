@@ -122,16 +122,60 @@ namespace Calc
 
         public void setTextSize()
         {
-            float symWidth = label1.Font.Size * 4 / 5;
-            float strWidth = symWidth * label1.Text.Length;
-            
-            if (strWidth>label1.Width || label1.Font.Size < 30)
+            ////float symWidth = label1.Font.Size * 4 / 5;
+            //float symWidth = label1.Font.Size;
+            //float strWidth = symWidth * label1.Text.Length;
+            //Font f;
+
+            ////if (strWidth>label1.Width || label1.Font.Size < 30)
+            //if (strWidth > label1.Width+label1.Font.Size*3)
+            //{
+
+            //    //f = new Font("Arial", label1.Font.Size * label1.Width / strWidth);
+            //    f = new Font("Arial", label1.Font.Size*label1.Width / strWidth+3);
+            //    //if (f.Size > 30) f = new Font("Arial", 30);
+            //    //label1.Font = f;
+            //}
+            //else
+            //{
+            //    float i = label1.Font.Size;
+            //    while (strWidth < label1.Width)
+            //    {
+            //        symWidth++;
+            //        strWidth = symWidth * label1.Text.Length;
+            //        i++;
+            //    }
+            //    f = new Font("Arial", i);
+            //}
+            //if (f.Size > 30) f = new Font("Arial", 30);
+            //label1.Font = f;
+
+            float symWidth = label1.Font.Size;
+            double strWidth = symWidth * label1.Text.Length;
+            Font f;
+            double c = strWidth / label1.Width;
+            //double d = 1.29;
+            double d = (strWidth + (strWidth / symWidth)) / strWidth * (1.176+symWidth/strWidth);
+
+            if (c>d)
+            while (c > d)
             {
-                Font f;
-                f = new Font("Arial", label1.Font.Size * label1.Width / strWidth);
-                if (f.Size > 30) f = new Font("Arial", 30);
-                label1.Font = f;
-            } 
+                symWidth--;
+                strWidth = symWidth * label1.Text.Length;
+                c = strWidth / label1.Width;
+                d = (strWidth + (strWidth / symWidth)) / strWidth * (1.176+symWidth / strWidth);
+            }
+            else
+                if (label1.Font.Size<30)
+                while (c < d || symWidth<30)
+                {
+                    symWidth++;
+                    strWidth = symWidth * label1.Text.Length;
+                    c = strWidth / label1.Width;
+                    d = (strWidth + (strWidth / symWidth)) / strWidth * (1.176 + symWidth / strWidth);
+                }
+            f = new Font("Arial", symWidth);
+            label1.Font = f;
         }
 
         private void btn_Func_Click(Calculator.funcDeleg f, bool isExtraFunc)
@@ -523,7 +567,7 @@ namespace Calc
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
         {
-            setTextSize();
+            //setTextSize();
         }
 
         private void Form1_Layout(object sender, LayoutEventArgs e)
