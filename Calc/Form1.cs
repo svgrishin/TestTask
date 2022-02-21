@@ -28,52 +28,62 @@ namespace Calc
 
         private void btn_1_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('1', this);
+            //label1.Text = calc.inputValues('1', this);
+            inputVal('1');
         }
 
         private void btn_2_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('2', this);
+            //label1.Text = calc.inputValues('2', this);
+            inputVal('2');
         }
 
         private void btn_3_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('3', this);
+            //label1.Text = calc.inputValues('3', this);
+            inputVal('3');
         }
 
         private void btn_4_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('4', this);
+            //label1.Text = calc.inputValues('4', this);
+            inputVal('4');
         }
 
         private void btn_5_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('5', this);
+            //label1.Text = calc.inputValues('5', this);
+            inputVal('5');
         }
 
         private void btn_6_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('6', this);
+            //label1.Text = calc.inputValues('6', this);
+            inputVal('6');
         }
 
         private void btn_7_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('7', this);
+            //label1.Text = calc.inputValues('7', this);
+            inputVal('7');
         }
 
         private void btn_8_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('8', this);
+            //label1.Text = calc.inputValues('8', this);
+            inputVal('8');
         }
 
         private void btn_9_Click(object sender, EventArgs e)
         {
-            label1.Text = calc.inputValues('9', this);
+            //label1.Text = calc.inputValues('9', this);
+            inputVal('9');
         }
 
         private void inputVal(char c)
         {
-            string s = calc.inputValues(c, this);
+            label1.Text = calc.inputValues(c, this);
+            setTextSize();
         }
 
         private void btn_Zero_Click(object sender, EventArgs e)
@@ -99,7 +109,8 @@ namespace Calc
         private void btn_Negative_Click(object sender, EventArgs e)
         {
             calc.minus = !calc.minus;
-            label1.Text = calc.inputValues('-', this);
+            //label1.Text = calc.inputValues('-', this);
+            inputVal('-');
         }
 
         private void btn_Coma_Click(object sender, EventArgs e)
@@ -122,60 +133,26 @@ namespace Calc
 
         public void setTextSize()
         {
-            ////float symWidth = label1.Font.Size * 4 / 5;
-            //float symWidth = label1.Font.Size;
-            //float strWidth = symWidth * label1.Text.Length;
-            //Font f;
-
-            ////if (strWidth>label1.Width || label1.Font.Size < 30)
-            //if (strWidth > label1.Width+label1.Font.Size*3)
-            //{
-
-            //    //f = new Font("Arial", label1.Font.Size * label1.Width / strWidth);
-            //    f = new Font("Arial", label1.Font.Size*label1.Width / strWidth+3);
-            //    //if (f.Size > 30) f = new Font("Arial", 30);
-            //    //label1.Font = f;
-            //}
-            //else
-            //{
-            //    float i = label1.Font.Size;
-            //    while (strWidth < label1.Width)
-            //    {
-            //        symWidth++;
-            //        strWidth = symWidth * label1.Text.Length;
-            //        i++;
-            //    }
-            //    f = new Font("Arial", i);
-            //}
-            //if (f.Size > 30) f = new Font("Arial", 30);
-            //label1.Font = f;
-
-            float symWidth = label1.Font.Size;
-            double strWidth = symWidth * label1.Text.Length;
-            Font f;
-            double c = strWidth / label1.Width;
-            //double d = 1.29;
-            double d = (strWidth + (strWidth / symWidth)) / strWidth * (1.176+symWidth/strWidth);
-
-            if (c>d)
-            while (c > d)
+            float fSize = label1.Font.Size;
+            float s = TextRenderer.MeasureText(label1.Text, label1.Font).Width;
+            if (s > label1.Width)
             {
-                symWidth--;
-                strWidth = symWidth * label1.Text.Length;
-                c = strWidth / label1.Width;
-                d = (strWidth + (strWidth / symWidth)) / strWidth * (1.176+symWidth / strWidth);
-            }
-            else
-                if (label1.Font.Size<30)
-                while (c < d || symWidth<30)
+                while(label1.Width<s)
                 {
-                    symWidth++;
-                    strWidth = symWidth * label1.Text.Length;
-                    c = strWidth / label1.Width;
-                    d = (strWidth + (strWidth / symWidth)) / strWidth * (1.176 + symWidth / strWidth);
+                    fSize--;
+                    label1.Font = new Font("Arial", fSize);
+                    s= TextRenderer.MeasureText(label1.Text, label1.Font).Width;
                 }
-            f = new Font("Arial", symWidth);
-            label1.Font = f;
+            }
+            else if (label1.Font.Size < 30)
+            {
+                while (label1.Width > s+fSize)
+                {
+                    fSize++;
+                    label1.Font = new Font("Arial", fSize);
+                    s = TextRenderer.MeasureText(label1.Text, label1.Font).Width;
+                }
+            }
         }
 
         private void btn_Func_Click(Calculator.funcDeleg f, bool isExtraFunc)

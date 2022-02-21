@@ -225,7 +225,6 @@ namespace Calc
                     s = displayOut(arg);
                 }
                 btnType = false;
-                f.setTextSize();
 
                 return s;
             }
