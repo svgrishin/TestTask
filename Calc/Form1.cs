@@ -144,15 +144,15 @@ namespace Calc
                     s= TextRenderer.MeasureText(label1.Text, label1.Font).Width;
                 }
             }
-            else if (label1.Font.Size < 30)
-            {
-                while (label1.Width > s+fSize)
+            else
+            
+                while (label1.Width > s+fSize && label1.Font.Size<30)
                 {
                     fSize++;
                     label1.Font = new Font("Arial", fSize);
                     s = TextRenderer.MeasureText(label1.Text, label1.Font).Width;
                 }
-            }
+            
         }
 
         private void btn_Func_Click(Calculator.funcDeleg f, bool isExtraFunc)
