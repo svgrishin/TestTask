@@ -28,55 +28,46 @@ namespace Calc
 
         private void btn_1_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('1', this);
             inputVal('1');
         }
 
         private void btn_2_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('2', this);
             inputVal('2');
         }
 
         private void btn_3_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('3', this);
             inputVal('3');
         }
 
         private void btn_4_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('4', this);
             inputVal('4');
         }
 
         private void btn_5_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('5', this);
             inputVal('5');
         }
 
         private void btn_6_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('6', this);
             inputVal('6');
         }
 
         private void btn_7_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('7', this);
             inputVal('7');
         }
 
         private void btn_8_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('8', this);
             inputVal('8');
         }
 
         private void btn_9_Click(object sender, EventArgs e)
         {
-            //label1.Text = calc.inputValues('9', this);
             inputVal('9');
         }
 
@@ -109,7 +100,6 @@ namespace Calc
         private void btn_Negative_Click(object sender, EventArgs e)
         {
             calc.minus = !calc.minus;
-            //label1.Text = calc.inputValues('-', this);
             inputVal('-');
         }
 
@@ -157,8 +147,6 @@ namespace Calc
 
         private void btn_Func_Click(Calculator.funcDeleg f, bool isExtraFunc)
         {
-            //calc.previousCalcFunc = calc.calcFuncOf; 
-
             if (isExtraFunc == true)
             {
                 label1.Text = calc.extraFunc(f);
@@ -441,11 +429,6 @@ namespace Calc
             btn_Func_Click(calc.fDeleg, true);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_Percent_Click(object sender, EventArgs e)
         {
             if (calcs.Length == 0)
@@ -544,12 +527,12 @@ namespace Calc
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
         {
-            //setTextSize();
+            setTextSize();
         }
 
         private void Form1_Layout(object sender, LayoutEventArgs e)
         {
-            setTextSize();
+            //setTextSize(); динамичное изменение размера шрифта, но выглядит не очень
         }
     }
 }
