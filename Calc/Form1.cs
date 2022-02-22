@@ -15,6 +15,10 @@ namespace Calc
 {
     public partial class Form1 : Form
     {
+        delegate void mrDeleg();
+        mrDeleg mDeleg;
+
+
         public Calculator calc = new Calculator();
         public Calculator[] calcs = new Calculator[0];
         public HistoryForm hf;
@@ -87,7 +91,6 @@ namespace Calc
         {
             resetCalc();
             Array.Clear(calc.args, 0, 1);
-            //calc.resetFunc();
             label1.Text = "0";
         }
 
@@ -161,86 +164,49 @@ namespace Calc
             btn_click("+", new Calculator.CalcFunction().summ, false);
         }
 
-        private void resetResultGetting()
-        {
-            calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
-            calc.fDeleg = null;
-            calc.index = true;
-        }
         
         private void funcClick(Calculator.funcDeleg f)
         {
-            //когда ввод первого аргумента, потом ввод функции, а потом замена функций
-            if (calc.btnType != false)
-            {
-                if (f != calc.fDeleg)
-                    resetResultGetting();
-                else
-                if (calc.index == true && f == calc.fDeleg)
-                    resetResultGetting();
-                else
-                if (calc.fDeleg == f && calc.arg != "")
-                    calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
+            calc.resBtnFlag = false;
 
-                
-            }
-            else if (calc.index == true && f == calc.fDeleg) resetResultGetting();
-
-            calc.resultBtnCheck(f);
-            calc.tryToGetArg(calc.arg);
-
-
-            //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
-            //в конце заполнения аргумента индекс переключается на противоположный
-            //соответсвенно,
-            //если индекс 1, то 1-й аргумент пустой, нужно запомнить функцию и заполнить 1-й аргумент в дальнейшем
-            //если индекс 0, то оба аргумента заполнены и нужно вычислить результат в дальнейшем
             switch (calc.index)
             {
-                case true: calc.fDeleg = f; break;
-                //есть вероятность, что подряд будут нажаты несколько функций
-                //глобальной переменной функции присваивается значение только после успешного выполнения функции
-                //всегда следует пытаться выполнить функцию, согласно глобальной переменной,
-                //так как обращение к процедуре может быть из кнопки "="
-                //если функция изменилась, то глобальная переменная сбрасывается
-                //и ожидается успешное выполнение новой функции
                 case false:
                     {
-                        try
-                        {
-                            getResult(calc.fDeleg);
-                        }
-                        catch
-                        {
-                            try
-                            {
-                                getResult(f);
-                            }
-                            catch
-                            {
-                                calc.getResult(calc.fDeleg);
-                            }
-                        }
-                        label1.Text = calc.disp;
                         calc.fDeleg = f;
+                        calc.tryToGetArg(calc.arg);
+                        calc.funcFlag = true;
+                        break;
                     }
-                    break;
+                case true:
+                    {
+                        calc.tryToGetArg(calc.arg);
+                        calc.getResult(calc.fDeleg);
+                        calc.funcFlag = true;
+                        calc.fDeleg = f;
+                        break;
+                    }
             }
-            calc.arg = "";
-            calc.btnType = true;
 
+            label1.Text = calc.disp;
             calc.minus = false;
         }
 
-        
+
         private void btn_click(string s, Calculator.funcDeleg f, bool isExtraFunc)
         {
             calc.symbol = s;
 
-            if (calc.fDeleg == null) calc.fDeleg = f;
-
-            btn_Func_Click(f, isExtraFunc);
-            setTextSize();
+            if (calc.funcFlag == true)
+            {
+                calc.fDeleg = f;
+                calc.resBtnFlag = false;
+            }
+            else
+            {
+                btn_Func_Click(f, isExtraFunc);
+                setTextSize();
+            }
         }
         
         private void btn_multiply_Click(object sender, EventArgs e)
@@ -260,41 +226,14 @@ namespace Calc
 
         private void btn_Result_Click(object sender, EventArgs e)
         {
-            //есть правило, что получить результат можно
-            //только если ранее результат не был получен.
-            //Это правило изначально было для арифметических кнопок,
-            //так как такие кнопки выполняют либо запоминание функции
-            //либо получение результата
-            //Кнопка "=" уникальна тем,
-            //что возвращает только результат без попытки получить аргумент
-            //стандартным способом. Аргумент получается в обход стандартного метода
+            calc.tryToGetArg(calc.arg);
+            
+            calc.resBtnFlag = true;
+            calc.funcFlag = true;
+            
+            calc.getResult(calc.fDeleg);
 
-            calc.isResultBtn = false;
-
-            //Если "=" нажато после кнопки функции и ранее не был получен результат то необходимо
-            //пройти в обход стандартного метода,
-            //получить аргументы принудительно,
-            //а затем принудительно вычислить результат
-
-            if (calc.btnType == true)
-            {
-                calc.args[1] = calc.args[0];
-                getResult(calc.fDeleg);
-                label1.Text = calc.disp;
-            }
-            //Если "=" нажато после цифры или уже был получен результат
-            //то обрабатывать стандартным методом
-            else
-            {
-                funcClick(calc.fDeleg);
-                calc.isResultBtn = true;
-            }
-            calc.index = false;
-            calc.isResultPresent = true;
-
-            calc.btnType = false;
-
-            //calc.previousCalcFunc = calc.calcFuncOf;
+            label1.Text = calc.disp;
 
             setTextSize();
         }
@@ -315,7 +254,15 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
+            mr_Click(mDeleg = new mrDeleg(getFromMR));
+            
             getFromMR(calc.mr.Length-1);
+            label1.Text = calc.arg;
+        }
+
+        private void mr_Click(mrDeleg md)
+        {
+            calc.mrFlag = true;
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
@@ -327,23 +274,26 @@ namespace Calc
         {
             try
             {
-                calc.mr[indexOf] += Convert.ToDouble(calc.arg) * negative;
+                calc.mr[indexOf] += calc.arg;
             }
             catch
             {
-                calc.mr[indexOf] = calc.args[0];
-                calc.arg = Convert.ToString(calc.mr[indexOf]);
+                calc.mr[indexOf] = calc.args[0].ToString();
+                calc.arg = calc.mr[indexOf];
             }
 
             setMrList(indexOf);
 
-            calc.btnType = true;
+            //calc.btnType = true;
+            calc.funcFlag = true;
+            calc.resBtnFlag = true;
+
             btn_MList.Enabled = true;
         }
 
         private void btn_MC_Click(object sender, EventArgs e)
         {
-            calc.mr = new double[1];
+            calc.mr = new string[1];
             btn_MList.Enabled = false;
             mf.listBox_MR.Items.Clear();
             switchMRButtons();
@@ -395,30 +345,37 @@ namespace Calc
 
         public void getFromMR(int indexOf)
         {
-            //вызов из памяти может произойти при двух обстоятельствах:
-            //  1.  Ожидание ввода второго аргумента при наличии первого
-            //  2.  Ожидание ввода первого аргумента (характерно для случаев
-            //      вызова памяти после "=")
-            //при случае 2 нужно подготовить калькулятор к заполнению с первого аргумента
+            ////вызов из памяти может произойти при двух обстоятельствах:
+            ////  1.  Ожидание ввода второго аргумента при наличии первого
+            ////  2.  Ожидание ввода первого аргумента (характерно для случаев
+            ////      вызова памяти после "=")
+            ////при случае 2 нужно подготовить калькулятор к заполнению с первого аргумента
 
-            short i = Convert.ToInt16(calc.index);
+            //short i = Convert.ToInt16(calc.index);
 
-            calc.resultPresentCheck();
 
-            calc.args[i] = calc.mr[indexOf];
+            //calc.args[i] = calc.mr[indexOf];
 
-            //if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
+            ////if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
 
-            calc.index = !calc.index;
-            calc.btnType = false;
+            //calc.index = !calc.index;
+            //calc.btnType = false;
 
-            label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
-            calc.arg = "";
+            //label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
+            //calc.arg = "";
+
+            calc.arg = calc.mr[indexOf];
+
         }
 
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
         {
+            int index = 
             getFromMR(mf.listBox_MR.SelectedIndex + 1);
+            //calc.funcFlag = true;
+            calc.resBtnFlag = true;
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)

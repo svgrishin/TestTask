@@ -8,47 +8,36 @@ using System.Windows.Forms;
 
 namespace Calc
 {
-    
-    //остледить состояние переменных при вводе первого аргумента и отразить в конструкторе класса с параметром
     public class Calculator
     {
+        public bool funcFlag = false;
+        public bool resBtnFlag = false;
+        public bool mrFlag = false;
+        
         public string symbol;
 
         public delegate double funcDeleg(double[] a);
 
         public funcDeleg fDeleg;
-        public funcDeleg priviousfDeleg;
 
         public double[] args = new double[2];
-
-        //public CalcFunction calcFuncOf;
-        //public CalcFunction previousCalcFunc;
 
         public DateTime dateTimeOf;
 
         public string resultString;
-        public bool isResultPresent;
 
         public bool index;
         public string arg, disp;
         public bool minus;
 
-        public bool isResultBtn;
+        //public bool isResultBtn;
+        
         public bool btnType;
 
-        public double[] mr;
+        public string[] mr;
 
         public string[] jsonString;
 
-        public int[] functions;
-        //0 - null
-        //1 - Сумма
-        //2 - Разность
-        //3 - Произведение
-        //4 - Частное
-        //5 - Корень
-        //6 - Степень
-        //7 - дробь
 
         public class CalcFunction
         {
@@ -111,62 +100,38 @@ namespace Calc
             args[1] = c.args[1];;
 
             resultString=c.resultString;
-            isResultPresent=c.isResultPresent;
 
             index = true;
+            funcFlag = false;
 
             arg = args[0].ToString();
             disp=c.disp;
             minus=c.minus;
 
-            isResultBtn = c.isResultBtn;
+            //isResultBtn = c.isResultBtn;
             btnType = c.btnType;
 
             mr=c.mr;
 
             jsonString=c.jsonString;
-
-            functions=c.functions;
         }
-        
-        //public void resetFunc()
-        //{
-        //    calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
-        //    functions[0] = 0;
-        //}
-
-        //public void getDeleg(int[] f)
-        //{
-        //    switch (f[0])
-        //    {
-        //        case 1: fDeleg = calcFuncOf.summ; break;
-        //        case 2: fDeleg = calcFuncOf.differens; break;
-        //        case 3: fDeleg = calcFuncOf.multiply; break;
-        //        case 4: fDeleg = calcFuncOf.divide; break;
-        //        case 5: fDeleg = calcFuncOf.sqrtOf; break;
-        //        case 6: fDeleg = calcFuncOf.sqrOf; break;
-        //      //case 7: calcFunc = ???; break;
-        //    }
-        //}
 
         public Calculator()
         {
-            isResultPresent = false;
+            funcFlag = false;
 
             index=false;
             arg = "";
             disp = "0";
             minus = false;
-            isResultBtn = false;
+            //isResultBtn = false;
             btnType = false;
-            mr = new double[1];
+            mr = new string[1];
 
             jsonString = new string[1];
-
-            functions = new int[2];
             
             fDeleg = null;
-            //calcFuncOf = new CalcFunction();
+
             args = new double[2];
 
         }
@@ -187,14 +152,21 @@ namespace Calc
             disp = "0";
             index = false;
             minus = false;
-            isResultPresent = false;
-            isResultBtn = false;
+            //isResultBtn = false;
             btnType = false;
             fDeleg = null;
         }
 
         public string inputValues(char c, Form1 f)
         {
+            if (funcFlag== true && resBtnFlag== true)
+            {
+                index = false;
+                arg = "";
+            }
+            
+            funcFlag = false;
+
             int i=15;
             
             if (c == '-') i = 17;
@@ -203,10 +175,10 @@ namespace Calc
             {
                 string s;
 
-                resultBtnCheck();
+                //resultBtnCheck();
 
-                if (isResultPresent == true) resetCalc();
-                if (btnType == true) arg = "";
+                //if (isResultPresent == true) resetCalc();
+                //if (btnType == true) arg = "";
 
                 if (c == '-')
                 {
@@ -309,8 +281,6 @@ namespace Calc
             try
             {
                 args[0] = cf(args);
-                //previousCalcFunc = this.calcFuncOf;
-                //fDeleg = cf;
             }
             catch
             {
@@ -319,7 +289,6 @@ namespace Calc
 
             fDeleg = cf;
             addToCalcString(args[0]);
-            isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
         }
 
@@ -331,10 +300,7 @@ namespace Calc
 
             tryToGetArg(arg);
             args[1] = 2;
-            
-            //addToCalcString(arg);
-            //addToCalcString(symbol);
-            
+
             getResult(cf);
 
             arg = "";
@@ -348,52 +314,74 @@ namespace Calc
             try
             {
                 args[Convert.ToByte(index)] = Convert.ToDouble(s);
+                arg = "";
             }
             catch
             {
-                index = !index;
-            }
-            index = !index;
-        }
-
-        public void resultPresentCheck()
-        {
-            //проверка наличия результата
-            if (isResultPresent == true) resetCalc();
-        }
-
-        public void resultBtnCheck(funcDeleg f)
-        {
-            //Проверка нажатия "=" ранее
-            //необходимо для предотвращения автоматического вычисления результата
-            //при нажатии кнопок функций после "=".
-            //При выполнении условия необходимо определить тип кнопки:
-            //  1. Цифра (false)
-            //  2. Функция (true)
-
-            if (isResultBtn == true)
-            {
-                switch (btnType)
+                if (resBtnFlag == false)
                 {
-                    case false:
-                        {
-                            resultBtnCheckReset();
-                            break;
-                        }
-                    case true:
-                        {
-                            resultBtnCheckReset();
-                            arg = Convert.ToString(args[0]);
-
-                            
-
-                            break;
-                        }
-                }
-                index = true;
-                isResultBtn = false;
+                    index = true;
+                    args[1] = args[0];
+                    resBtnFlag = true;
+                } 
             }
+            index = true;
+            disp = s;
         }
+
+        public void tryToGetArg(double s)
+        {
+            try
+            {
+                args[Convert.ToByte(index)] = s;
+                arg = "";
+            }
+            catch
+            {
+                if (resBtnFlag == false)
+                {
+                    index = true;
+                    args[1] = args[0];
+                    resBtnFlag = true;
+                }
+            }
+            index = true;
+            disp = s.ToString();
+        }
+
+
+        //public void resultBtnCheck(funcDeleg f)
+        //{
+        //    //Проверка нажатия "=" ранее
+        //    //необходимо для предотвращения автоматического вычисления результата
+        //    //при нажатии кнопок функций после "=".
+        //    //При выполнении условия необходимо определить тип кнопки:
+        //    //  1. Цифра (false)
+        //    //  2. Функция (true)
+
+        //    if (isResultBtn == true)
+        //    {
+        //        switch (btnType)
+        //        {
+        //            case false:
+        //                {
+        //                    resultBtnCheckReset();
+        //                    break;
+        //                }
+        //            case true:
+        //                {
+        //                    resultBtnCheckReset();
+        //                    arg = Convert.ToString(args[0]);
+
+
+
+        //                    break;
+        //                }
+        //        }
+        //        index = true;
+        //        isResultBtn = false;
+        //    }
+        //}
 
         public void resultBtnCheckReset()
         {
@@ -401,32 +389,32 @@ namespace Calc
             index = false;
         }
 
-        public void resultBtnCheck()
-        {
-            //следует не допускать автоматическое выполнение функции
-            //над аргументом, который введён после "="
-            //необходимо подготовпть калькулятор к вводу второго аргумента
-            //после ввода первого, не допуская автоматического выполнения функции
-            //после ввода первого аргумента
-            if (isResultBtn == true)
-            {
-                switch (btnType)
-                {
-                    case false:
-                        {
-                            index = true;
-                            break;
-                        }
-                    case true:
-                        {
-                            //resetFunc();
-                            index = false;
-                            break;
-                        }
-                }
-                isResultBtn = false;
-            }
-        }
+        //public void resultBtnCheck()
+        //{
+        //    //следует не допускать автоматическое выполнение функции
+        //    //над аргументом, который введён после "="
+        //    //необходимо подготовпть калькулятор к вводу второго аргумента
+        //    //после ввода первого, не допуская автоматического выполнения функции
+        //    //после ввода первого аргумента
+        //    if (isResultBtn == true)
+        //    {
+        //        switch (btnType)
+        //        {
+        //            case false:
+        //                {
+        //                    index = true;
+        //                    break;
+        //                }
+        //            case true:
+        //                {
+        //                    //resetFunc();
+        //                    index = false;
+        //                    break;
+        //                }
+        //        }
+        //        isResultBtn = false;
+        //    }
+        //}
 
         private void addToCalcString(string s)
         {
