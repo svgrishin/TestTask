@@ -21,8 +21,8 @@ namespace Calc
 
         public double[] args = new double[2];
 
-        public CalcFunction calcFuncOf;
-        public CalcFunction previousCalcFunc;
+        //public CalcFunction calcFuncOf;
+        //public CalcFunction previousCalcFunc;
 
         public DateTime dateTimeOf;
 
@@ -129,25 +129,25 @@ namespace Calc
             functions=c.functions;
         }
         
-        public void resetFunc()
-        {
-            calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
-            functions[0] = 0;
-        }
+        //public void resetFunc()
+        //{
+        //    calcFuncOf = new CalcFunction(calcFuncOf.functionOf);
+        //    functions[0] = 0;
+        //}
 
-        public void getDeleg(int[] f)
-        {
-            switch (f[0])
-            {
-                case 1: fDeleg = calcFuncOf.summ; break;
-                case 2: fDeleg = calcFuncOf.differens; break;
-                case 3: fDeleg = calcFuncOf.multiply; break;
-                case 4: fDeleg = calcFuncOf.divide; break;
-                case 5: fDeleg = calcFuncOf.sqrtOf; break;
-                case 6: fDeleg = calcFuncOf.sqrOf; break;
-              //case 7: calcFunc = ???; break;
-            }
-        }
+        //public void getDeleg(int[] f)
+        //{
+        //    switch (f[0])
+        //    {
+        //        case 1: fDeleg = calcFuncOf.summ; break;
+        //        case 2: fDeleg = calcFuncOf.differens; break;
+        //        case 3: fDeleg = calcFuncOf.multiply; break;
+        //        case 4: fDeleg = calcFuncOf.divide; break;
+        //        case 5: fDeleg = calcFuncOf.sqrtOf; break;
+        //        case 6: fDeleg = calcFuncOf.sqrOf; break;
+        //      //case 7: calcFunc = ???; break;
+        //    }
+        //}
 
         public Calculator()
         {
@@ -164,8 +164,9 @@ namespace Calc
             jsonString = new string[1];
 
             functions = new int[2];
-
-            calcFuncOf = new CalcFunction();
+            
+            fDeleg = null;
+            //calcFuncOf = new CalcFunction();
             args = new double[2];
 
         }
@@ -189,6 +190,7 @@ namespace Calc
             isResultPresent = false;
             isResultBtn = false;
             btnType = false;
+            fDeleg = null;
         }
 
         public string inputValues(char c, Form1 f)
@@ -307,14 +309,15 @@ namespace Calc
             try
             {
                 args[0] = cf(args);
-                previousCalcFunc = this.calcFuncOf;
+                //previousCalcFunc = this.calcFuncOf;
+                //fDeleg = cf;
             }
             catch
             {
                 args[0] = fDeleg(args);
             }
 
-            fDeleg = null;
+            fDeleg = cf;
             addToCalcString(args[0]);
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
@@ -394,7 +397,7 @@ namespace Calc
 
         public void resultBtnCheckReset()
         {
-            resetFunc();
+            //resetFunc();
             index = false;
         }
 
@@ -416,7 +419,7 @@ namespace Calc
                         }
                     case true:
                         {
-                            resetFunc();
+                            //resetFunc();
                             index = false;
                             break;
                         }

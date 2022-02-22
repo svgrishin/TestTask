@@ -87,7 +87,7 @@ namespace Calc
         {
             resetCalc();
             Array.Clear(calc.args, 0, 1);
-            calc.resetFunc();
+            //calc.resetFunc();
             label1.Text = "0";
         }
 
@@ -158,11 +158,7 @@ namespace Calc
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            btn_click("+", new Calculator().calcFuncOf.summ, false);
-
-            //calc.symbol = "+";
-            //calc.fDeleg = new Calculator().calcFuncOf.summ;
-            //btn_Func_Click(calc.fDeleg, false);
+            btn_click("+", new Calculator.CalcFunction().summ, false);
         }
 
         private void resetResultGetting()
@@ -249,29 +245,17 @@ namespace Calc
         
         private void btn_multiply_Click(object sender, EventArgs e)
         {
-            btn_click("×", new Calculator().calcFuncOf.multiply, false);
-            
-            //calc.symbol = "×";
-            //calc.fDeleg = new Calculator().calcFuncOf.multiply;
-            //btn_Func_Click(calc.fDeleg, false);
+            btn_click("×", new Calculator.CalcFunction().multiply, false);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
-            btn_click("÷", new Calculator().calcFuncOf.divide, false);
-
-            //calc.symbol = "÷";
-            //calc.fDeleg = new Calculator().calcFuncOf.divide;
-            //btn_Func_Click(calc.fDeleg, false);
+            btn_click("÷", new Calculator.CalcFunction().divide, false);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            btn_click("-", new Calculator().calcFuncOf.differens, false);
-
-            //calc.symbol = "-";
-            //calc.fDeleg = new Calculator().calcFuncOf.differens;
-            //btn_Func_Click(calc.fDeleg, false);
+            btn_click("-", new Calculator.CalcFunction().differens, false);
         }
 
         private void btn_Result_Click(object sender, EventArgs e)
@@ -310,7 +294,7 @@ namespace Calc
 
             calc.btnType = false;
 
-            calc.previousCalcFunc = calc.calcFuncOf;
+            //calc.previousCalcFunc = calc.calcFuncOf;
 
             setTextSize();
         }
@@ -318,14 +302,14 @@ namespace Calc
         private void btn_SQRT_Click(object sender, EventArgs e)
         {
             calc.symbol = "√";
-            calc.fDeleg = new Calculator().calcFuncOf.sqrtOf;
+            calc.fDeleg = new Calculator.CalcFunction().sqrtOf;
             btn_Func_Click(calc.fDeleg, true);
         }
 
         private void btn_SQR_Click(object sender, EventArgs e)
         {
             calc.symbol = "^";
-            calc.fDeleg = new Calculator().calcFuncOf.sqrOf;
+            calc.fDeleg = new Calculator.CalcFunction().sqrOf;
             btn_Func_Click(calc.fDeleg, true);
         }
 
@@ -423,7 +407,7 @@ namespace Calc
 
             calc.args[i] = calc.mr[indexOf];
 
-            if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
+            //if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
 
             calc.index = !calc.index;
             calc.btnType = false;
@@ -440,7 +424,7 @@ namespace Calc
         private void button1_Click(object sender, EventArgs e)
         {
             calc.symbol = "1/";
-            calc.fDeleg = new Calculator().calcFuncOf.fraction;
+            calc.fDeleg = new Calculator.CalcFunction().fraction;
             btn_Func_Click(calc.fDeleg, true);
         }
 
@@ -508,8 +492,9 @@ namespace Calc
         private void saveCalc()
         {
             Calculator c = new Calculator(calc);
-            c.calcFuncOf = null;
-            c.previousCalcFunc = null;
+            //c.calcFuncOf = null;
+            //c.previousCalcFunc = null;
+            c.fDeleg = null;
             
             string s = JsonConvert.SerializeObject(c);
 
