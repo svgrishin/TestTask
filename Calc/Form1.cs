@@ -158,14 +158,18 @@ namespace Calc
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            calc.symbol = "+";
-            calc.fDeleg = new Calculator().calcFuncOf.summ;
-            btn_Func_Click(calc.fDeleg, false);
+            btn_click("+", new Calculator().calcFuncOf.summ, false);
+
+            //calc.symbol = "+";
+            //calc.fDeleg = new Calculator().calcFuncOf.summ;
+            //btn_Func_Click(calc.fDeleg, false);
         }
 
         private void resetResultGetting()
         {
             calc.isResultPresent = false;// это нужно, чтобы аргументы не сбрасывались при замене функции на горячую
+            calc.fDeleg = null;
+            calc.index = true;
         }
         
         private void funcClick(Calculator.funcDeleg f)
@@ -175,17 +179,20 @@ namespace Calc
             {
                 if (f != calc.fDeleg)
                     resetResultGetting();
-
+                else
+                if (calc.index == true && f == calc.fDeleg)
+                    resetResultGetting();
+                else
                 if (calc.fDeleg == f && calc.arg != "")
                     calc.index = true;//это нужно для того, чтобы при смене функции на горячую результат выдавался сразу при вызове результирующей функции
 
-                if (calc.index == true && f == calc.fDeleg)
-                    resetResultGetting();
+                
             }
             else if (calc.index == true && f == calc.fDeleg) resetResultGetting();
 
             calc.resultBtnCheck(f);
             calc.tryToGetArg(calc.arg);
+
 
             //index = метка, по которой определяется, какой аргумент заполнять, 0-й или 1-й
             //в конце заполнения аргумента индекс переключается на противоположный
@@ -233,30 +240,38 @@ namespace Calc
         private void btn_click(string s, Calculator.funcDeleg f, bool isExtraFunc)
         {
             calc.symbol = s;
-            calc.fDeleg = f;
-            btn_Func_Click(calc.fDeleg, isExtraFunc);
+
+            if (calc.fDeleg == null) calc.fDeleg = f;
+
+            btn_Func_Click(f, isExtraFunc);
             setTextSize();
         }
         
         private void btn_multiply_Click(object sender, EventArgs e)
         {
-            calc.symbol = "×";
-            calc.fDeleg = new Calculator().calcFuncOf.multiply;
-            btn_Func_Click(calc.fDeleg, false);
+            btn_click("×", new Calculator().calcFuncOf.multiply, false);
+            
+            //calc.symbol = "×";
+            //calc.fDeleg = new Calculator().calcFuncOf.multiply;
+            //btn_Func_Click(calc.fDeleg, false);
         }
 
         private void btn_divide_Click(object sender, EventArgs e)
         {
-            calc.symbol = "÷";
-            calc.fDeleg = new Calculator().calcFuncOf.divide;
-            btn_Func_Click(calc.fDeleg, false);
+            btn_click("÷", new Calculator().calcFuncOf.divide, false);
+
+            //calc.symbol = "÷";
+            //calc.fDeleg = new Calculator().calcFuncOf.divide;
+            //btn_Func_Click(calc.fDeleg, false);
         }
 
         private void btn_minus_Click(object sender, EventArgs e)
         {
-            calc.symbol = "-";
-            calc.fDeleg = new Calculator().calcFuncOf.differens;
-            btn_Func_Click(calc.fDeleg, false);
+            btn_click("-", new Calculator().calcFuncOf.differens, false);
+
+            //calc.symbol = "-";
+            //calc.fDeleg = new Calculator().calcFuncOf.differens;
+            //btn_Func_Click(calc.fDeleg, false);
         }
 
         private void btn_Result_Click(object sender, EventArgs e)

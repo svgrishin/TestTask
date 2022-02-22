@@ -17,6 +17,7 @@ namespace Calc
         public delegate double funcDeleg(double[] a);
 
         public funcDeleg fDeleg;
+        public funcDeleg priviousfDeleg;
 
         public double[] args = new double[2];
 
@@ -312,7 +313,8 @@ namespace Calc
             {
                 args[0] = fDeleg(args);
             }
-            
+
+            fDeleg = null;
             addToCalcString(args[0]);
             isResultPresent = true;
             disp = displayOut(Convert.ToString(args[0]));
