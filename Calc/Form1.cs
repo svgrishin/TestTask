@@ -73,14 +73,14 @@ namespace Calc
 
         private void inputVal(char c)
         {
-            label1.Text = calc.inputValues(c, this);
+            label1.Text = calc.inputValues(c);
             setTextSize();
         }
 
         private void btn_Zero_Click(object sender, EventArgs e)
         {
             if (calc.arg == "") typeZeroComa();
-            else label1.Text = calc.inputValues('0', this);
+            else label1.Text = calc.inputValues('0');
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
@@ -110,14 +110,14 @@ namespace Calc
                 {
                     typeZeroComa();
                 }
-                else label1.Text = calc.inputValues(',', this);
+                else label1.Text = calc.inputValues(',');
             }
         }
 
         public void typeZeroComa()
         {
-            label1.Text = calc.inputValues('0', this);
-            label1.Text = calc.inputValues(',', this);
+            label1.Text = calc.inputValues('0');
+            label1.Text = calc.inputValues(',');
         }
 
         public void setTextSize()
@@ -148,7 +148,8 @@ namespace Calc
         {
             if (isExtraFunc == true)
             {
-                label1.Text = calc.extraFunc(f);
+                calc.extraFunc(f);
+                label1.Text = calc.disp;
                 saveStatus();
                 setTextSize();
             }
@@ -157,7 +158,7 @@ namespace Calc
 
         private void btn_plus_Click(object sender, EventArgs e)
         {
-            btn_click("+", new Calculator.CalcFunction().summ, false);
+            btn_click("+", new Calculator.CalcFunction().Summ, false);
         }
 
         
@@ -177,7 +178,8 @@ namespace Calc
                 case true:
                     {
                         calc.tryToGetArg(calc.arg);
-                        calc.getResult(calc.fDeleg);
+                        //calc.getResult(calc.fDeleg);
+                        getResult(calc.fDeleg);
                         calc.funcFlag = true;
                         calc.fDeleg = f;
                         break;
@@ -230,6 +232,8 @@ namespace Calc
 
             label1.Text = calc.disp;
 
+            saveStatus();
+
             setTextSize();
         }
 
@@ -251,13 +255,16 @@ namespace Calc
         {
             getFromMR(calc.mr.Length - 1);
             label1.Text = calc.arg;
+            
             calc.mrFlag = true;
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
             setMR(calc.mr.Length - 1, 1);
+            
             calc.mrFlag = true;
+            
             btn_MC.Enabled = true;
             btn_MR.Enabled = true;
         }
@@ -296,6 +303,7 @@ namespace Calc
         {
             setMR(calc.mr.Length - 1, -1);
             calc.mrFlag = true;
+            
             btn_MC.Enabled = true;
             btn_MR.Enabled = true;
         }
@@ -312,6 +320,7 @@ namespace Calc
             setMR(l, 1);
             
             calc.mrFlag = true;
+            
             btn_MC.Enabled = true;
             btn_MR.Enabled = true;
         }
@@ -347,6 +356,7 @@ namespace Calc
             calc.arg = calc.mr[indexOf-1].ToString();
             if (calc.mr[indexOf - 1] < 0) calc.minus = true;
             calc.disp = calc.displayOut(calc.arg);
+            
             label1.Text = calc.disp;
         }
 
@@ -413,7 +423,7 @@ namespace Calc
 
         public void resetCalc()
         {
-            calc.resetCalc();
+            calc.ResetCalc();
             label1.Font = new Font("Arial", 30);
         }
 
