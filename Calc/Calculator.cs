@@ -8,12 +8,16 @@ using System.Windows.Forms;
 
 namespace Calc
 {
-    public class Calculator
+    unsafe public class Calculator
     {
         public bool funcFlag = false;
         public bool resBtnFlag = false;
         public bool mrFlag = false;
-        
+
+         public bool *funcFlags;
+         public bool *resBtnFlags;
+         public bool *mrFlags;
+
         public string symbol;
 
         public delegate double funcDeleg(double[] a);
@@ -29,8 +33,6 @@ namespace Calc
         public bool index;
         public string arg, disp;
         public bool minus;
-
-        //public bool isResultBtn;
         
         public bool btnType;
 
@@ -108,7 +110,6 @@ namespace Calc
             disp=c.disp;
             minus=c.minus;
 
-            //isResultBtn = c.isResultBtn;
             btnType = c.btnType;
 
             mr=c.mr;
@@ -118,13 +119,14 @@ namespace Calc
 
         public Calculator()
         {
+            fixed(bool *funcFlags = &funcFlag);
             funcFlag = false;
 
             index=false;
             arg = "";
             disp = "0";
             minus = false;
-            //isResultBtn = false;
+  
             btnType = false;
             mr = new double[1];
 
@@ -152,7 +154,6 @@ namespace Calc
             disp = "0";
             index = false;
             minus = false;
-            //isResultBtn = false;
             btnType = false;
             fDeleg = null;
         }
@@ -202,8 +203,6 @@ namespace Calc
             }
             else return displayOut(arg);
         }
-
-        
 
         public string deleteSymbol()
         {

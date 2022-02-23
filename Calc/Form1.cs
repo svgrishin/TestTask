@@ -188,7 +188,6 @@ namespace Calc
             calc.minus = false;
         }
 
-
         private void btn_click(string s, Calculator.funcDeleg f, bool isExtraFunc)
         {
             calc.symbol = s;
@@ -223,7 +222,7 @@ namespace Calc
         private void btn_Result_Click(object sender, EventArgs e)
         {
             calc.tryToGetArg(calc.arg);
-            
+             
             calc.resBtnFlag = true;
             calc.funcFlag = true;
             
@@ -323,7 +322,6 @@ namespace Calc
             mf.Top = Top + (Height - hf.Height) / 2;
             mf.Show();
             Enabled = false;
-            //switchMRButtons();
         }
 
         public void setMrList(int indexOf)
@@ -468,7 +466,7 @@ namespace Calc
 
         private void Form1_Layout(object sender, LayoutEventArgs e)
         {
-            //setTextSize(); динамичное изменение размера шрифта, но выглядит не очень
+            //setTextSize(); //динамичное изменение размера шрифта, но выглядит не очень
         }
     }
 }
