@@ -15,10 +15,6 @@ namespace Calc
 {
     public partial class Form1 : Form
     {
-        delegate void mrDeleg();
-        mrDeleg mDeleg;
-
-
         public Calculator calc = new Calculator();
         public Calculator[] calcs = new Calculator[0];
         public HistoryForm hf;
@@ -254,46 +250,44 @@ namespace Calc
 
         private void btn_MR_Click(object sender, EventArgs e)
         {
-            mr_Click(mDeleg = new mrDeleg(getFromMR));
-            
-            getFromMR(calc.mr.Length-1);
+            getFromMR(calc.mr.Length - 1);
             label1.Text = calc.arg;
-        }
-
-        private void mr_Click(mrDeleg md)
-        {
             calc.mrFlag = true;
         }
 
         private void btn_MPlus_Click(object sender, EventArgs e)
         {
             setMR(calc.mr.Length - 1, 1);
+            calc.mrFlag = true;
+            btn_MC.Enabled = true;
+            btn_MR.Enabled = true;
         }
 
         public void setMR(int indexOf, int negative)
         {
             try
             {
-                calc.mr[indexOf] += calc.arg;
+                calc.mr[indexOf] += Convert.ToDouble(calc.arg)*negative;
             }
             catch
             {
-                calc.mr[indexOf] = calc.args[0].ToString();
-                calc.arg = calc.mr[indexOf];
+                calc.mr[indexOf] = calc.args[0];
+                calc.arg = calc.mr[indexOf].ToString();
             }
 
             setMrList(indexOf);
 
-            //calc.btnType = true;
             calc.funcFlag = true;
             calc.resBtnFlag = true;
 
             btn_MList.Enabled = true;
+
+            calc.mrFlag = true;
         }
 
         private void btn_MC_Click(object sender, EventArgs e)
         {
-            calc.mr = new string[1];
+            calc.mr = new double[1];
             btn_MList.Enabled = false;
             mf.listBox_MR.Items.Clear();
             switchMRButtons();
@@ -302,6 +296,9 @@ namespace Calc
         private void btn_MMinus_Click(object sender, EventArgs e)
         {
             setMR(calc.mr.Length - 1, -1);
+            calc.mrFlag = true;
+            btn_MC.Enabled = true;
+            btn_MR.Enabled = true;
         }
 
         private void btn_MS_Click(object sender, EventArgs e)
@@ -314,6 +311,10 @@ namespace Calc
                 l++;
             }
             setMR(l, 1);
+            
+            calc.mrFlag = true;
+            btn_MC.Enabled = true;
+            btn_MR.Enabled = true;
         }
 
         private void btn_MList_Click(object sender, EventArgs e)
@@ -322,7 +323,7 @@ namespace Calc
             mf.Top = Top + (Height - hf.Height) / 2;
             mf.Show();
             Enabled = false;
-            switchMRButtons();
+            //switchMRButtons();
         }
 
         public void setMrList(int indexOf)
@@ -339,43 +340,22 @@ namespace Calc
 
         public void switchMRButtons()
         {
-            btn_MR.Enabled = !btn_MR.Enabled;
-            btn_MS.Enabled = !btn_MS.Enabled;
+            btn_MR.Enabled = false;
+            btn_MC.Enabled = false;
         }
 
         public void getFromMR(int indexOf)
         {
-            ////вызов из памяти может произойти при двух обстоятельствах:
-            ////  1.  Ожидание ввода второго аргумента при наличии первого
-            ////  2.  Ожидание ввода первого аргумента (характерно для случаев
-            ////      вызова памяти после "=")
-            ////при случае 2 нужно подготовить калькулятор к заполнению с первого аргумента
-
-            //short i = Convert.ToInt16(calc.index);
-
-
-            //calc.args[i] = calc.mr[indexOf];
-
-            ////if (calc.isResultPresent == false && calc.index == false) calc.resetFunc();
-
-            //calc.index = !calc.index;
-            //calc.btnType = false;
-
-            //label1.Text = calc.displayOut(Convert.ToString(calc.args[i]));
-            //calc.arg = "";
-
-            calc.arg = calc.mr[indexOf];
-
+            calc.arg = calc.mr[indexOf-1].ToString();
+            if (calc.mr[indexOf - 1] < 0) calc.minus = true;
+            calc.disp = calc.displayOut(calc.arg);
+            label1.Text = calc.disp;
         }
 
         private void listBox_MR_DoubleClick(object sender, EventArgs e)
         {
-            int index = 
             getFromMR(mf.listBox_MR.SelectedIndex + 1);
-            //calc.funcFlag = true;
             calc.resBtnFlag = true;
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -449,8 +429,7 @@ namespace Calc
         private void saveCalc()
         {
             Calculator c = new Calculator(calc);
-            //c.calcFuncOf = null;
-            //c.previousCalcFunc = null;
+
             c.fDeleg = null;
             
             string s = JsonConvert.SerializeObject(c);

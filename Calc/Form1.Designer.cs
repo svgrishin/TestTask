@@ -132,6 +132,7 @@
             // btn_MC
             // 
             this.btn_MC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MC.Enabled = false;
             this.btn_MC.Location = new System.Drawing.Point(3, 3);
             this.btn_MC.Name = "btn_MC";
             this.btn_MC.Size = new System.Drawing.Size(40, 31);
@@ -143,6 +144,7 @@
             // btn_MR
             // 
             this.btn_MR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_MR.Enabled = false;
             this.btn_MR.Location = new System.Drawing.Point(49, 3);
             this.btn_MR.Name = "btn_MR";
             this.btn_MR.Size = new System.Drawing.Size(40, 31);

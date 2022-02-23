@@ -34,7 +34,7 @@ namespace Calc
         
         public bool btnType;
 
-        public string[] mr;
+        public double[] mr;
 
         public string[] jsonString;
 
@@ -126,7 +126,7 @@ namespace Calc
             minus = false;
             //isResultBtn = false;
             btnType = false;
-            mr = new string[1];
+            mr = new double[1];
 
             jsonString = new string[1];
             
@@ -159,11 +159,13 @@ namespace Calc
 
         public string inputValues(char c, Form1 f)
         {
-            if (funcFlag== true && resBtnFlag== true)
+            if (funcFlag == true)
             {
-                index = false;
                 arg = "";
+                funcFlag = false;
             }
+            
+            if (resBtnFlag == true) index = false;
             
             funcFlag = false;
 
@@ -174,11 +176,6 @@ namespace Calc
             if (arg.Length <= i)
             {
                 string s;
-
-                //resultBtnCheck();
-
-                //if (isResultPresent == true) resetCalc();
-                //if (btnType == true) arg = "";
 
                 if (c == '-')
                 {
@@ -349,72 +346,10 @@ namespace Calc
             disp = s.ToString();
         }
 
-
-        //public void resultBtnCheck(funcDeleg f)
-        //{
-        //    //Проверка нажатия "=" ранее
-        //    //необходимо для предотвращения автоматического вычисления результата
-        //    //при нажатии кнопок функций после "=".
-        //    //При выполнении условия необходимо определить тип кнопки:
-        //    //  1. Цифра (false)
-        //    //  2. Функция (true)
-
-        //    if (isResultBtn == true)
-        //    {
-        //        switch (btnType)
-        //        {
-        //            case false:
-        //                {
-        //                    resultBtnCheckReset();
-        //                    break;
-        //                }
-        //            case true:
-        //                {
-        //                    resultBtnCheckReset();
-        //                    arg = Convert.ToString(args[0]);
-
-
-
-        //                    break;
-        //                }
-        //        }
-        //        index = true;
-        //        isResultBtn = false;
-        //    }
-        //}
-
         public void resultBtnCheckReset()
         {
-            //resetFunc();
             index = false;
         }
-
-        //public void resultBtnCheck()
-        //{
-        //    //следует не допускать автоматическое выполнение функции
-        //    //над аргументом, который введён после "="
-        //    //необходимо подготовпть калькулятор к вводу второго аргумента
-        //    //после ввода первого, не допуская автоматического выполнения функции
-        //    //после ввода первого аргумента
-        //    if (isResultBtn == true)
-        //    {
-        //        switch (btnType)
-        //        {
-        //            case false:
-        //                {
-        //                    index = true;
-        //                    break;
-        //                }
-        //            case true:
-        //                {
-        //                    //resetFunc();
-        //                    index = false;
-        //                    break;
-        //                }
-        //        }
-        //        isResultBtn = false;
-        //    }
-        //}
 
         private void addToCalcString(string s)
         {
@@ -424,11 +359,6 @@ namespace Calc
         private void addToCalcString(double s)
         {
             resultString=string.Concat(resultString,s.ToString());
-        }
-
-        public void saveFile(Calculator c)
-        {
-
         }
     }
 }
