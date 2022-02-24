@@ -405,21 +405,25 @@ namespace Calc
 
         private void btn_Percent_Click(object sender, EventArgs e)
         {
-            if (calcs.Length == 0)
+            //if (calcs.Length == 0)
             {
                 string[] s = File.ReadAllLines("c:/temp/calc.json");
-                int i = calcs.Length;
+                //int i = calcs.Length;
+                int i = 0;
                 foreach (string str in s)
                 {
-                    try
-                    {
-                        calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
-                    }
-                    catch
-                    {
-                        Array.Resize(ref calcs, i+1);
-                        calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
-                    }
+                    Array.Resize(ref calcs, i + 1);
+                    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+
+                    //try
+                    //{
+                    //    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+                    //}
+                    //catch
+                    //{
+                    //    Array.Resize(ref calcs, i+1);
+                    //    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+                    //}
                     hf.HistoryList.Items.Add(calcs[i].resultString);
                     i++;
                 }
@@ -446,10 +450,11 @@ namespace Calc
         /// <summary>
         /// Загрузка калькулятора
         /// </summary>
-        /// <param name="Индекс загружаемого калькулятора из массива калькуляторов"></param>
+        /// <param name="i">Индекс загружаемого калькулятора из массива калькуляторов></param>
         public void loadMe(int i)
         {
             calc = new Calculator(calcs[i]);
+            calc.resultString = "";
             
             label1.Text = calc.displayOut(calc.disp);
 
@@ -474,7 +479,7 @@ namespace Calc
         {
             int i = calcs.Length;
             Array.Resize(ref calcs, i + 1);
-            calcs[i] = new Calculator(calc);   
+            calcs[calcs.Length-1] = new Calculator(calc);   
         }
 
         /// <summary>
@@ -497,7 +502,7 @@ namespace Calc
         /// <param name="c">Калькулятор</param>
         private void addToCalcList(Calculator c)
         {
-            hf.HistoryList.Items.Add(c.resultString);
+            //hf.HistoryList.Items.Add(c.resultString);
             comboBox1.Items.Add(c.resultString);
         }
 

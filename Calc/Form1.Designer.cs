@@ -612,7 +612,7 @@
         private System.Windows.Forms.Panel panel3;
         public System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

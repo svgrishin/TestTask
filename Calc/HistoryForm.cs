@@ -22,11 +22,14 @@ namespace Calc
         private void HistoryList_DoubleClick(object sender, EventArgs e)
         {
             calcForm.loadMe(HistoryList.SelectedIndex);
+            calcForm.comboBox1.Items.Add(HistoryList.Items[HistoryList.SelectedIndex]);
+            
             Close();
         }
 
         private void HistoryForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            HistoryList.Items.Clear();
             Visible = false;
             calcForm.Enabled = true;
             e.Cancel = true;
