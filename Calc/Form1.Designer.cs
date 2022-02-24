@@ -563,8 +563,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Калькулятор";
-            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
-            this.Layout += new System.Windows.Forms.LayoutEventHandler(this.Form1_Layout);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);

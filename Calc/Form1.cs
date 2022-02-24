@@ -15,6 +15,8 @@ namespace Calc
 {
     public partial class Form1 : Form
     {
+        bool sizeFlag = false;
+        
         /// <summary>
         /// Объект калькулятора
         /// </summary>
@@ -153,9 +155,14 @@ namespace Calc
             {
                 while(label1.Width<s)
                 {
-                    fSize--;
-                    label1.Font = new Font("Arial", fSize);
-                    s= TextRenderer.MeasureText(label1.Text, label1.Font).Width;
+                    try
+                    {
+                        fSize--;
+                        label1.Font = new Font("Arial", fSize);
+                        s = TextRenderer.MeasureText(label1.Text, label1.Font).Width;
+                    }
+                    catch {}
+
                 }
             }
             else
@@ -410,8 +417,8 @@ namespace Calc
 
         private void btn_Percent_Click(object sender, EventArgs e)
         {
-
-            string[] s = File.ReadAllLines("c:/temp/calc.json");
+            string location = Directory.GetCurrentDirectory() + "/calc.json";
+            string[] s = File.ReadAllLines(location);
             int i = 0;
             foreach (string str in s)
             {
@@ -486,7 +493,8 @@ namespace Calc
             
             string s = JsonConvert.SerializeObject(c);
 
-            File.AppendAllText("c:/temp/calc.json", s + "\n");
+            string location = Directory.GetCurrentDirectory()+"/calc.json";
+            File.AppendAllText(location, s + "\n");
         }
 
         /// <summary>
@@ -523,21 +531,57 @@ namespace Calc
             loadMe(comboBox1.SelectedIndex);
         }
 
-        private void Form1_ResizeEnd(object sender, EventArgs e)
+        private void setFonSize(float fSize)
         {
-            setTextSize();
-            
-            float fSize = btn_Zero.Font.Size;
-            fSize = btn_Zero.Height / 5;
+            btn_MList.Font = new Font("Arial", fSize);
+            btn_MS.Font = new Font("Arial", fSize);
+            btn_MC.Font = new Font("Arial", fSize);
+            btn_MR.Font = new Font("Arial", fSize);
+            btn_MPlus.Font = new Font("Arial", fSize);
+            btn_MMinus.Font = new Font("Arial", fSize);
+            button1.Font = new Font("Arial", fSize);
+            btn_History.Font = new Font("Arial", fSize);
+            button2.Font = new Font("Arial", fSize);
+            btn_Result.Font = new Font("Arial", fSize);
+            btn_plus.Font = new Font("Arial", fSize);
+            btn_minus.Font = new Font("Arial", fSize);
+            btn_Negative.Font = new Font("Arial", fSize);
+            btn_Coma.Font = new Font("Arial", fSize);
+            btn_1.Font = new Font("Arial", fSize);
             btn_Zero.Font = new Font("Arial", fSize);
+            btn_2.Font = new Font("Arial", fSize);
+            btn_7.Font = new Font("Arial", fSize);
+            btn_3.Font = new Font("Arial", fSize);
+            btn_8.Font = new Font("Arial", fSize);
+            btn_6.Font = new Font("Arial", fSize);
+            btn_4.Font = new Font("Arial", fSize);
+            btn_5.Font = new Font("Arial", fSize);
+            btn_divide.Font = new Font("Arial", fSize);
+            btn_multiply.Font = new Font("Arial", fSize);
+            btn_bspace.Font = new Font("Arial", fSize);
+            btn_SQR.Font = new Font("Arial", fSize);
+            btn_SQRT.Font = new Font("Arial", fSize);
+            btn_clear.Font = new Font("Arial", fSize);
+            btn_9.Font = new Font("Arial", fSize);
         }
 
-        private void Form1_Layout(object sender, LayoutEventArgs e)
+        private void Form1_Resize(object sender, EventArgs e)
         {
-            //setTextSize(); //динамичное изменение размера шрифта, но выглядит не очень
-            float fSize = btn_Zero.Font.Size;
-            fSize = btn_Zero.Height / 5;
-            btn_Zero.Font = new Font("Arial", fSize);
+            bool flag = sizeFlag;
+
+            if (Height>=526) setTextSize();
+
+            if (Height > 700 && Width > 400) sizeFlag = true;
+            else sizeFlag = false;
+            
+            if (flag != sizeFlag)
+            {
+                switch (sizeFlag)
+                {
+                    case true: setFonSize(13);break;
+                    case false: setFonSize(9);break;
+                }
+            }
         }
     }
 }
