@@ -160,13 +160,12 @@ namespace Calc
             }
             else
             
-                while (label1.Width > s+fSize && label1.Font.Size<30)
-                {
-                    fSize++;
-                    label1.Font = new Font("Arial", fSize);
-                    s = TextRenderer.MeasureText(label1.Text, label1.Font).Width;
-                }
-            
+            while (label1.Width > s+fSize && label1.Font.Size<30)
+            {
+                fSize++;
+                label1.Font = new Font("Arial", fSize);
+                s = TextRenderer.MeasureText(label1.Text, label1.Font).Width;
+            }    
         }
 
         /// <summary>
@@ -191,7 +190,10 @@ namespace Calc
             btn_click("+", new Calculator.CalcFunction().Summ, false);
         }
 
-        
+        /// <summary>
+        /// Выполнение заданной функции
+        /// </summary>
+        /// <param name="f">Делегат заданной функции</param>
         private void funcClick(Calculator.funcDeleg f)
         {
             calc.resBtnFlag = false;
@@ -207,8 +209,7 @@ namespace Calc
                     }
                 case true:
                     {
-                        calc.tryToGetArg(calc.arg);
-                        //calc.getResult(calc.fDeleg);
+                        calc.tryToGetArg(calc.arg);;
                         getResult(calc.fDeleg);
                         calc.funcFlag = true;
                         calc.fDeleg = f;
@@ -381,6 +382,10 @@ namespace Calc
             btn_MC.Enabled = false;
         }
 
+        /// <summary>
+        /// Получение аргумента из памяти
+        /// </summary>
+        /// <param name="indexOf">индекс аргумента в массиве памяти</param>
         public void getFromMR(int indexOf)
         {
             calc.arg = calc.mr[indexOf-1].ToString();
@@ -405,29 +410,17 @@ namespace Calc
 
         private void btn_Percent_Click(object sender, EventArgs e)
         {
-            //if (calcs.Length == 0)
-            {
-                string[] s = File.ReadAllLines("c:/temp/calc.json");
-                //int i = calcs.Length;
-                int i = 0;
-                foreach (string str in s)
-                {
-                    Array.Resize(ref calcs, i + 1);
-                    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
 
-                    //try
-                    //{
-                    //    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
-                    //}
-                    //catch
-                    //{
-                    //    Array.Resize(ref calcs, i+1);
-                    //    calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
-                    //}
-                    hf.HistoryList.Items.Add(calcs[i].resultString);
-                    i++;
-                }
+            string[] s = File.ReadAllLines("c:/temp/calc.json");
+            int i = 0;
+            foreach (string str in s)
+            {
+                Array.Resize(ref calcs, i + 1);
+                calcs[i] = JsonConvert.DeserializeObject<Calculator>(str);
+                hf.HistoryList.Items.Add(calcs[i].resultString);
+                i++;
             }
+            
             hf.Left = Left + (Width-hf.Width) / 2;
             hf.Top = Top + (Height-hf.Height) / 2;
             Enabled = false;
@@ -502,7 +495,6 @@ namespace Calc
         /// <param name="c">Калькулятор</param>
         private void addToCalcList(Calculator c)
         {
-            //hf.HistoryList.Items.Add(c.resultString);
             comboBox1.Items.Add(c.resultString);
         }
 
@@ -534,11 +526,18 @@ namespace Calc
         private void Form1_ResizeEnd(object sender, EventArgs e)
         {
             setTextSize();
+            
+            float fSize = btn_Zero.Font.Size;
+            fSize = btn_Zero.Height / 5;
+            btn_Zero.Font = new Font("Arial", fSize);
         }
 
         private void Form1_Layout(object sender, LayoutEventArgs e)
         {
             //setTextSize(); //динамичное изменение размера шрифта, но выглядит не очень
+            float fSize = btn_Zero.Font.Size;
+            fSize = btn_Zero.Height / 5;
+            btn_Zero.Font = new Font("Arial", fSize);
         }
     }
 }

@@ -8,8 +8,6 @@ using System.Windows.Forms;
 
 namespace Calc
 {
-
-
     public class Calculator
     {
         /// <summary>
@@ -87,85 +85,36 @@ namespace Calc
         /// </summary>
         public class CalcFunction
         {
-            /// <summary>
-            /// Строка с числом в процессе набора
-            /// </summary>
-            //public Func<double> functionOf;
-
-            //public CalcFunction(Func<double> f)
-            //{
-            //    functionOf = f;
-            //}
-
-            //public CalcFunction()
-            //{
-            //    functionOf = null;
-            //}
-            /// <summary>
-            /// Сумма
-            /// </summary>
-            /// <param name="a">Массив аргументов</param>
-            /// <returns>Сумма аргументов</returns>
             public double Summ(double[] a)
             {
                 return a[0]+a[1];
             }
 
-            /// <summary>
-            /// Произведение
-            /// </summary>
-            /// <param name="a">Массив аргументов</param>
-            /// <returns>Произведение аргументов</returns>
             public double multiply(double[] a)
             {
                 return a[0]*a[1];
             }
 
-            /// <summary>
-            /// Частное
-            /// </summary>
-            /// <param name="a">Массив аргументов</param>
-            /// <returns>Частное аргументов</returns>
             public double divide(double[] a)
             {
                 return a[0]/a[1];
             }
 
-            /// <summary>
-            /// Разность
-            /// </summary>
-            /// <param name="a">Массив аргументов</param>
-            /// <returns>Разность аргументов</returns>
             public double differens(double[] a)
             {
                 return a[0]-a[1];
             }
 
-            /// <summary>
-            /// Степерь 2
-            /// </summary>
-            /// <param name="a">Аргумент</param>
-            /// <returns>Квадрат числа</returns>
             public double sqrOf(double[] a)
             {
                 return Math.Pow(a[0],2);
             }
 
-            /// <summary>
-            /// Квадратный корень
-            /// </summary>
-            /// <param name="a">Аргумент</param>
-            /// <returns>Квадратный корень из аргумента</returns>
             public double sqrtOf(double[] a)
             {
                 return Math.Sqrt(a[0]);
             }
 
-            /// <summary>
-            /// Обратное преобразование
-            /// </summary>
-            /// <param name="a">Аргумент</param>
-            /// <returns>Обратное аргументу число</returns>
             public double fraction(double[] a)
             {
                 return 1/a[0];
