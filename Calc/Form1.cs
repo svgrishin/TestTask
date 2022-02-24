@@ -15,9 +15,24 @@ namespace Calc
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Объект калькулятора
+        /// </summary>
         public Calculator calc = new Calculator();
+
+        /// <summary>
+        /// Массив с калькуляторами для хранения объектов с различными состояниями
+        /// </summary>
         public Calculator[] calcs = new Calculator[0];
+
+        /// <summary>
+        /// Форма с историей вычислений
+        /// </summary>
         public HistoryForm hf;
+
+        /// <summary>
+        /// Форма отображения памяти калькулятора
+        /// </summary>
         public MRForm mf;
         public Form1()
         {
@@ -71,6 +86,10 @@ namespace Calc
             inputVal('9');
         }
 
+        /// <summary>
+        /// Ввод символа
+        /// </summary>
+        /// <param name="c">Вводимый символ</param>
         private void inputVal(char c)
         {
             label1.Text = calc.inputValues(c);
@@ -114,12 +133,18 @@ namespace Calc
             }
         }
 
+        /// <summary>
+        /// Ввод "0,"
+        /// </summary>
         public void typeZeroComa()
         {
             label1.Text = calc.inputValues('0');
             label1.Text = calc.inputValues(',');
         }
 
+        /// <summary>
+        /// Подгонка размера шрифта дисплея
+        /// </summary>
         public void setTextSize()
         {
             float fSize = label1.Font.Size;
@@ -144,6 +169,11 @@ namespace Calc
             
         }
 
+        /// <summary>
+        /// Нажатие одной из функций
+        /// </summary>
+        /// <param name="f">Делегат функции выполнения</param>
+        /// <param name="isExtraFunc">Флаг функции одного аргумента</param>
         private void btn_Func_Click(Calculator.funcDeleg f, bool isExtraFunc)
         {
             if (isExtraFunc == true)
@@ -400,6 +430,9 @@ namespace Calc
             hf.Show();
         }
 
+        /// <summary>
+        /// Инициатор сохранения статуса калькулятора
+        /// </summary>
         public void saveMe()
         {
             addCalc();
@@ -410,6 +443,10 @@ namespace Calc
             catch { this.Text = "Не удалось сохранить в файл"; }
         }
 
+        /// <summary>
+        /// Загрузка калькулятора
+        /// </summary>
+        /// <param name="Индекс загружаемого калькулятора из массива калькуляторов"></param>
         public void loadMe(int i)
         {
             calc = new Calculator(calcs[i]);
@@ -421,12 +458,18 @@ namespace Calc
             calc.arg = calc.args[0].ToString();
         }
 
+        /// <summary>
+        /// Инициатор сброса калькулятора
+        /// </summary>
         public void resetCalc()
         {
             calc.ResetCalc();
             label1.Font = new Font("Arial", 30);
         }
 
+        /// <summary>
+        /// Пополнение массива состояний новым состоянием калькулятора
+        /// </summary>
         private void addCalc()
         {
             int i = calcs.Length;
@@ -434,6 +477,9 @@ namespace Calc
             calcs[i] = new Calculator(calc);   
         }
 
+        /// <summary>
+        /// Сохранение состояния калькулятора в файл
+        /// </summary>
         private void saveCalc()
         {
             Calculator c = new Calculator(calc);
@@ -445,18 +491,29 @@ namespace Calc
             File.AppendAllText("c:/temp/calc.json", s + "\n");
         }
 
+        /// <summary>
+        /// Добавление в список вычисления целиком
+        /// </summary>
+        /// <param name="c">Калькулятор</param>
         private void addToCalcList(Calculator c)
         {
             hf.HistoryList.Items.Add(c.resultString);
             comboBox1.Items.Add(c.resultString);
         }
 
+        /// <summary>
+        /// Инициатор получения результата
+        /// </summary>
+        /// <param name="cf">Делегат функции</param>
         private void getResult(Calculator.funcDeleg cf)
         {
             calc.getResult(cf);
             saveStatus();
         }
 
+        /// <summary>
+        /// Фиксация этапа вычисления
+        /// </summary>
         private void saveStatus()
         {
             saveMe();
