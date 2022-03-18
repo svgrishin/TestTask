@@ -583,5 +583,13 @@ namespace Calc
                 }
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            calc.arg = "";
+            calc.disp = "0";
+            label1.Text = calc.disp;
+            label1.Font = new Font("Arial",30);
+        }
     }
 }
